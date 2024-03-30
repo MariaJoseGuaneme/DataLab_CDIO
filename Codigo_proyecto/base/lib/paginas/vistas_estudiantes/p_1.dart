@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main (){
-runApp(MyApp());
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: PagInicio(),
     );
   }
@@ -42,7 +42,7 @@ return Center(
               width: 400,
               child: Image.asset('assets/logou.jpg'),
             ),
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
           Container(
             width: 400,
             height: 200,
@@ -52,7 +52,7 @@ return Center(
               borderRadius: BorderRadius.circular(10.0)
             ),
 
-            child: Center(
+            child: const Center(
             child: Text('¡Bienvenido al sistema de recolección de datos!',
              style: TextStyle(color: Colors.white,fontSize: 30,
               fontWeight: FontWeight.bold,backgroundColor:Colors.green),
@@ -60,12 +60,12 @@ return Center(
             ),
             ),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
            ElevatedButton(
             onPressed: (){}, 
             style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.black),
              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0)) ),),
-            child: Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
+            child: const Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
             ) ,
             
         ],

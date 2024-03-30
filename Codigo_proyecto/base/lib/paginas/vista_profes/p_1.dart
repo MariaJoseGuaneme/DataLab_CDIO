@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main (){
-runApp(MyApp());
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -40,7 +40,7 @@ return Center(
           SizedBox(
               height:400 ,
               width: 400,
-              child: Image.asset('assets/logou.jpg'),
+              child: Image.asset('assets/logou.jpg'), 
             ),
             const SizedBox(height: 20.0,),
           Container(
