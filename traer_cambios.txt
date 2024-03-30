@@ -1,0 +1,252 @@
+PS C:\Users\sapeo\OneDrive\Documentos\Universidad\Septimo semestre\CDIO 3\programa\DataLab_CDIO> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+PS C:\Users\sapeo\OneDrive\Documentos\Universidad\Septimo semestre\CDIO 3\programa\DataLab_CDIO> git fetch
+remote: Enumerating objects: 159, done.
+remote: Counting objects: 100% (159/159), done.
+remote: Compressing objects: 100% (113/113), done.
+Receiving objects: 100% (158/158), 243.21 KiB | 1.08 MiB/s, done.0
+
+Resolving deltas: 100% (14/14), done.
+From https://github.com/MariaJoseGuaneme/DataLab_CDIO
+   5ec18e7..0292202  main       -> origin/main
+PS C:\Users\sapeo\OneDrive\Documentos\Universidad\Septimo semestre\CDIO 3\programa\DataLab_CDIO> git status
+On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+nothing to commit, working tree clean
+PS C:\Users\sapeo\OneDrive\Documentos\Universidad\Septimo semestre\CDIO 3\programa\DataLab_CDIO> git pull  
+Updating 5ec18e7..0292202
+Fast-forward
+ Codigo_proyecto/base/.gitignore                    |  43 ++
+ Codigo_proyecto/base/.metadata                     |  42 ++
+ Codigo_proyecto/base/DataLab+.code-workspace       |   8 +
+ Codigo_proyecto/base/README.md                     |  16 +
+ Codigo_proyecto/base/analysis_options.yaml         |  28 +
+ Codigo_proyecto/base/android/.gitignore            |  13 +
+ Codigo_proyecto/base/android/app/build.gradle      |  67 ++
+ .../base/android/app/src/debug/AndroidManifest.xml |   7 +
+ .../base/android/app/src/main/AndroidManifest.xml  |  44 ++
+ .../main/kotlin/com/example/base/MainActivity.kt   |   5 +
+ .../main/res/drawable-v21/launch_background.xml    |  12 +
+ .../src/main/res/drawable/launch_background.xml    |  12 +
+ .../app/src/main/res/mipmap-hdpi/ic_launcher.png   | Bin 0 -> 544 bytes
+ .../app/src/main/res/mipmap-mdpi/ic_launcher.png   | Bin 0 -> 442 bytes
+ .../app/src/main/res/mipmap-xhdpi/ic_launcher.png  | Bin 0 -> 721 bytes
+ .../app/src/main/res/mipmap-xxhdpi/ic_launcher.png | Bin 0 -> 1031 bytes
+ .../src/main/res/mipmap-xxxhdpi/ic_launcher.png    | Bin 0 -> 1443 bytes
+ .../app/src/main/res/values-night/styles.xml       |  18 +
+ .../android/app/src/main/res/values/styles.xml     |  18 +
+ .../android/app/src/profile/AndroidManifest.xml    |   7 +
+ Codigo_proyecto/base/android/build.gradle          |  18 +
+ Codigo_proyecto/base/android/gradle.properties     |   3 +
+ .../gradle/wrapper/gradle-wrapper.properties       |   5 +
+ Codigo_proyecto/base/android/settings.gradle       |  26 +
+ Codigo_proyecto/base/ios/.gitignore                |  34 +
+ .../base/ios/Flutter/AppFrameworkInfo.plist        |  26 +
+ Codigo_proyecto/base/ios/Flutter/Debug.xcconfig    |   1 +
+ Codigo_proyecto/base/ios/Flutter/Release.xcconfig  |   1 +
+ .../base/ios/Runner.xcodeproj/project.pbxproj      | 616 ++++++++++++++++++
+ .../project.xcworkspace/contents.xcworkspacedata   |   7 +
+ .../xcshareddata/IDEWorkspaceChecks.plist          |   8 +
+ .../xcshareddata/WorkspaceSettings.xcsettings      |   8 +
+ .../xcshareddata/xcschemes/Runner.xcscheme         |  98 +++
+ .../Runner.xcworkspace/contents.xcworkspacedata    |   7 +
+ .../xcshareddata/IDEWorkspaceChecks.plist          |   8 +
+ .../xcshareddata/WorkspaceSettings.xcsettings      |   8 +
+ Codigo_proyecto/base/ios/Runner/AppDelegate.swift  |  13 +
+ .../AppIcon.appiconset/Contents.json               | 122 ++++
+ .../AppIcon.appiconset/Icon-App-1024x1024@1x.png   | Bin 0 -> 10932 bytes
+ .../AppIcon.appiconset/Icon-App-20x20@1x.png       | Bin 0 -> 295 bytes
+ .../AppIcon.appiconset/Icon-App-20x20@2x.png       | Bin 0 -> 406 bytes
+ .../AppIcon.appiconset/Icon-App-20x20@3x.png       | Bin 0 -> 450 bytes
+ .../AppIcon.appiconset/Icon-App-29x29@1x.png       | Bin 0 -> 282 bytes
+ .../AppIcon.appiconset/Icon-App-29x29@2x.png       | Bin 0 -> 462 bytes
+ .../AppIcon.appiconset/Icon-App-29x29@3x.png       | Bin 0 -> 704 bytes
+ .../AppIcon.appiconset/Icon-App-40x40@1x.png       | Bin 0 -> 406 bytes
+ .../AppIcon.appiconset/Icon-App-40x40@2x.png       | Bin 0 -> 586 bytes
+ .../AppIcon.appiconset/Icon-App-40x40@3x.png       | Bin 0 -> 862 bytes
+ .../AppIcon.appiconset/Icon-App-60x60@2x.png       | Bin 0 -> 862 bytes
+ .../AppIcon.appiconset/Icon-App-60x60@3x.png       | Bin 0 -> 1674 bytes
+ .../AppIcon.appiconset/Icon-App-76x76@1x.png       | Bin 0 -> 762 bytes
+ .../AppIcon.appiconset/Icon-App-76x76@2x.png       | Bin 0 -> 1226 bytes
+ .../AppIcon.appiconset/Icon-App-83.5x83.5@2x.png   | Bin 0 -> 1418 bytes
+ .../LaunchImage.imageset/Contents.json             |  23 +
+ .../LaunchImage.imageset/LaunchImage.png           | Bin 0 -> 68 bytes
+ .../LaunchImage.imageset/LaunchImage@2x.png        | Bin 0 -> 68 bytes
+ .../LaunchImage.imageset/LaunchImage@3x.png        | Bin 0 -> 68 bytes
+ .../Assets.xcassets/LaunchImage.imageset/README.md |   5 +
+ .../ios/Runner/Base.lproj/LaunchScreen.storyboard  |  37 ++
+ .../base/ios/Runner/Base.lproj/Main.storyboard     |  26 +
+ Codigo_proyecto/base/ios/Runner/Info.plist         |  49 ++
+ .../base/ios/Runner/Runner-Bridging-Header.h       |   1 +
+ .../base/ios/RunnerTests/RunnerTests.swift         |  12 +
+ Codigo_proyecto/base/lib/main.dart                 | 125 ++++
+ Codigo_proyecto/base/linux/.gitignore              |   1 +
+ Codigo_proyecto/base/linux/CMakeLists.txt          | 145 +++++
+ Codigo_proyecto/base/linux/flutter/CMakeLists.txt  |  88 +++
+ .../linux/flutter/generated_plugin_registrant.cc   |  11 +
+ .../linux/flutter/generated_plugin_registrant.h    |  15 +
+ .../base/linux/flutter/generated_plugins.cmake     |  23 +
+ Codigo_proyecto/base/linux/main.cc                 |   6 +
+ Codigo_proyecto/base/linux/my_application.cc       | 124 ++++
+ Codigo_proyecto/base/linux/my_application.h        |  18 +
+ Codigo_proyecto/base/macos/.gitignore              |   7 +
+ .../base/macos/Flutter/Flutter-Debug.xcconfig      |   1 +
+ .../base/macos/Flutter/Flutter-Release.xcconfig    |   1 +
+ .../macos/Flutter/GeneratedPluginRegistrant.swift  |  10 +
+ .../base/macos/Runner.xcodeproj/project.pbxproj    | 705 +++++++++++++++++++++
+ .../xcshareddata/IDEWorkspaceChecks.plist          |   8 +
+ .../xcshareddata/xcschemes/Runner.xcscheme         |  98 +++
+ .../Runner.xcworkspace/contents.xcworkspacedata    |   7 +
+ .../xcshareddata/IDEWorkspaceChecks.plist          |   8 +
+ .../base/macos/Runner/AppDelegate.swift            |   9 +
+ .../AppIcon.appiconset/Contents.json               |  68 ++
+ .../AppIcon.appiconset/app_icon_1024.png           | Bin 0 -> 102994 bytes
+ .../AppIcon.appiconset/app_icon_128.png            | Bin 0 -> 5680 bytes
+ .../AppIcon.appiconset/app_icon_16.png             | Bin 0 -> 520 bytes
+ .../AppIcon.appiconset/app_icon_256.png            | Bin 0 -> 14142 bytes
+ .../AppIcon.appiconset/app_icon_32.png             | Bin 0 -> 1066 bytes
+ .../AppIcon.appiconset/app_icon_512.png            | Bin 0 -> 36406 bytes
+ .../AppIcon.appiconset/app_icon_64.png             | Bin 0 -> 2218 bytes
+ .../base/macos/Runner/Base.lproj/MainMenu.xib      | 343 ++++++++++
+ .../base/macos/Runner/Configs/AppInfo.xcconfig     |  14 +
+ .../base/macos/Runner/Configs/Debug.xcconfig       |   2 +
+ .../base/macos/Runner/Configs/Release.xcconfig     |   2 +
+ .../base/macos/Runner/Configs/Warnings.xcconfig    |  13 +
+ .../base/macos/Runner/DebugProfile.entitlements    |  12 +
+ Codigo_proyecto/base/macos/Runner/Info.plist       |  32 +
+ .../base/macos/Runner/MainFlutterWindow.swift      |  15 +
+ .../base/macos/Runner/Release.entitlements         |   8 +
+ .../base/macos/RunnerTests/RunnerTests.swift       |  12 +
+ Codigo_proyecto/base/pubspec.lock                  | 212 +++++++
+ Codigo_proyecto/base/pubspec.yaml                  |  90 +++
+ Codigo_proyecto/base/test/widget_test.dart         |  30 +
+ Codigo_proyecto/base/web/favicon.png               | Bin 0 -> 917 bytes
+ Codigo_proyecto/base/web/icons/Icon-192.png        | Bin 0 -> 5292 bytes
+ Codigo_proyecto/base/web/icons/Icon-512.png        | Bin 0 -> 8252 bytes
+ .../base/web/icons/Icon-maskable-192.png           | Bin 0 -> 5594 bytes
+ .../base/web/icons/Icon-maskable-512.png           | Bin 0 -> 20998 bytes
+ Codigo_proyecto/base/web/index.html                |  59 ++
+ Codigo_proyecto/base/web/manifest.json             |  35 +
+ 111 files changed, 3859 insertions(+)
+ create mode 100644 Codigo_proyecto/base/.gitignore
+ create mode 100644 Codigo_proyecto/base/.metadata
+ create mode 100644 Codigo_proyecto/base/DataLab+.code-workspace
+ create mode 100644 Codigo_proyecto/base/README.md
+ create mode 100644 Codigo_proyecto/base/analysis_options.yaml
+ create mode 100644 Codigo_proyecto/base/android/.gitignore
+ create mode 100644 Codigo_proyecto/base/android/app/build.gradle
+ create mode 100644 Codigo_proyecto/base/android/app/src/debug/AndroidManifest.xml
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/AndroidManifest.xml
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/kotlin/com/example/base/MainActivity.kt
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/drawable-v21/launch_background.xml
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/drawable/launch_background.xml
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/values-night/styles.xml
+ create mode 100644 Codigo_proyecto/base/android/app/src/main/res/values/styles.xml
+ create mode 100644 Codigo_proyecto/base/android/app/src/profile/AndroidManifest.xml
+ create mode 100644 Codigo_proyecto/base/android/build.gradle
+ create mode 100644 Codigo_proyecto/base/android/gradle.properties
+ create mode 100644 Codigo_proyecto/base/android/gradle/wrapper/gradle-wrapper.properties
+ create mode 100644 Codigo_proyecto/base/android/settings.gradle
+ create mode 100644 Codigo_proyecto/base/ios/.gitignore
+ create mode 100644 Codigo_proyecto/base/ios/Flutter/AppFrameworkInfo.plist
+ create mode 100644 Codigo_proyecto/base/ios/Flutter/Debug.xcconfig
+ create mode 100644 Codigo_proyecto/base/ios/Flutter/Release.xcconfig
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcodeproj/project.pbxproj
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcworkspace/contents.xcworkspacedata
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ create mode 100644 Codigo_proyecto/base/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+ create mode 100644 Codigo_proyecto/base/ios/Runner/AppDelegate.swift
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Base.lproj/LaunchScreen.storyboard
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Base.lproj/Main.storyboard
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Info.plist
+ create mode 100644 Codigo_proyecto/base/ios/Runner/Runner-Bridging-Header.h
+ create mode 100644 Codigo_proyecto/base/ios/RunnerTests/RunnerTests.swift
+ create mode 100644 Codigo_proyecto/base/lib/main.dart
+ create mode 100644 Codigo_proyecto/base/linux/.gitignore
+ create mode 100644 Codigo_proyecto/base/linux/CMakeLists.txt
+ create mode 100644 Codigo_proyecto/base/linux/flutter/CMakeLists.txt
+ create mode 100644 Codigo_proyecto/base/linux/flutter/generated_plugin_registrant.cc
+ create mode 100644 Codigo_proyecto/base/linux/flutter/generated_plugin_registrant.h
+ create mode 100644 Codigo_proyecto/base/linux/flutter/generated_plugins.cmake
+ create mode 100644 Codigo_proyecto/base/linux/main.cc
+ create mode 100644 Codigo_proyecto/base/linux/my_application.cc
+ create mode 100644 Codigo_proyecto/base/linux/my_application.h
+ create mode 100644 Codigo_proyecto/base/macos/.gitignore
+ create mode 100644 Codigo_proyecto/base/macos/Flutter/Flutter-Debug.xcconfig
+ create mode 100644 Codigo_proyecto/base/macos/Flutter/Flutter-Release.xcconfig
+ create mode 100644 Codigo_proyecto/base/macos/Flutter/GeneratedPluginRegistrant.swift
+ create mode 100644 Codigo_proyecto/base/macos/Runner.xcodeproj/project.pbxproj
+ create mode 100644 Codigo_proyecto/base/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ create mode 100644 Codigo_proyecto/base/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+ create mode 100644 Codigo_proyecto/base/macos/Runner.xcworkspace/contents.xcworkspacedata
+ create mode 100644 Codigo_proyecto/base/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ create mode 100644 Codigo_proyecto/base/macos/Runner/AppDelegate.swift
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Base.lproj/MainMenu.xib
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Configs/AppInfo.xcconfig
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Configs/Debug.xcconfig
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Configs/Release.xcconfig
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Configs/Warnings.xcconfig
+ create mode 100644 Codigo_proyecto/base/macos/Runner/DebugProfile.entitlements
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Info.plist
+ create mode 100644 Codigo_proyecto/base/macos/Runner/MainFlutterWindow.swift
+ create mode 100644 Codigo_proyecto/base/macos/Runner/Release.entitlements
+ create mode 100644 Codigo_proyecto/base/macos/RunnerTests/RunnerTests.swift
+ create mode 100644 Codigo_proyecto/base/pubspec.lock
+ create mode 100644 Codigo_proyecto/base/pubspec.yaml
+ create mode 100644 Codigo_proyecto/base/test/widget_test.dart
+ create mode 100644 Codigo_proyecto/base/web/favicon.png
+ create mode 100644 Codigo_proyecto/base/web/icons/Icon-192.png
+ create mode 100644 Codigo_proyecto/base/web/icons/Icon-512.png
+ create mode 100644 Codigo_proyecto/base/web/icons/Icon-maskable-192.png
+ create mode 100644 Codigo_proyecto/base/web/icons/Icon-maskable-512.png
+ create mode 100644 Codigo_proyecto/base/web/index.html
+ create mode 100644 Codigo_proyecto/base/web/manifest.json
+PS C:\Users\sapeo\OneDrive\Documentos\Universidad\Septimo semestre\CDIO 3\programa\DataLab_CDIO> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+PS C:\Users\sapeo\OneDrive\Documentos\Universidad\Septimo semestre\CDIO 3\programa\DataLab_CDIO>
