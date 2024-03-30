@@ -27,7 +27,13 @@ class _PagInicio extends State<PagInicio> {
   Widget build(BuildContext context) { //appBar
     return Scaffold(
      backgroundColor: Colors.white,
-     body: Center(
+     body: inicio(),
+);
+}
+}
+
+Widget inicio(){
+return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -64,7 +70,5 @@ class _PagInicio extends State<PagInicio> {
             
         ],
       )
-   )
-);
-}
+   );
 }

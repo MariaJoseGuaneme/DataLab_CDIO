@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: PagInicio(),
     );
   }
@@ -27,7 +27,13 @@ class _PagInicio extends State<PagInicio> {
   Widget build(BuildContext context) { //appBar
     return Scaffold(
      backgroundColor: Colors.white,
-     body: Center(
+     body: inicio(),
+);
+}
+}
+
+Widget inicio(){
+return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -36,7 +42,7 @@ class _PagInicio extends State<PagInicio> {
               width: 400,
               child: Image.asset('assets/logou.jpg'),
             ),
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
           Container(
             width: 400,
             height: 200,
@@ -46,7 +52,7 @@ class _PagInicio extends State<PagInicio> {
               borderRadius: BorderRadius.circular(10.0)
             ),
 
-            child: Center(
+            child: const Center(
             child: Text('¡Bienvenido al sistema de recolección de datos!',
              style: TextStyle(color: Colors.white,fontSize: 30,
               fontWeight: FontWeight.bold,backgroundColor:Colors.green),
@@ -54,17 +60,15 @@ class _PagInicio extends State<PagInicio> {
             ),
             ),
 
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
            ElevatedButton(
             onPressed: (){}, 
             style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.black),
              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0)) ),),
-            child: Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
+            child: const Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
             ) ,
             
         ],
       )
-   )
-);
-}
+   );
 }
