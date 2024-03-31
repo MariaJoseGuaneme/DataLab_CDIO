@@ -1,0 +1,6 @@
+ElevatedButton(
+            onPressed: (){ }, 
+            style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.black),
+             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0)) ),),
+            child: const Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
+            ) ,

@@ -1,0 +1,16 @@
+Container(
+                width: 200,
+            height: 100,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 85, 223, 138),
+              border: Border.all(color: const Color.fromARGB(255, 104, 203, 102),width: 10),
+              borderRadius: BorderRadius.circular(10.0)
+            ),
+
+            child: const Center(
+            child: Text('Estudiante',
+             style: TextStyle(color: Colors.white,fontSize: 30,
+              fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,)
+            ),
+              )

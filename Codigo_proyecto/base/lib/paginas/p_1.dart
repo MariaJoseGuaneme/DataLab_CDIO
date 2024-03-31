@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
 
-void main (){
-runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({ super.key });
+class PagInicio1 extends StatefulWidget {
+  const PagInicio1({ super.key });
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: PagInicio(),
-    );
-  }
+  State<PagInicio1> createState() => _PagInicio1();
 }
 
-class PagInicio extends StatefulWidget {
-  const PagInicio({ super.key });
-
-  @override
-  State<PagInicio> createState() => _PagInicio();
-}
-
-class _PagInicio extends State<PagInicio> {
+class _PagInicio1 extends State<PagInicio1> {
   @override
   Widget build(BuildContext context) { //appBar
     return Scaffold(
@@ -62,7 +47,7 @@ return Center(
 
             const SizedBox(height: 20.0,),
            ElevatedButton(
-            onPressed: (){}, 
+            onPressed: (){ }, 
             style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.black),
              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0)) ),),
             child: const Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
