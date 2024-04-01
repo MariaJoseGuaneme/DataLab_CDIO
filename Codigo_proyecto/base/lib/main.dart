@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PagInicio(),
+      home: PagInicio(), //Acá cambian por el widget que ustedes creen
     );
   }
 }
