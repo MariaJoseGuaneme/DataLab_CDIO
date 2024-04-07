@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:base/funciones_proyecto/inicio.dart';
+import 'dart:ui';
 
 void main() {
   runApp(const MyApp());
