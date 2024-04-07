@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/Universidad_Log.jpg
     - assets/UQ.png
+    - assets/logou.jpg
 
 
   fonts:
