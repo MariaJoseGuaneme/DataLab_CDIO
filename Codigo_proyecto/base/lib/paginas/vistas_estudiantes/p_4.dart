@@ -1,45 +1,32 @@
+import 'package:base/paginas/vistas_estudiantes/p_5.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-// MyApp is the main application widget.
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const PagInicio4(), // Set PagInicio4 as the home widget of the app.
-    );
-  }
-}
-
-// PagInicio4 is a StatefulWidget which will show the UI defined in inicio().
 class PagInicio4 extends StatefulWidget {
   const PagInicio4({super.key});
 
   @override
-  State<PagInicio4> createState() => _PagInicio4State();
+  State<PagInicio4> createState() => _PagInicio4(); 
 }
 
-class _PagInicio4State extends State<PagInicio4> {
+class _PagInicio4 extends State<PagInicio4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop(); // Goes back to the previous page.
+          },
+        ),
+      ),
       backgroundColor: Colors.white,
-      body: inicio(),
+      body: inicio(context),
     );
   }
 }
 
-// inicio defines the UI that the PagInicio4 will show.
-Widget inicio() {
+Widget inicio(BuildContext context) {
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -60,9 +47,9 @@ Widget inicio() {
           ),
           child: const Center(
             child: Text(
-              'Seleccionar actividad',
+              'Selecciona la actividad',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
                 backgroundColor: Colors.green,
@@ -75,46 +62,58 @@ Widget inicio() {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
-              width: 200,
-              height: 100,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 89, 135, 213),
-                border: Border.all(
-                    color: const Color.fromARGB(255, 68, 100, 165), width: 10),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: const Center(
-                child: Text(
-                  'Revisar práctica',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () {
+                // Handle INSERTAR DATOS tap
+              },
+              child: Container(
+                width: 200,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 89, 135, 213),
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 68, 100, 165), width: 10),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Center(
+                  child: Text(
+                    'REVISAR PRACTICAS',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),
             const SizedBox(width: 60),
-            Container(
-              width: 200,
-              height: 100,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 85, 223, 138),
-                border: Border.all(
-                    color: const Color.fromARGB(255, 79, 199, 76), width: 10),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: const Center(
-                child: Text(
-                  'Seleccionar práctica',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio5()),
+                );
+              },
+              child: Container(
+                width: 200,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 85, 223, 138),
+                  border: Border.all(
+                      color: const Color.fromARGB(255, 104, 203, 102), width: 10),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Center(
+                  child: Text(
+                    'INICIAR PRACTICA',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             )
