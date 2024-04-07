@@ -1,5 +1,6 @@
 import 'package:base/paginas/vistas_estudiantes/p_4.dart';
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
+import 'package:base/paginas/vistas_estudiantes/p_7.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const PagInicio4(),
-        '/pagina6': (context) => const PagInicio5(),
+        '/pagina5': (context) => const PagInicio5(),
+        '/pagina7': (context) => const PagInicio7(),
       },
     );
   }

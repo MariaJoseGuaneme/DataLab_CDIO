@@ -1,4 +1,5 @@
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
+import 'package:base/paginas/vistas_estudiantes/p_7.dart';
 import 'package:flutter/material.dart';
 
 class PagInicio4 extends StatefulWidget {
@@ -64,7 +65,9 @@ Widget inicio(BuildContext context) {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                // Handle INSERTAR DATOS tap
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio7()),
+                );
               },
               child: Container(
                 width: 200,
