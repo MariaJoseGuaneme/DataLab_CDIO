@@ -1,13 +1,15 @@
+import 'package:base/paginas/vistas_estudiantes/p_5.dart';
+import 'package:base/paginas/vistas_estudiantes/p_7.dart';
 import 'package:flutter/material.dart';
 
-class PagInicio4 extends StatefulWidget {
-  const PagInicio4({super.key});
+class Select_e extends StatefulWidget {
+  const Select_e({super.key});
 
   @override
-  State<PagInicio4> createState() => _PagInicio4(); 
+  State<Select_e> createState() => _Select_e(); 
 }
 
-class _PagInicio4 extends State<PagInicio4> {
+class _Select_e extends State<Select_e> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +64,11 @@ Widget inicio(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio7()),
+                );
+              },
               child: Container(
                 width: 200,
                 height: 100,
@@ -87,7 +94,9 @@ Widget inicio(BuildContext context) {
             const SizedBox(width: 60),
             GestureDetector(
               onTap: () {
-
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio5()),
+                );
               },
               child: Container(
                 width: 200,

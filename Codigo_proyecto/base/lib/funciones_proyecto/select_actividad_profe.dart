@@ -1,13 +1,14 @@
+import 'package:base/paginas/vista_profes/p_6.dart';
 import 'package:flutter/material.dart';
 
-class PagInicio4 extends StatefulWidget {
-  const PagInicio4({super.key});
+class Select_p extends StatefulWidget {
+  const Select_p({super.key});
 
   @override
-  State<PagInicio4> createState() => _PagInicio4(); 
+  State<Select_p> createState() => _Select_p();
 }
 
-class _PagInicio4 extends State<PagInicio4> {
+class _Select_p extends State<Select_p> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +63,9 @@ Widget inicio(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             GestureDetector(
+              onTap: () {
+                // Handle INSERTAR DATOS tap
+              },
               child: Container(
                 width: 200,
                 height: 100,
@@ -73,7 +77,7 @@ Widget inicio(BuildContext context) {
                 ),
                 child: const Center(
                   child: Text(
-                    'REVISAR PRACTICAS',
+                    'INSERTAR DATOS',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -87,7 +91,9 @@ Widget inicio(BuildContext context) {
             const SizedBox(width: 60),
             GestureDetector(
               onTap: () {
-
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio6()),
+                );
               },
               child: Container(
                 width: 200,
@@ -100,7 +106,7 @@ Widget inicio(BuildContext context) {
                 ),
                 child: const Center(
                   child: Text(
-                    'INICIAR PRACTICA',
+                    'REVISAR PRACTICAS',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,

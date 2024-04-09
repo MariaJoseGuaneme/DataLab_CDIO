@@ -1,6 +1,6 @@
-import 'package:base/paginas/vistas_estudiantes/p_4.dart';
-import 'package:base/paginas/vistas_estudiantes/p_5.dart';
-import 'package:base/paginas/vistas_estudiantes/p_7.dart';
+import 'package:base/funciones_proyecto/inicio.dart';
+import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -13,14 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Navegación entre páginas',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const PagInicio4(),
-        '/pagina5': (context) => const PagInicio5(),
-        '/pagina7': (context) => const PagInicio7(),
-      },
+    return const MaterialApp(
+      //home: PagInicio(),
+     home: Select_e(),
+      
     );
   }
 }
