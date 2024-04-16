@@ -1,12 +1,13 @@
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
 import 'package:base/paginas/vistas_estudiantes/p_7.dart';
+import 'package:base/paginas/vistas_estudiantes/p_11.dart';
 import 'package:flutter/material.dart';
 
 class Select_e extends StatefulWidget {
   const Select_e({super.key});
 
   @override
-  State<Select_e> createState() => _Select_e(); 
+  State<Select_e> createState() => _Select_e();
 }
 
 class _Select_e extends State<Select_e> {
@@ -75,7 +76,8 @@ Widget inicio(BuildContext context) {
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 89, 135, 213),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 68, 100, 165), width: 10),
+                      color: const Color.fromARGB(255, 68, 100, 165),
+                      width: 10),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: const Center(
@@ -104,7 +106,8 @@ Widget inicio(BuildContext context) {
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 85, 223, 138),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 104, 203, 102), width: 10),
+                      color: const Color.fromARGB(255, 104, 203, 102),
+                      width: 10),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: const Center(
