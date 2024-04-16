@@ -1,14 +1,15 @@
 import 'package:base/paginas/vistas_estudiantes/p_11.dart';
+import 'package:base/paginas/vistas_estudiantes/p_12.dart';
 import 'package:flutter/material.dart';
 
-class Menup extends StatefulWidget {
-  const Menup({super.key});
+class Menu extends StatefulWidget {
+  const Menu({super.key});
 
   @override
-  State<Menup> createState() => _Menup();
+  State<Menu> createState() => _Menu();
 }
 
-class _Menup extends State<Menup> {
+class _Menu extends State<Menu> {
   // Inicializa una variable para mantener el widget actual mostrado en el body
   Widget _currentBody = const Center(
     child: Text('Contenido principal aquí'),
@@ -74,6 +75,10 @@ class _Menup extends State<Menup> {
         case 'Recepción':
           _currentBody =
               const RecepcionPage(); // Cambia a la página de recepción
+          break;
+        case 'Lavado':
+          _currentBody =
+              const RecepcionPage2(); // Cambia a la página de recepción
           break;
         // Añade casos para otras secciones
         default:
