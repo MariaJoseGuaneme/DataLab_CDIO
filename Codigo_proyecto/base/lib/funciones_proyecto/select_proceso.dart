@@ -1,5 +1,8 @@
 import 'package:base/paginas/vistas_estudiantes/p_11.dart';
 import 'package:base/paginas/vistas_estudiantes/p_12.dart';
+import 'package:base/paginas/vistas_estudiantes/p_14.dart';
+import 'package:base/paginas/vistas_estudiantes/p_16.dart';
+import 'package:base/paginas/vistas_estudiantes/p_18.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
@@ -79,6 +82,18 @@ class _Menu extends State<Menu> {
         case 'Lavado':
           _currentBody =
               const RecepcionPage2(); // Cambia a la página de recepción
+          break;
+        case 'Desinfección':
+          _currentBody =
+              const RecepcionPage14(); // Cambia a la página de recepción
+          break;
+        case 'Escaldado':
+          _currentBody =
+              const RecepcionPage16(); // Cambia a la página de recepción
+          break;
+        case 'Enfriamiento':
+          _currentBody =
+              const RecepcionPage18(); // Cambia a la página de recepción
           break;
         // Añade casos para otras secciones
         default:
