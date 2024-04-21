@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RecepcionPage17 extends StatelessWidget {
-  const RecepcionPage17({super.key});
+class RecepcionPage20 extends StatelessWidget {
+  const RecepcionPage20({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,24 @@ class RecepcionPage17 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '5. ESCALDADO',
+                        '8. ACONDICIONAMIENTO',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 16.0),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      color: Colors.green.shade300,
+                      child: const Text(
+                        'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
                     const Text(
-                      'Ingrese el peso inicial',
+                      'Ingrese el peso de la cáscara',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
@@ -59,9 +69,7 @@ class RecepcionPage17 extends StatelessWidget {
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

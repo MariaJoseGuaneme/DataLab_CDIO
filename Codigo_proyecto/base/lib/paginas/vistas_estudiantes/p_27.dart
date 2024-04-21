@@ -1,7 +1,8 @@
+import 'package:base/paginas/vistas_estudiantes/p_28.dart';
 import 'package:flutter/material.dart';
 
-class RecepcionPage18 extends StatelessWidget {
-  const RecepcionPage18({super.key});
+class RecepcionPage27 extends StatelessWidget {
+  const RecepcionPage27({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class RecepcionPage18 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '6. ENFRIAMIENTO',
+                        '15. EMPACADO',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
@@ -52,6 +53,23 @@ class RecepcionPage18 extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    // Botón de aceptar
+                    ElevatedButton(
+                      onPressed: () {
+                        // Acción que se llevará a cabo cuando se presione el botón
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RecepcionPage28()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black, // Color del texto
+                      ),
+                      child: const Text('Aceptar'),
                     ),
                   ],
                 ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RecepcionPage17 extends StatelessWidget {
-  const RecepcionPage17({super.key});
+class RecepcionPage28 extends StatelessWidget {
+  const RecepcionPage28({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,14 @@ class RecepcionPage17 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '5. ESCALDADO',
+                        '15. EMPACADO',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      'Ingrese el peso inicial',
+                      'Ingrese las perdidas',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
@@ -47,8 +47,8 @@ class RecepcionPage17 extends StatelessWidget {
                     TextField(
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Peso',
-                        hintText: 'Introduzca el peso en kilogramos',
+                        labelText: 'Ingresese las perdidas',
+                        hintText: 'Introduzca el %',
                       ),
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),

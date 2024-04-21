@@ -1,3 +1,4 @@
+import 'package:base/paginas/vistas_estudiantes/p_17.dart';
 import 'package:flutter/material.dart';
 
 class RecepcionPage16 extends StatelessWidget {
@@ -58,6 +59,11 @@ class RecepcionPage16 extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // Acción que se llevará a cabo cuando se presione el botón
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RecepcionPage17()),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

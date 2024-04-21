@@ -53,18 +53,6 @@ class RecepcionPage14 extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    // Botón de aceptar
-                    ElevatedButton(
-                      onPressed: () {
-                        // Acción que se llevará a cabo cuando se presione el botón
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.black, // Color del texto
-                      ),
-                      child: const Text('Aceptar'),
-                    ),
                   ],
                 ),
               ),
