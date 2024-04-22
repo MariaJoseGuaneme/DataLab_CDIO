@@ -1,5 +1,6 @@
 import 'package:base/funciones_proyecto/inicio.dart';
 import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
+import 'package:base/funciones_proyecto/select_actividad_profe.dart';
 import 'package:base/funciones_proyecto/select_proceso.dart';
 
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       //home: PagInicio(),
       //home: Select_e(),
-      home: Menu(),
+      home: Select_p(),
     );
   }
 }

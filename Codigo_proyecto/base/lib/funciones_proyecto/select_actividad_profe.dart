@@ -1,4 +1,5 @@
 import 'package:base/paginas/vista_profes/p_6.dart';
+import 'package:base/paginas/vista_profes/p_9.dart';
 import 'package:flutter/material.dart';
 
 class Select_p extends StatefulWidget {
@@ -64,6 +65,9 @@ Widget inicio(BuildContext context) {
           children: <Widget>[
             GestureDetector(
               onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio9()),
+                );
                 // Handle INSERTAR DATOS tap
               },
               child: Container(
@@ -72,7 +76,8 @@ Widget inicio(BuildContext context) {
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 89, 135, 213),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 68, 100, 165), width: 10),
+                      color: const Color.fromARGB(255, 68, 100, 165),
+                      width: 10),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: const Center(
@@ -101,7 +106,8 @@ Widget inicio(BuildContext context) {
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 85, 223, 138),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 104, 203, 102), width: 10),
+                      color: const Color.fromARGB(255, 104, 203, 102),
+                      width: 10),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: const Center(

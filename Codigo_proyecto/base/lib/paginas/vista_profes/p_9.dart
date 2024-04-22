@@ -1,3 +1,5 @@
+import 'package:base/paginas/vista_profes/p_9aPulpa.dart';
+import 'package:base/paginas/vista_profes/p_9aRefresco.dart';
 import 'package:flutter/material.dart';
 
 class PagInicio9 extends StatefulWidget {
@@ -43,7 +45,9 @@ class _PagInicio9 extends State<PagInicio9> {
               ),
             ),
           ),
+          const Spacer(),
           Expanded(
+            flex: 2,
             child: GridView.count(
               padding: const EdgeInsets.all(20),
               crossAxisCount: 2,
@@ -51,12 +55,10 @@ class _PagInicio9 extends State<PagInicio9> {
               mainAxisSpacing: 20, // Espacio entre filas
               childAspectRatio: buttonAspectRatio,
               children: <Widget>[
-                _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169)),
-                _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161)),
-                _buildPracticaButton(context, 'NÉCTAR', const Color.fromARGB(255, 38, 134, 45)),
-                _buildPracticaButton(context, 'MERMELADA', const Color.fromARGB(255, 56, 142, 60)),
-                _buildPracticaButton(context, 'BOCADILLO', const Color.fromARGB(255, 26, 115, 232)),
-                _buildPracticaButton(context, 'FRUTAS EN ALMIBAR', const Color.fromARGB(255, 2, 136, 209)),
+                _buildPracticaButton(context, 'PULPA', Color.fromARGB(255, 57, 174, 247), () 
+                {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));}),
+                _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () 
+                {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aRefresco()));}),
               ],
             ),
           ),
@@ -65,7 +67,7 @@ class _PagInicio9 extends State<PagInicio9> {
     );
   }
 
-  Widget _buildPracticaButton(BuildContext context, String etiqueta, Color color) {
+  Widget _buildPracticaButton(BuildContext context, String etiqueta, Color color, VoidCallback onPressed) {
     return Padding(
       padding: const EdgeInsets.all(20), // Añade padding alrededor del botón para más espacio
       child: ElevatedButton(
@@ -77,9 +79,7 @@ class _PagInicio9 extends State<PagInicio9> {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {
-          // Manejar la pulsación del botón
-        },
+        onPressed: onPressed,
         child: Text(etiqueta),
       ),
     );
