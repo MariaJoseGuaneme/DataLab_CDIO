@@ -8,6 +8,7 @@ import 'package:base/paginas/vistas_estudiantes/p_20.dart';
 import 'package:base/paginas/vistas_estudiantes/p_21.dart';
 import 'package:base/paginas/vistas_estudiantes/p_22.dart';
 import 'package:base/paginas/vistas_estudiantes/p_23.dart';
+import 'package:base/paginas/vistas_estudiantes/p_24.dart';
 import 'package:base/paginas/vistas_estudiantes/p_25.dart';
 import 'package:base/paginas/vistas_estudiantes/p_26.dart';
 import 'package:base/paginas/vistas_estudiantes/p_27.dart';
@@ -122,6 +123,10 @@ class _Menu extends State<Menu> {
           _currentBody =
               const RecepcionPage23(); // Cambia a la página de recepción
           break;
+        case 'Formulación':
+          _currentBody =
+              const RecepcionPage24(); // Cambia a la página de recepción
+          break;
         case 'Mezclado':
           _currentBody =
               const RecepcionPage25(); // Cambia a la página de recepción
@@ -150,7 +155,14 @@ class _Menu extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Proceso de producción'),
+        title: const Text(
+          'Proceso de producción',
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 24), // Ajusta el color a blanco y el tamaño del texto
+        ),
+        backgroundColor: const Color.fromARGB(
+            255, 20, 99, 22), // Color verde específico para el AppBar
       ),
       drawer: Drawer(
         child: ListView(
@@ -163,23 +175,46 @@ class _Menu extends State<Menu> {
               child: Text('Selecciona el proceso',
                   style: TextStyle(color: Colors.white, fontSize: 24)),
             ),
-            ...sections.map((section) => ListTile(
+            ...sections.map((section) {
+              // Aplica un estilo diferente al botón 'Exportar'
+              if (section['title'] == 'Exportar') {
+                return ListTile(
+                  title: ElevatedButton.icon(
+                    icon: const Icon(Icons.download,
+                        color: Colors.white), // Ícono de descarga
+                    label: Text(section['title']),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.red,
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () =>
+                        _exportData(), // Acción especial para exportar datos
+                  ),
+                );
+              } else {
+                return ListTile(
                   title: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: section[
-                          'color'], // Color del texto del botón cuando está habilitado
-                      textStyle:
-                          const TextStyle(fontSize: 20), // Tamaño del texto
+                      backgroundColor: section['color'],
+                      textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () => _changeContent(section['title']),
                     child: Text(section['title']),
                   ),
-                )),
+                );
+              }
+            }),
           ],
         ),
       ),
-      body: _currentBody, // Usa la variable de estado para mostrar el contenido
+      body: _currentBody,
     );
+  }
+
+// Método para manejar la exportación de datos
+  void _exportData() {
+    // Implementa la lógica para exportar datos aquí
   }
 }
