@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RecepcionPage13 extends StatelessWidget {
-  const RecepcionPage13({super.key});
+class RecepcionPage22 extends StatelessWidget {
+  const RecepcionPage22({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RecepcionPage13 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '3. PESADO',
+                        '10. PESADO P/S',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
@@ -42,14 +42,14 @@ class RecepcionPage13 extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child: const Text(
-                        'Descripción del proceso de pesado. Aquí va el contenido descriptivo sobre cómo se maneja el pesado en tu proceso.',
+                        'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      'Ingrese el peso inicial',
+                      'Ingrese el peso de la pulpa',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
@@ -57,8 +57,30 @@ class RecepcionPage13 extends StatelessWidget {
                     TextField(
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Peso',
+                        labelText: 'Peso de la pulpa',
                         hintText: 'Introduzca el peso en kilogramos',
+                      ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d*\.?\,?\d*')),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    // Nuevo texto de etiqueta para el segundo cuadro de texto
+                    const Text(
+                      'Ingrese el peso las semillas',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 8.0),
+                    // Segundo cuadro de texto
+                    TextField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Peso de las semillas',
+                        hintText: 'Introduzca el peso final en kilogramos',
                       ),
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
