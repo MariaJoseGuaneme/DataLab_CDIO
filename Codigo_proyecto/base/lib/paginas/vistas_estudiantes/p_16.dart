@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RecepcionPage13 extends StatelessWidget {
-  const RecepcionPage13({super.key});
+class RecepcionPage16 extends StatelessWidget {
+  const RecepcionPage16({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RecepcionPage13 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '3. PESADO',
+                        '5. ESCALDADO',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),

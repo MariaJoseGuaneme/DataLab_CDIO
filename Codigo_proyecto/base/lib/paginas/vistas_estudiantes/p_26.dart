@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RecepcionPage13 extends StatelessWidget {
-  const RecepcionPage13({super.key});
+class RecepcionPage26 extends StatelessWidget {
+  const RecepcionPage26({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RecepcionPage13 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '3. PESADO',
+                        '14. PRUEBAS DE PLATAFORMA',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
@@ -42,14 +42,14 @@ class RecepcionPage13 extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child: const Text(
-                        'Descripción del proceso de pesado. Aquí va el contenido descriptivo sobre cómo se maneja el pesado en tu proceso.',
+                        'Descripción del proceso . Aquí va el contenido descriptivo sobre cómo se maneja el proceso en tu proceso.',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      'Ingrese el peso inicial',
+                      'Ingrese los °Brix',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
@@ -57,8 +57,51 @@ class RecepcionPage13 extends StatelessWidget {
                     TextField(
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Peso',
-                        hintText: 'Introduzca el peso en kilogramos',
+                        labelText: 'los °Brix',
+                      ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d*\.?\,?\d*')),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    // Nuevo texto de etiqueta para el segundo cuadro de texto
+                    const Text(
+                      'Ingrese el ph',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 8.0),
+                    // Segundo cuadro de texto
+                    TextField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Ph',
+                        hintText: 'Introduzca el ph',
+                      ),
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d*\.?\,?\d*')),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    // Nuevo texto de etiqueta para el segundo cuadro de texto
+                    const Text(
+                      'Ingrese la acidez',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 8.0),
+                    // Segundo cuadro de texto
+                    TextField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Acidez de la fruta',
+                        hintText: 'Introduzca la acidez',
                       ),
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
