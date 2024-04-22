@@ -1,12 +1,8 @@
 import 'package:base/funciones_proyecto/inicio.dart';
-<<<<<<< HEAD
-import 'dart:ui';
-=======
 import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
 import 'package:base/funciones_proyecto/select_proceso.dart';
 
 import 'package:flutter/material.dart';
->>>>>>> Juan
 
 void main() {
   runApp(const MyApp());
