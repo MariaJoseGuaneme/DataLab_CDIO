@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PagInicio9bPulpa extends StatelessWidget {
-  const PagInicio9bPulpa({Key? key}) : super(key: key);
+  const PagInicio9bPulpa({super.key});
 
   @override
   Widget build(BuildContext context) {

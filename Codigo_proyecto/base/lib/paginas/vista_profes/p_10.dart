@@ -53,7 +53,7 @@ class _PagInicio10State extends State<PagInicio10> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(60.0),
+            padding: const EdgeInsets.all(200.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch, // Esto asegura que los elementos hijos se estiren a lo ancho
