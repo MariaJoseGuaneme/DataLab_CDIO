@@ -3,6 +3,7 @@
 import 'package:base/funciones_proyecto/select_proceso.dart';
 
 import 'package:flutter/material.dart';
+import 'package:base/paginas/vista_profes/p_9aPulpa.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-   home: ,
+   home: PagInicio9aPulpa(),
     );
   }
 }
