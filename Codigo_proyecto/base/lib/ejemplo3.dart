@@ -106,13 +106,15 @@ class DatabaseHelper {
 }
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Database Example',
       home: HomePage(),
     );
@@ -120,6 +122,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -139,7 +143,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('DB Example'),
+        title: const Text('DB Example'),
       ),
       body: Center(
         child: Column(
@@ -147,7 +151,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             TextField( //acá debería dejar guardar lo que ingrese el ususario
               controller: _userController,
-              decoration: InputDecoration( labelText: 'Usuario')
+              decoration: const InputDecoration( labelText: 'Usuario')
 
             ),
             ElevatedButton(onPressed: () async{
@@ -159,7 +163,7 @@ class _HomePageState extends State<HomePage> {
             ), //Acá quiero que me llame a la función del databasehelp addUser
             TextField(
               controller: _productController,
-              decoration: InputDecoration(labelText: 'Producto'),
+              decoration: const InputDecoration(labelText: 'Producto'),
             ),
             
             ElevatedButton(
@@ -168,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                 await _dbHelper.addProduct(newProduct);
                 print('Product added');
               },
-              child: Text('Añadir producto'),
+              child: const Text('Añadir producto'),
             ),
 
            ElevatedButton(onPressed:() async {
@@ -176,16 +180,16 @@ class _HomePageState extends State<HomePage> {
            } 
            
            
-           , child: Text('Mostrar info'))
+           , child: const Text('Mostrar info'))
           ],
         ),
       ),
     );
   }
 }
-Future<void> _showMyDialog(BuildContext context, final _dbHelper) async {
-  List<User> users = await _dbHelper.getUsers();
-    List<Product> products = await _dbHelper.getProducts();
+Future<void> _showMyDialog(BuildContext context, final dbHelper) async {
+  List<User> users = await dbHelper.getUsers();
+    List<Product> products = await dbHelper.getProducts();
 
     // Prepara los textos para mostrar
     String usersText = users.map((user) => 'Id: ${user.id}, Name: ${user.name}, Age: ${user.age}').join('\n');
@@ -197,25 +201,25 @@ Future<void> _showMyDialog(BuildContext context, final _dbHelper) async {
       builder: (BuildContext context) {
         return AlertDialog(
 
-          title: Text('Alert Dialog Title'),
+          title: const Text('Alert Dialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                Text('Usuarios:\n$usersText'),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text('Productos:\n$productsText'),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Approve'),
+              child: const Text('Approve'),
               onPressed: () {
                 Navigator.of(context).pop(); // Dismiss the dialog
               },
             ),
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop(); // Dismiss the dialog
               },
