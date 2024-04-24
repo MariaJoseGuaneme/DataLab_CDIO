@@ -2,6 +2,7 @@ import 'package:base/funciones_proyecto/inicio.dart';
 import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
 import 'package:base/funciones_proyecto/select_actividad_profe.dart';
 import 'package:base/funciones_proyecto/select_proceso.dart';
+import 'package:base/studentoperationspage.dart';
 
 import 'package:flutter/material.dart';
 

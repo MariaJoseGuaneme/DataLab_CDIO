@@ -1,3 +1,5 @@
+import 'package:base/paginas/vista_profes/p_10.dart';
+import 'package:base/paginas/vista_profes/p_9bPulpa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -49,6 +51,7 @@ class _PagInicio9aPulpa extends State<PagInicio9aPulpa> {
                     child: ListTile(
                       title: Text(frutas[index]),
                       onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio10()),);
                         // Acción cuando se toca cada fruta, por ejemplo, navegar a otra página o mostrar un mensaje.
                         print('Seleccionada: ${frutas[index]}');
                       },
@@ -59,11 +62,17 @@ class _PagInicio9aPulpa extends State<PagInicio9aPulpa> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, 
+                foregroundColor: Colors.white,
+              ),
               onPressed: () {
-                // Acción para añadir una nueva fruta
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio9bPulpa()),);// Acción para añadir una nueva fruta
               },
-              child: const Text('Añadir fruta'),
+              child: const Text(
+                'Añadir fruta', 
+                style: TextStyle(fontSize: 20.0),
+              ),
             ),
             Align(
               alignment: Alignment.bottomLeft,
