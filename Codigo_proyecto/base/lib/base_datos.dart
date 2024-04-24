@@ -83,35 +83,108 @@ class Grupo {
 
 class Practica1 {
   final int idGrupos;
-  final int dato1;
-  final int dato2;
-  // ... continúa con los demás datos hasta dato21
+  final int unidadesProducir;
+  final int unidadesEmpaque;
+  final int tiempoEscaldado;
+  final int tiempoEnfriamiento;
+  final int pPulpa;
+  final int pAcidoAscorbico;
+  final int pAcidoCitrico;
+  final int pBenzonatoSodio;
+  final int pSorbatoPotasio;
+  final int pesoInicial;
+  final int pesoEscaldado;
+  final int pesoCascara;
+  final int pesoPulpa;
+  final int pesoSemillas;
+  final int brix1;
+  final int ph1;
+  final int acidez1;
+  final int brix2;
+  final int ph2;
+  final int acidez2;
+  final int perdidasEmpacado;
 
   Practica1({
     required this.idGrupos,
-    required this.dato1,
-    required this.dato2,
-    // ... continúa con los demás datos hasta dato21
+    required this.unidadesProducir,
+    required this.unidadesEmpaque,
+    required this.tiempoEscaldado,
+    required this.tiempoEnfriamiento,
+    required this.pPulpa,
+    required this.pAcidoAscorbico,
+    required this.pAcidoCitrico,
+    required this.pBenzonatoSodio,
+    required this.pSorbatoPotasio,
+    required this.pesoInicial,
+    required this.pesoEscaldado,
+    required this.pesoCascara,
+    required this.pesoPulpa,
+    required this.pesoSemillas,
+    required this.brix1,
+    required this.ph1,
+    required this.acidez1,
+    required this.brix2,
+    required this.ph2,
+    required this.acidez2,
+    required this.perdidasEmpacado,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id_grupos': idGrupos,
-      'dato1': dato1,
-      'dato2': dato2,
-      // ... continúa con los demás datos hasta dato21
+      'unidades_producir': unidadesProducir,
+      'unidades_empaque': unidadesEmpaque,
+      'tiempo_escaldado': tiempoEscaldado,
+      'tiempo_enfriamiento': tiempoEnfriamiento,
+      'p_pulpa': pPulpa,
+      'p_acido_ascorbico': pAcidoAscorbico,
+      'p_acido_citrico': pAcidoCitrico,
+      'p_benzonato_sodio': pBenzonatoSodio,
+      'p_sorbato_potasio': pSorbatoPotasio,
+      'peso_inicial': pesoInicial,
+      'peso_escaldado': pesoEscaldado,
+      'peso_cascara': pesoCascara,
+      'peso_pulpa': pesoPulpa,
+      'peso_semillas': pesoSemillas,
+      'brix_1': brix1,
+      'ph_1': ph1,
+      'acidez_1': acidez1,
+      'brix_2': brix2,
+      'ph_2': ph2,
+      'acidez_2': acidez2,
+      'perdidas_empacado': perdidasEmpacado,
     };
   }
 
   factory Practica1.fromMap(Map<String, dynamic> map) {
     return Practica1(
       idGrupos: map['id_grupos'],
-      dato1: map['dato1'],
-      dato2: map['dato2'],
-      // ... continúa con los demás datos hasta dato21
+      unidadesProducir: map['unidades_producir'],
+      unidadesEmpaque: map['unidades_empaque'],
+      tiempoEscaldado: map['tiempo_escaldado'],
+      tiempoEnfriamiento: map['tiempo_enfriamiento'],
+      pPulpa: map['p_pulpa'],
+      pAcidoAscorbico: map['p_acido_ascorbico'],
+      pAcidoCitrico: map['p_acido_citrico'],
+      pBenzonatoSodio: map['p_benzonato_sodio'],
+      pSorbatoPotasio: map['p_sorbato_potasio'],
+      pesoInicial: map['peso_inicial'],
+      pesoEscaldado: map['peso_escaldado'],
+      pesoCascara: map['peso_cascara'],
+      pesoPulpa: map['peso_pulpa'],
+      pesoSemillas: map['peso_semillas'],
+      brix1: map['brix_1'],
+      ph1: map['ph_1'],
+      acidez1: map['acidez_1'],
+      brix2: map['brix_2'],
+      ph2: map['ph_2'],
+      acidez2: map['acidez_2'],
+      perdidasEmpacado: map['perdidas_empacado'],
     );
   }
 }
+
 
 
 
@@ -198,31 +271,31 @@ CREATE TABLE grupos (
 ''');
 
     await db.execute('''
-CREATE TABLE practica_1 (
-  id_grupos $intType,
-  dato1 $intType,
-  dato2 $intType,
-  dato3 $intType,
-  dato4 $intType,
-  dato5 $intType,
-  dato6 $intType,
-  dato7 $intType,
-  dato8 $intType,
-  dato9 $intType,
-  dato10 $intType,
-  dato11 $intType,
-  dato12 $intType,
-  dato13 $intType,
-  dato14 $intType,
-  dato15 $intType,
-  dato16 $intType,
-  dato17 $intType,
-  dato18 $intType,
-  dato19 $intType,
-  dato20 $intType,
-  dato21 $intType
-)
-''');
+    CREATE TABLE practica1 (
+      id_grupos INTEGER PRIMARY KEY,
+      unidades_producir INTEGER,
+      unidades_empaque INTEGER,
+      tiempo_escaldado INTEGER,
+      tiempo_enfriamiento INTEGER,
+      p_pulpa INTEGER,
+      p_acido_ascorbico INTEGER,
+      p_acido_citrico INTEGER,
+      p_benzonato_sodio INTEGER,
+      p_sorbato_potasio INTEGER,
+      peso_inicial INTEGER,
+      peso_escaldado INTEGER,
+      peso_cascara INTEGER,
+      peso_pulpa INTEGER,
+      peso_semillas INTEGER,
+      brix_1 INTEGER,
+      ph_1 INTEGER,
+      acidez_1 INTEGER,
+      brix_2 INTEGER,
+      ph_2 INTEGER,
+      acidez_2 INTEGER,
+      perdidas_empacado INTEGER
+    )
+  '''); 
 
     await db.execute('''
 CREATE TABLE practica_2 (
@@ -393,51 +466,42 @@ CREATE TABLE practica_2 (
     );
   }
 
-  // Insertar una práctica
-  Future<int> insertPractica1(Practica1 practica) async {
-    final db = await database;
-    return await db.insert('practica_1', practica.toMap());
-  }
+  // Insertar una nueva práctica
+Future<int> insertPractica1(Practica1 practica) async {
+  final db = await database;
+  return await db.insert('practica1', practica.toMap());
+}
 
-  // Leer todas las prácticas
-  Future<List<Practica1>> getAllPracticas1() async {
-    final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('practica_1');
-    return List.generate(maps.length, (i) {
-      return Practica1.fromMap(maps[i]);
-    });
-  }
+// Leer todas las prácticas
+Future<List<Practica1>> getAllPracticas1() async {
+  final db = await database;
+  final maps = await db.query('practica1');
+  return List.generate(maps.length, (i) {
+    return Practica1.fromMap(maps[i]);
+  });
+}
 
-  // Leer una práctica por el ID de grupo
-  Future<Practica1?> getPractica1ByGrupoId(int idGrupos) async {
-    final db = await database;
-    final maps = await db.query('practica_1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
-    if (maps.isNotEmpty) {
-      return Practica1.fromMap(maps.first);
-    }
-    return null;
+// Leer una práctica por su ID de grupo
+Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {
+  final db = await database;
+  final maps = await db.query('practica1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
+  if (maps.isNotEmpty) {
+    return Practica1.fromMap(maps.first);
   }
+  return null;
+}
 
-  // Actualizar una práctica
-  Future<int> updatePractica1(Practica1 practica) async {
-    final db = await database;
-    return await db.update(
-      'practica_1',
-      practica.toMap(),
-      where: 'id_grupos = ?',
-      whereArgs: [practica.idGrupos],
-    );
-  }
+// Actualizar una práctica
+Future<int> updatePractica1(Practica1 practica) async {
+  final db = await database;
+  return await db.update('practica1', practica.toMap(), where: 'id_grupos = ?', whereArgs: [practica.idGrupos]);
+}
 
-  // Eliminar una práctica
-  Future<int> deletePractica1(int idGrupos) async {
-    final db = await database;
-    return await db.delete(
-      'practica_1',
-      where: 'id_grupos = ?',
-      whereArgs: [idGrupos],
-    );
-  }
+// Eliminar una práctica
+Future<int> deletePractica1(int idGrupos) async {
+  final db = await database;
+  return await db.delete('practica1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
+}
 
   // Insertar una práctica
   Future<int> insertPractica2(Practica2 practica) async {
@@ -484,6 +548,15 @@ CREATE TABLE practica_2 (
       whereArgs: [idGrupos],
     );
   }
+  // Función para actualizar un solo dato en practica1
+  Future<int> updateSingleDataPractica1(String columnName, dynamic value) async {
+    final db = await database;
+    return await db.rawUpdate(
+        'UPDATE practica1 SET $columnName = ? WHERE id_grupos = 1',
+        [value]
+    );
+  }
+
 
   // Agregar funciones CRUD aquí...
 

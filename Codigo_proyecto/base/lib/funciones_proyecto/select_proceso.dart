@@ -93,7 +93,7 @@ class _Menu extends State<Menu> {
           break;
         case 'Pesado':
           _currentBody =
-              const RecepcionPage13(); // Cambia a la página de recepción
+              RecepcionPage13(); // Cambia a la página de recepción
           break;
         case 'Desinfección':
           _currentBody =

@@ -52,30 +52,30 @@ void _deleteAllStudents() async {
 }
 
 void _showEditDialog(BuildContext context, Estudiante estudiante) {
-  final _editEmailController = TextEditingController(text: estudiante.correo);
+  final editEmailController = TextEditingController(text: estudiante.correo);
 
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text('Editar Correo'),
+        title: const Text('Editar Correo'),
         content: TextField(
-          controller: _editEmailController,
-          decoration: InputDecoration(labelText: 'Nuevo correo'),
+          controller: editEmailController,
+          decoration: const InputDecoration(labelText: 'Nuevo correo'),
         ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.of(context).pop(); // Cierra el cuadro de diálogo
             },
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () {
-              _updateStudentEmail(estudiante.id!, _editEmailController.text);
+              _updateStudentEmail(estudiante.id!, editEmailController.text);
               Navigator.of(context).pop(); // Cierra el cuadro de diálogo
             },
-            child: Text('Guardar'),
+            child: const Text('Guardar'),
           ),
         ],
       );
@@ -89,10 +89,10 @@ void _showEditDialog(BuildContext context, Estudiante estudiante) {
     return Scaffold(
       appBar: 
       AppBar(
-  title: Text('Estudiantes'),
+  title: const Text('Estudiantes'),
   actions: <Widget>[
     IconButton(
-      icon: Icon(Icons.delete_forever),
+      icon: const Icon(Icons.delete_forever),
       onPressed: _deleteAllStudents, // Aquí no necesitas pasar parámetros
       tooltip: 'Borrar todos los estudiantes',
     ),
@@ -102,11 +102,11 @@ void _showEditDialog(BuildContext context, Estudiante estudiante) {
         children: [
           TextField(
             controller: _correoController,
-            decoration: InputDecoration(labelText: 'Correo del Estudiante'),
+            decoration: const InputDecoration(labelText: 'Correo del Estudiante'),
           ),
           ElevatedButton(
             onPressed: _addStudent,
-            child: Text('Agregar Estudiante'),
+            child: const Text('Agregar Estudiante'),
           ),
          Expanded(
   child: ListView.builder(
@@ -119,11 +119,11 @@ void _showEditDialog(BuildContext context, Estudiante estudiante) {
           mainAxisSize: MainAxisSize.min, // Esto asegura que el Row solo toma el espacio necesario para sus hijos.
           children: [
             IconButton(
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
               onPressed: () => _showEditDialog(context, _estudiantes[index]),
             ),
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               onPressed: () => _deleteStudent(_estudiantes[index].id!), // Asegúrate de que el estudiante tenga un id.
             ),
           ],

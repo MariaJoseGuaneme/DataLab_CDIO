@@ -1,14 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:base/base_datos_manager.dart'; // Asegúrate de importar tu DatabaseManager
 
-class RecepcionPage23 extends StatelessWidget {
+class RecepcionPage23 extends StatefulWidget {
   const RecepcionPage23({super.key});
 
   @override
+  _RecepcionPage23State createState() => _RecepcionPage23State();
+}
+
+class _RecepcionPage23State extends State<RecepcionPage23> {
+  final TextEditingController _brixController = TextEditingController();
+  final TextEditingController _phController = TextEditingController();
+  final TextEditingController _acidezController = TextEditingController();
+  final DatabaseManager _dbManager = DatabaseManager();
+  bool _isLoading = true;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarDatos();
+  }
+
+  void _cargarDatos() async {
+    try {
+      final brix1 = await _dbManager.getBrix2();
+      final ph1 = await _dbManager.getPh2();
+      final acidez1 = await _dbManager.getAcidez2();
+      setState(() {
+        _brixController.text = brix1.toString();
+        _phController.text = ph1.toString();
+        _acidezController.text = acidez1.toString();
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _error = 'Error al cargar los datos: ${e.toString()}';
+      });
+    }
+  }
+
+  void _guardarDatos() async {
+    // Convertir los valores de los controladores a números
+    final double? brixValue = double.tryParse(_brixController.text);
+    final double? phValue = double.tryParse(_phController.text);
+    final double? acidezValue = double.tryParse(_acidezController.text);
+
+    // Comprobar si alguno de los valores es nulo, lo que significa que la conversión falló
+    if (brixValue == null || phValue == null || acidezValue == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor, ingrese valores numéricos válidos.')),
+      );
+      return;
+    }
+
+    // Guardar Brix
+    try {
+      await _dbManager.insertSingleDataPractica1('brix_1', brixValue, context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Valor de Brix guardado con éxito')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al guardar Brix: ${e.toString()}')),
+      );
+    }
+
+    // Guardar pH
+    try {
+      await _dbManager.insertSingleDataPractica1('ph_1', phValue, context );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Valor de pH guardado con éxito')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al guardar pH: ${e.toString()}')),
+      );
+    }
+
+    // Guardar Acidez
+    try {
+      await _dbManager.insertSingleDataPractica1('acidez_1', acidezValue, context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Valor de Acidez guardado con éxito')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al guardar Acidez: ${e.toString()}')),
+      );
+    }
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
+      appBar: AppBar(
+        title: const Text('Control Fisicoquímico'),
+      ),
+      body: _error != null
+          ? Center(child: Text(_error!))
+          : Stack(
         children: <Widget>[
           Positioned(
             bottom: 0,
@@ -38,86 +136,59 @@ class RecepcionPage23 extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      color: Colors.green.shade300,
-                      child: const Text(
-                        'Descripción del proceso . Aquí va el contenido descriptivo sobre cómo se maneja el proceso en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    const Text(
-                      'Ingrese los °Brix',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 8.0),
+                    // Agregar los demás elementos del formulario aquí
                     TextField(
+                      controller: _brixController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'los °Brix',
+                        labelText: 'Brix',
+                        hintText: 'Introduzca los °Brix',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                            RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 16.0),
-                    // Nuevo texto de etiqueta para el segundo cuadro de texto
-                    const Text(
-                      'Ingrese el ph',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 8.0),
-                    // Segundo cuadro de texto
                     TextField(
+                      controller: _phController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Ph',
-                        hintText: 'Introduzca el ph',
+                        labelText: 'pH',
+                        hintText: 'Introduzca el pH',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                            RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 16.0),
-                    // Nuevo texto de etiqueta para el segundo cuadro de texto
-                    const Text(
-                      'Ingrese la acidez',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 8.0),
-                    // Segundo cuadro de texto
                     TextField(
+                      controller: _acidezController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Acidez de la fruta',
+                        labelText: 'Acidez',
                         hintText: 'Introduzca la acidez',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                            RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _guardarDatos,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,
                       ),
-                      child: const Text('Aceptar'),
+                      child: const Text('Guardar Datos'),
                     ),
                   ],
                 ),
