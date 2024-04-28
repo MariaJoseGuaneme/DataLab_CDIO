@@ -70,7 +70,7 @@ class _PagInicio9aRefresco extends State<PagInicio9aRefresco> {
               child: SizedBox(
                 height: 200,
                 width: 200,
-                child: Image.asset('assets/logou.jpg'), 
+                child: Image.asset(''),
               ),
             ),
           ],
