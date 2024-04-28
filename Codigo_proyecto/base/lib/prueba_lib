@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ..._amigos.map((amigo) => ListTile(
                 title: Text('ID: ${amigo.id}, Nombre: ${amigo.nombre}, Edad: ${amigo.edad}'),
-              )).toList(),
+              )),
             ],
           ),
         ),
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class AddFriendForm extends StatelessWidget {
   final VoidCallback onDatabaseUpdated;
 
-  AddFriendForm({required this.onDatabaseUpdated});
+  AddFriendForm({super.key, required this.onDatabaseUpdated});
 
   final _formKey = GlobalKey<FormState>();
   String _name = '';

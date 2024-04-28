@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   // Creación del controlador de texto
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void dispose() {
@@ -33,14 +37,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TextEditingController Example'),
+        title: const Text('TextEditingController Example'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextField(
             controller: _controller,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: 'Enter something',
             ),
           ),
@@ -54,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
-            child: Text('Show what I typed'),
+            child: const Text('Show what I typed'),
           ),
         ],
       ),

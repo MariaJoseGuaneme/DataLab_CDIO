@@ -1,0 +1,200 @@
+import 'package:flutter/material.dart';
+import 'package:base/base_datos_manager.dart';
+import 'package:flutter/services.dart';// Asegúrate de importar el DatabaseManager
+
+class RecepcionPage22 extends StatefulWidget {
+  const RecepcionPage22({super.key});
+
+  @override
+  _RecepcionPage22State createState() => _RecepcionPage22State();
+}
+
+class _RecepcionPage22State extends State<RecepcionPage22> {
+  final TextEditingController _pesoPulpaController = TextEditingController();
+  final TextEditingController _pesoSemillasController = TextEditingController();
+  final DatabaseManager _dbManager = DatabaseManager();
+  bool _isLoading = true;
+  String? _errorPulpa;
+  String? _errorSemillas;
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarDatos();
+  }
+
+  void _cargarDatos() async {
+    try {
+      final double pesoPulpa = await _dbManager.getPesoPulpa();
+      final double pesoSemillas = await _dbManager.getPesoSemillas();
+      print("Peso Pulpa: $pesoPulpa, Peso Semillas: $pesoSemillas"); // Agrega esto para depuración
+      setState(() {
+        _pesoPulpaController.text = pesoPulpa.toString();
+        _pesoSemillasController.text = pesoSemillas.toString();
+        _isLoading = false;
+        _errorPulpa = null;
+        _errorSemillas = null;
+      });
+    } catch (e) {
+      print("Error loading data: ${e.toString()}"); // Agrega esto para depuración
+      setState(() {
+        _isLoading = false;
+        _errorPulpa = 'Error al cargar el peso de la pulpa: ${e.toString()}';
+        _errorSemillas = 'Error al cargar el peso de las semillas: ${e.toString()}';
+      });
+    }
+  }
+
+
+  void _guardarPesoPulpa() async {
+    final String pesoStr = _pesoPulpaController.text;
+    if (pesoStr.isNotEmpty) {
+      final double? peso = double.tryParse(pesoStr);
+      if (peso != null) {
+        // Actualiza solo el campo de pesoInicial
+        try {
+          await _dbManager.insertSingleDataPractica1('peso_pulpa', peso, context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Peso pulpa guardado con éxito')),
+          );
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
+        );
+      }
+    }
+  }
+
+  void _guardarPesoSemilla() async {
+    final String pesoStr = _pesoSemillasController.text;
+    if (pesoStr.isNotEmpty) {
+      final double? peso = double.tryParse(pesoStr);
+      if (peso != null) {
+        // Actualiza solo el campo de pesoInicial
+        try {
+          await _dbManager.insertSingleDataPractica1('peso_semillas', peso, context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Peso pulpa guardado con éxito')),
+          );
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: Image.asset(
+              'assets/UQ.png',
+              width: 200,
+              height: 200,
+            ),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                constraints: const BoxConstraints(maxWidth: 600),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      color: Colors.green,
+                      child: const Text(
+                        '10. PESADO P/S',
+                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      color: Colors.green.shade300,
+                      child: const Text(
+                        'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    const Text(
+                      'Ingrese el peso de la pulpa',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 8.0),
+                    TextField(
+                      controller: _pesoPulpaController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Peso',
+                        hintText: 'Introduzca el peso en kilogramos',
+                      ),
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    // Nuevo texto de etiqueta para el segundo cuadro de texto
+                    const Text(
+                      'Ingrese el peso las semillas',
+                      style: TextStyle(fontSize: 16),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 8.0),
+                    // Segundo cuadro de texto
+              TextField(
+                controller: _pesoSemillasController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Peso',
+                  hintText: 'Introduzca el peso en kilogramos',
+                ),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                ],
+              ),
+              const SizedBox(height: 18.0),
+              ElevatedButton(
+                onPressed: () {
+                  _guardarPesoSemilla(); // Llama a la función _guardarPesoSemilla()
+                  _guardarPesoPulpa(); // Llama a la función _guardarPesoPulpa()
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.black,
+                ),
+                child: const Text('Aceptar'),)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

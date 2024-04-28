@@ -1,68 +1,64 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:base/base_datos_manager.dart';
-// Asegúrate de importar el DatabaseManager
+import 'package:base/base_datos_manager.dart'; // Importa tu DatabaseManager
 
-class RecepcionPage13 extends StatefulWidget {
-  const RecepcionPage13({super.key});
+class RecepcionPage20 extends StatefulWidget {
+  const RecepcionPage20({super.key});
 
   @override
-  _RecepcionPage13State createState() => _RecepcionPage13State();
+  _RecepcionPage20State createState() => _RecepcionPage20State();
 }
 
-class _RecepcionPage13State extends State<RecepcionPage13> {
-  final TextEditingController _pesoController = TextEditingController();
+class _RecepcionPage20State extends State<RecepcionPage20> {
+  final TextEditingController _pesoCascaraController = TextEditingController();
   final DatabaseManager _dbManager = DatabaseManager();
- bool _isLoading = true; // Añade una variable para manejar el estado de carga
-  String? _error; // Añade una variable para almacenar mensajes de error
+  bool _isLoading = true;
+  String? _error;
 
   @override
   void initState() {
     super.initState();
-    _cargarPesoInicial();
+    _cargarPesoCascara();
   }
 
-
- void _cargarPesoInicial() async {
+  void _cargarPesoCascara() async {
     try {
-      final double pesoInicial = await _dbManager.getPesoInicial();
+      final double pesoCascara = await _dbManager.getPesoCascara();
       setState(() {
-        _pesoController.text = pesoInicial.toString();
-        _isLoading = false; // Carga completada
-        _error = null; // No hay errores
+        _pesoCascaraController.text = pesoCascara.toString();
+        _isLoading = false;
+        _error = null;
       });
     } catch (e) {
       setState(() {
-        _isLoading = false; // Carga completada
-        _error = 'Error al cargar el peso inicial: ${e.toString()}'; // Almacenar el error
+        _isLoading = false;
+        _error = 'Error al cargar el peso de la cáscara: ${e.toString()}';
       });
-    }}
-
- void _guardarPesoInicial() async {
-  final String pesoStr = _pesoController.text;
-  if (pesoStr.isNotEmpty) {
-    final double? peso = double.tryParse(pesoStr);
-    if (peso != null) {
-      // Actualiza solo el campo de pesoInicial
-      try {
-        await _dbManager.insertSingleDataPractica1('peso_inicial', peso, context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Peso inicial guardado con éxito')),
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-        );
-      }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-      );
     }
   }
-}
 
+  void _guardarPesoCascara() async {
+    final String pesoStr = _pesoCascaraController.text;
+    if (pesoStr.isNotEmpty) {
+      final double? peso = double.tryParse(pesoStr);
+      if (peso != null) {
+        try {
+          await _dbManager.insertSingleDataPractica1('peso_cascara', peso, context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Peso de la cáscara guardado con éxito')),
+          );
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,16 +84,11 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    if (_isLoading)
-                    CircularProgressIndicator() // Muestra un indicador de carga
-                  else if (_error != null)
-                    Text(_error!, style: TextStyle(color: Colors.red, fontSize: 16)) // Muestra el mensaje de error
-                  else ...[ // Solo muestra los campos si no está cargando y no hay errores
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '3. PESADO',
+                        '8. ACONDICIONAMIENTO',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
@@ -107,20 +98,20 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child: const Text(
-                        'Descripción del proceso de pesado. Aquí va el contenido descriptivo sobre cómo se maneja el pesado en tu proceso.',
+                        'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      'Ingrese el peso inicial',
+                      'Ingrese el peso de la cáscara',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 8.0),
                     TextField(
-                      controller: _pesoController,
+                      controller: _pesoCascaraController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Peso',
@@ -133,7 +124,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: _guardarPesoInicial,
+                      onPressed: _guardarPesoCascara,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,
@@ -141,7 +132,6 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       child: const Text('Aceptar'),
                     ),
                   ],
-                  ]
                 ),
               ),
             ),
