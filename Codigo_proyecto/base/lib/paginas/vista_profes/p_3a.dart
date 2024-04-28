@@ -7,22 +7,29 @@ class PagInicio3a extends StatefulWidget {
   State<PagInicio3a> createState() => _PagInicio3aState();
 }
 
-
 class _PagInicio3aState extends State<PagInicio3a> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Flexible(
                 child: Image.asset(
-                  'assets/UQ.png', // Debes añadir el logo en tu carpeta de assets.
+                  'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
                   height: 120.0,
                 ),
               ),
@@ -38,7 +45,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
               ),
               SizedBox(height: 48.0),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 80.0, horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 8.0), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10.0),
@@ -50,6 +57,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       keyboardType: TextInputType.emailAddress,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.account_circle_sharp),
                         hintText: 'Correo institucional',
                         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         border: OutlineInputBorder(
@@ -64,6 +72,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       obscureText: true,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock_outline_rounded),
                         hintText: 'Contraseña',
                         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         border: OutlineInputBorder(
@@ -76,31 +85,49 @@ class _PagInicio3aState extends State<PagInicio3a> {
                   ],
                 ),
               ),
-              SizedBox(height: 24.0),
-              Material(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(10.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    // Implementar la lógica de inicio de sesión
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Ingresar',
-                    style: TextStyle(color: Colors.white, fontSize: 17.0),
+              SizedBox(height: 50.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                child: Container(
+                  child: Material(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10.0),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        // Implementar la lógica de inicio de sesión
+                      },
+                      minWidth: 100.0,
+                      height: 42.0,
+                      child: Text(
+                        'Ingresar',
+                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(height: 8.0),
-              TextButton(
-                onPressed: () {
-                  // Implementar lógica para ir a la pantalla de registro
-                },
-                child: Text(
-                  'Registrarse',
-                  style: TextStyle(color: Colors.green, fontSize: 15.0),
+              SizedBox(height: 20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 200),
+                child: Container(
+                  width: 100.0,
+                  child: Material(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10.0),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        // Implementar la lógica de inicio de sesión
+                      },
+                      minWidth: 50.0,
+                      height: 42.0,
+                      child: Text(
+                        'Registrase',
+                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
