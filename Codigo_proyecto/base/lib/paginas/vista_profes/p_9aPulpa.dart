@@ -26,6 +26,7 @@ class _PagInicio9aPulpa extends State<PagInicio9aPulpa> {
       
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+
         child: Column(
           children: <Widget>[
             Container(
@@ -74,12 +75,13 @@ class _PagInicio9aPulpa extends State<PagInicio9aPulpa> {
                 style: TextStyle(fontSize: 20.0),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: SizedBox(
-                height: 200,
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Image.asset(
+                'assets/UQ.png',
                 width: 200,
-                child: Image.asset('assets/logou.jpg'), 
+                height: 200,
               ),
             ),
           ],
