@@ -1,3 +1,5 @@
+import 'package:base/paginas/vista_profes/p_3b.dart';
+import 'package:base/paginas/vista_profes/p_4.dart';
 import 'package:flutter/material.dart';
 
 class PagInicio3a extends StatefulWidget {
@@ -8,6 +10,7 @@ class PagInicio3a extends StatefulWidget {
 }
 
 class _PagInicio3aState extends State<PagInicio3a> {
+  bool _obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +25,8 @@ class _PagInicio3aState extends State<PagInicio3a> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
+          padding: const EdgeInsets.symmetric(
+              horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,7 +49,10 @@ class _PagInicio3aState extends State<PagInicio3a> {
               ),
               SizedBox(height: 48.0),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 8.0), // Asegúrate de usar 'const' para optimizar
+                padding: const EdgeInsets.symmetric(
+                    vertical: 60.0,
+                    horizontal:
+                        8.0), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10.0),
@@ -59,7 +66,8 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.account_circle_sharp),
                         hintText: 'Correo institucional',
-                        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -69,17 +77,28 @@ class _PagInicio3aState extends State<PagInicio3a> {
                     ),
                     SizedBox(height: 50.0),
                     TextField(
-                      obscureText: true,
+                      obscureText: _obscureText,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock_outline_rounded),
                         hintText: 'Contraseña',
-                        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
                         filled: true,
                         fillColor: Colors.white,
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -95,7 +114,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: () {
-                        // Implementar la lógica de inicio de sesión
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio4()),);// Implementar la lógica de inicio de sesión
                       },
                       minWidth: 100.0,
                       height: 42.0,
@@ -118,12 +137,12 @@ class _PagInicio3aState extends State<PagInicio3a> {
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: () {
-                        // Implementar la lógica de inicio de sesión
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio3b()),);// Implementar la lógica de Registrarse
                       },
                       minWidth: 50.0,
                       height: 42.0,
                       child: Text(
-                        'Registrase',
+                        'Registrarse',
                         style: TextStyle(color: Colors.white, fontSize: 17.0),
                       ),
                     ),
