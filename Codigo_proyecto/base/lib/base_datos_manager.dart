@@ -200,7 +200,7 @@ Future<void> deleteStudent(int id, BuildContext context) async {
       // Si no existe, inserta un nuevo registro con `id_grupos` igual a 1.
       await db.insert('practica1', {'id_grupos': 1, columnName: value});
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Nuevo registro creado con éxito en practica1'))
+          SnackBar(content: Text('Nuevo registro creado con éxito en practica1'))   ,
       );
     } else {
       // Si existe, actualiza el registro existente.

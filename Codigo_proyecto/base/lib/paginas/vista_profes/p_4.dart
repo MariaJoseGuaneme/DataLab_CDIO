@@ -18,35 +18,31 @@ class _PagInicio4State extends State<PagInicio4> {
     });
   }
 
-  void _borrarGrupo() {
-    if (grupos.isNotEmpty) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Confirmar'),
-            content: const Text('¿Quieres borrar el último grupo?'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Cancelar'),
-                onPressed: () {
-                  Navigator.of(context).pop(); // Cierra el cuadro de diálogo
-                },
-              ),
-              TextButton(
-                child: const Text('Borrar'),
-                onPressed: () {
-                  setState(() {
-                    grupos.removeLast();
-                  });
-                  Navigator.of(context).pop(); // Cierra el cuadro de diálogo
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
+  void _borrarGrupo(int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirmar'),
+          content: Text('¿Estás seguro de que quieres borrar "${grupos[index]}"?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Borrar'),
+              onPressed: () {
+                setState(() {
+                  grupos.removeAt(index);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -58,21 +54,6 @@ class _PagInicio4State extends State<PagInicio4> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: (String result) {
-              if (result == 'Borrar grupo') {
-                _borrarGrupo();
-              }
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'Borrar grupo',
-                child: Text('Borrar grupo'),
-              ),
-            ],
-          ),
-        ],
       ),
       body: Column(
         children: <Widget>[
@@ -83,24 +64,8 @@ class _PagInicio4State extends State<PagInicio4> {
                 if (index == grupos.length) {
                   return _crearBotonAgregar();
                 }
-                return _grupo(grupos[index], Icons.check, () {}, () {});
+                return _grupo(grupos[index], index);
               },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Rechazar'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Aceptar'),
-                ),
-              ],
             ),
           ),
         ],
@@ -108,16 +73,38 @@ class _PagInicio4State extends State<PagInicio4> {
     );
   }
 
-  Widget _grupo(String nombre_grupo, IconData iconData, VoidCallback onPressed, VoidCallback onIconPressed) {
+  Widget _grupo(String nombre_grupo, int index) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: ListTile(
         title: Text(nombre_grupo),
-        trailing: IconButton(
-          icon: Icon(iconData),
-          onPressed: onIconPressed,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {
+                // Acción para editar el grupo
+              },
+            ),
+            PopupMenuButton<String>(
+              onSelected: (String result) {
+                if (result == 'Borrar') {
+                  _borrarGrupo(index);
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: 'Borrar',
+                  child: Text('Borrar'),
+                ),
+              ],
+            ),
+          ],
         ),
-        onTap: onPressed,
+        onTap: () {
+          // Aquí puedes definir la acción al tocar el grupo si es necesario
+        },
       ),
     );
   }
