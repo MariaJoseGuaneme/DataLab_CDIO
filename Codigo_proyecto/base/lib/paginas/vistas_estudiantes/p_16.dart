@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:base/base_datos_manager.dart';  // Asegúrate de importar el DatabaseManager
+import 'package:base/base_datos_manager.dart';
+import 'package:base/base_datos.dart';// Asegúrate de importar el DatabaseManager
 
 class RecepcionPage16 extends StatefulWidget {
   const RecepcionPage16({super.key});
@@ -11,9 +12,8 @@ class RecepcionPage16 extends StatefulWidget {
 
 class _RecepcionPage16State extends State<RecepcionPage16> {
   final TextEditingController _pesoEscaldadoController = TextEditingController();
-  final DatabaseManager _dbManager = DatabaseManager();
-  bool _isLoading = true;
-  String? _error;
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
 
   @override
   void initState() {
@@ -22,20 +22,13 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
   }
 
   void _cargarPesoEscaldado() async {
-    try {
-      final double pesoEscaldado = await _dbManager.getPesoEscaldado();
+
+      final double pesoEscaldado = await _databaseH.getPesoEscaldado();
       setState(() {
         _pesoEscaldadoController.text = pesoEscaldado.toString();
-        _isLoading = false;
-        _error = null;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _error = 'Error al cargar el peso escaldado: ${e.toString()}';
       });
     }
-  }
+
 
   void _guardarPesoEscaldado() async {
     final String pesoStr = _pesoEscaldadoController.text;
@@ -44,9 +37,6 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
       if (peso != null) {
         try {
           await _dbManager.insertSingleDataPractica1('peso_escaldado', peso, context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Peso escaldado guardado con éxito')),
-          );
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
@@ -131,10 +121,6 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
                       ),
                       child: const Text('Aceptar'),
                     ),
-                    if (_isLoading)
-                      CircularProgressIndicator(),
-                    if (_error != null)
-                      Text(_error!, style: TextStyle(color: Colors.red, fontSize: 16)),
                   ],
                 ),
               ),

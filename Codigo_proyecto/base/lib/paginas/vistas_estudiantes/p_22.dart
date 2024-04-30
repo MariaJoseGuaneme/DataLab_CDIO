@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:base/base_datos_manager.dart';
+import 'package:base/base_datos.dart';
 import 'package:flutter/services.dart';// Asegúrate de importar el DatabaseManager
 
 class RecepcionPage22 extends StatefulWidget {
@@ -12,10 +13,9 @@ class RecepcionPage22 extends StatefulWidget {
 class _RecepcionPage22State extends State<RecepcionPage22> {
   final TextEditingController _pesoPulpaController = TextEditingController();
   final TextEditingController _pesoSemillasController = TextEditingController();
-  final DatabaseManager _dbManager = DatabaseManager();
-  bool _isLoading = true;
-  String? _errorPulpa;
-  String? _errorSemillas;
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+
 
   @override
   void initState() {
@@ -24,27 +24,13 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
   }
 
   void _cargarDatos() async {
-    try {
-      final double pesoPulpa = await _dbManager.getPesoPulpa();
-      final double pesoSemillas = await _dbManager.getPesoSemillas();
-      print("Peso Pulpa: $pesoPulpa, Peso Semillas: $pesoSemillas"); // Agrega esto para depuración
+      final double pesoPulpa = await _databaseH.getPesoPulpa();
+      final double pesoSemillas = await _databaseH.getPesoSemillas();
       setState(() {
         _pesoPulpaController.text = pesoPulpa.toString();
         _pesoSemillasController.text = pesoSemillas.toString();
-        _isLoading = false;
-        _errorPulpa = null;
-        _errorSemillas = null;
-      });
-    } catch (e) {
-      print("Error loading data: ${e.toString()}"); // Agrega esto para depuración
-      setState(() {
-        _isLoading = false;
-        _errorPulpa = 'Error al cargar el peso de la pulpa: ${e.toString()}';
-        _errorSemillas = 'Error al cargar el peso de las semillas: ${e.toString()}';
       });
     }
-  }
-
 
   void _guardarPesoPulpa() async {
     final String pesoStr = _pesoPulpaController.text;
@@ -54,9 +40,6 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
         // Actualiza solo el campo de pesoInicial
         try {
           await _dbManager.insertSingleDataPractica1('peso_pulpa', peso, context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Peso pulpa guardado con éxito')),
-          );
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
@@ -78,9 +61,6 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
         // Actualiza solo el campo de pesoInicial
         try {
           await _dbManager.insertSingleDataPractica1('peso_semillas', peso, context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Peso pulpa guardado con éxito')),
-          );
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),

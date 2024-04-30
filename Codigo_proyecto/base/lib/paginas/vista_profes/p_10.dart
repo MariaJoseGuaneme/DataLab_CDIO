@@ -11,6 +11,7 @@ class PagInicio10 extends StatefulWidget {
 }
 
 class _PagInicio10State extends State<PagInicio10> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +54,7 @@ class _PagInicio10State extends State<PagInicio10> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(200.0),
+            padding: const EdgeInsets.all(150.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch, // Esto asegura que los elementos hijos se estiren a lo ancho
@@ -68,7 +69,7 @@ class _PagInicio10State extends State<PagInicio10> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightBlue,
-                    fixedSize: const Size(200, 100), // Tamaño de los botones
+                    fixedSize: const Size(150, 100), // Tamaño de los botones
                   ),
                 ),
                 const SizedBox(height: 100), // Espacio entre los botones
@@ -82,7 +83,7 @@ class _PagInicio10State extends State<PagInicio10> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    fixedSize: const Size(200, 100), // Tamaño de los botones
+                    fixedSize: const Size(150, 100), // Tamaño de los botones
                   ),
                 ),
                 const SizedBox(height: 100), // Espacio entre los botones
@@ -96,7 +97,7 @@ class _PagInicio10State extends State<PagInicio10> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 20, 224, 211),
-                    fixedSize: const Size(200, 100), // Tamaño de los botones
+                    fixedSize: const Size(150, 100), // Tamaño de los botones
                   ),
                 ),
               ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:base/base_datos_manager.dart'; // Asegúrate de importar tu DatabaseManager
+import 'package:base/base_datos_manager.dart';
+import 'package:base/base_datos.dart';// Asegúrate de importar tu DatabaseManager
 
 class RecepcionPage26 extends StatefulWidget {
   const RecepcionPage26({super.key});
@@ -13,9 +14,8 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
   final TextEditingController _brix2Controller = TextEditingController();
   final TextEditingController _ph2Controller = TextEditingController();
   final TextEditingController _acidez2Controller = TextEditingController();
-  final DatabaseManager _dbManager = DatabaseManager();
-  bool _isLoading = true;
-  String? _error;
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
 
   @override
   void initState() {
@@ -24,23 +24,15 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
   }
 
   void _cargarDatos() async {
-    try {
-      final brix2 = await _dbManager.getBrix2();
-      final ph2 = await _dbManager.getPh2();
-      final acidez2 = await _dbManager.getAcidez2();
+      final brix2 = await _databaseH.getBrix2();
+      final ph2 = await _databaseH.getPh2();
+      final acidez2 = await _databaseH.getAcidez2();
       setState(() {
         _brix2Controller.text = brix2.toString();
         _ph2Controller.text = ph2.toString();
         _acidez2Controller.text = acidez2.toString();
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _error = 'Error al cargar los datos: ${e.toString()}';
       });
     }
-  }
 
   void _guardarDatos() async {
     // Convertir los valores de los controladores a números
@@ -48,20 +40,10 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
     final double? phValue2 = double.tryParse(_ph2Controller.text);
     final double? acidezValue2 = double.tryParse(_acidez2Controller.text);
 
-    // Comprobar si alguno de los valores es nulo, lo que significa que la conversión falló
-    if (brixValue2 == null || phValue2 == null || acidezValue2 == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Por favor, ingrese valores numéricos válidos.')),
-      );
-      return;
-    }
 
     // Guardar Brix
     try {
       await _dbManager.insertSingleDataPractica1('brix_2', brixValue2, context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Valor de Brix guardado con éxito')),
-      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al guardar Brix: ${e.toString()}')),
@@ -71,9 +53,6 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
     // Guardar pH
     try {
       await _dbManager.insertSingleDataPractica1('ph_2', phValue2, context );
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Valor de pH guardado con éxito')),
-      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al guardar pH: ${e.toString()}')),
@@ -83,9 +62,6 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
     // Guardar Acidez
     try {
       await _dbManager.insertSingleDataPractica1('acidez_2', acidezValue2, context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Valor de Acidez guardado con éxito')),
-      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al guardar Acidez: ${e.toString()}')),
@@ -96,17 +72,14 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Control Fisicoquímico'),
       ),
-      body: _error != null
-          ? Center(child: Text(_error!))
-          : Stack(
+      body:
+          Center(child:
+          Stack(
         children: <Widget>[
           Positioned(
             bottom: 0,
@@ -196,7 +169,7 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
             ),
           ),
         ],
-      ),
+      ),)
     );
   }
 }

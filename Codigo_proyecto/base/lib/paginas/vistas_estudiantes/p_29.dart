@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
-// Asegúrate de importar el DatabaseManager
+import 'package:base/base_datos.dart';
+
 
 class RecepcionPage29 extends StatefulWidget {
   const RecepcionPage29({super.key});
@@ -12,9 +13,8 @@ class RecepcionPage29 extends StatefulWidget {
 
 class _RecepcionPage29State extends State<RecepcionPage29> {
   final TextEditingController _perdidasController = TextEditingController();
-  final DatabaseManager _dbManager = DatabaseManager();
-  bool _isLoading = true; // Añade una variable para manejar el estado de carga
-  String? _error; // Añade una variable para almacenar mensajes de error
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
 
   @override
   void initState() {
@@ -24,19 +24,11 @@ class _RecepcionPage29State extends State<RecepcionPage29> {
 
 
   void _cargarPerdidas() async {
-    try {
-      final double perdidas = await _dbManager.getPerdidas_empacado();
+      final double perdidas = await _databaseH.getPerdidas_empacado();
       setState(() {
         _perdidasController.text = perdidas.toString();
-        _isLoading = false; // Carga completada
-        _error = null; // No hay errores
       });
-    } catch (e) {
-      setState(() {
-        _isLoading = false; // Carga completada
-        _error = 'Error al cargar el peso inicial: ${e.toString()}'; // Almacenar el error
-      });
-    }}
+    }
 
   void _guardarPesoInicial() async {
     final String perdidasSr = _perdidasController.text;
@@ -87,11 +79,6 @@ class _RecepcionPage29State extends State<RecepcionPage29> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      if (_isLoading)
-                        CircularProgressIndicator() // Muestra un indicador de carga
-                      else if (_error != null)
-                        Text(_error!, style: TextStyle(color: Colors.red, fontSize: 16)) // Muestra el mensaje de error
-                      else ...[ // Solo muestra los campos si no está cargando y no hay errores
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             color: Colors.green,
@@ -140,7 +127,6 @@ class _RecepcionPage29State extends State<RecepcionPage29> {
                             child: const Text('Aceptar'),
                           ),
                         ],
-                    ]
                 ),
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart'; // Importa tu DatabaseManager
+import 'package:base/base_datos.dart';
 
 class RecepcionPage20 extends StatefulWidget {
   const RecepcionPage20({super.key});
@@ -11,9 +12,8 @@ class RecepcionPage20 extends StatefulWidget {
 
 class _RecepcionPage20State extends State<RecepcionPage20> {
   final TextEditingController _pesoCascaraController = TextEditingController();
-  final DatabaseManager _dbManager = DatabaseManager();
-  bool _isLoading = true;
-  String? _error;
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
 
   @override
   void initState() {
@@ -22,20 +22,12 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
   }
 
   void _cargarPesoCascara() async {
-    try {
-      final double pesoCascara = await _dbManager.getPesoCascara();
+      final double pesoCascara = await _databaseH.getPesoCascara();
       setState(() {
         _pesoCascaraController.text = pesoCascara.toString();
-        _isLoading = false;
-        _error = null;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _error = 'Error al cargar el peso de la cáscara: ${e.toString()}';
       });
     }
-  }
+
 
   void _guardarPesoCascara() async {
     final String pesoStr = _pesoCascaraController.text;
@@ -44,9 +36,6 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
       if (peso != null) {
         try {
           await _dbManager.insertSingleDataPractica1('peso_cascara', peso, context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Peso de la cáscara guardado con éxito')),
-          );
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),

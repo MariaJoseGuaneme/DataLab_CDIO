@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
+import 'package:base/base_datos.dart';
 // Asegúrate de importar el DatabaseManager
 
 class RecepcionPage13 extends StatefulWidget {
@@ -13,9 +14,8 @@ class RecepcionPage13 extends StatefulWidget {
 
 class _RecepcionPage13State extends State<RecepcionPage13> {
   final TextEditingController _pesoController = TextEditingController();
-  final DatabaseManager _dbManager = DatabaseManager();
- bool _isLoading = true; // Añade una variable para manejar el estado de carga
-  String? _error; // Añade una variable para almacenar mensajes de error
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
 
   @override
   void initState() {
@@ -25,19 +25,12 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
 
 
  void _cargarPesoInicial() async {
-    try {
-      final double pesoInicial = await _dbManager.getPesoInicial();
+      final double pesoInicial = await _databaseH.getPesoInicial();
       setState(() {
         _pesoController.text = pesoInicial.toString();
-        _isLoading = false; // Carga completada
-        _error = null; // No hay errores
       });
-    } catch (e) {
-      setState(() {
-        _isLoading = false; // Carga completada
-        _error = 'Error al cargar el peso inicial: ${e.toString()}'; // Almacenar el error
-      });
-    }}
+    }
+
 
  void _guardarPesoInicial() async {
   final String pesoStr = _pesoController.text;
@@ -47,9 +40,6 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
       // Actualiza solo el campo de pesoInicial
       try {
         await _dbManager.insertSingleDataPractica1('peso_inicial', peso, context);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Peso inicial guardado con éxito')),
-        );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
@@ -88,11 +78,6 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    if (_isLoading)
-                    CircularProgressIndicator() // Muestra un indicador de carga
-                  else if (_error != null)
-                    Text(_error!, style: TextStyle(color: Colors.red, fontSize: 16)) // Muestra el mensaje de error
-                  else ...[ // Solo muestra los campos si no está cargando y no hay errores
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
@@ -141,7 +126,6 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       child: const Text('Aceptar'),
                     ),
                   ],
-                  ]
                 ),
               ),
             ),

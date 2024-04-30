@@ -72,9 +72,9 @@ class _PagInicio9 extends State<PagInicio9> {
       padding: const EdgeInsets.all(20), // Añade padding alrededor del botón para más espacio
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black, backgroundColor: color, // Color del texto del botón
+          foregroundColor: Colors.white, backgroundColor: color, // Color del texto del botón
           padding: const EdgeInsets.symmetric(vertical: 16.0), // Ajusta el padding dentro del botón
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          textStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
