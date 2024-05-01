@@ -315,7 +315,7 @@ class DatabaseHelper {
     final path = join(dbPath, filePath);
 
     return await openDatabase(
-        path, version: 3, onCreate: _createDB, onUpgrade: _onUpgrade);
+        path, version: 11, onCreate: _createDB, onUpgrade: _onUpgrade);
   }
 
   Future _createDB(Database db, int version) async {
@@ -350,7 +350,7 @@ CREATE TABLE grupos (
     await db.execute('''
 CREATE TABLE practica1 (
   id_grupos INTEGER PRIMARY KEY,
-  fruta TEXT NOT NULL,
+  fruta TEXT NOT NULL DEFAULT 'Na',
   unidades_producir REAL NOT NULL DEFAULT 0.0,
   unidades_empaque REAL NOT NULL DEFAULT 0.0,
   tiempo_escaldado REAL NOT NULL DEFAULT 0.0,
@@ -371,7 +371,11 @@ CREATE TABLE practica1 (
   brix_2 REAL NOT NULL DEFAULT 0.0,
   ph_2 REAL NOT NULL DEFAULT 0.0,
   acidez_2 REAL NOT NULL DEFAULT 0.0,
-  perdidas_empacado REAL NOT NULL DEFAULT 0.0
+  perdidas_olla REAL NOT NULL DEFAULT 0.0,
+  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0
+  brix_fruta REAL NOT NULL DEFAULT 0.0,
+  peso_pulpa_empacada REAL NOT NULL DEFAULT 0.0
+  
 )
 ''');
 
@@ -413,6 +417,8 @@ CREATE TABLE _resultados_practica1 (
   Perdidas_despulpado_gr REAL NOT NULL DEFAULT 0,
   Perdidas_Escaldado_gr REAL NOT NULL DEFAULT 0,
   Perdidas_Escaldado REAL NOT NULL DEFAULT 0,
+  Perdidas_empacado_gr REAL NOT NULL DEFAULT 0,
+  Perdidas_empacado REAL NOT NULL DEFAULT 0,
   Total_Formulacion REAL NOT NULL DEFAULT 0,
   gr_pulpa REAL NOT NULL DEFAULT 0,
   gr_acidoAscorbico REAL NOT NULL DEFAULT 0,
@@ -422,6 +428,9 @@ CREATE TABLE _resultados_practica1 (
   Fruta_fresca_formulacion REAL NOT NULL DEFAULT 0,
   Fruta_fresca_real REAL NOT NULL DEFAULT 0,
   Rendimiento_producto REAL NOT NULL DEFAULT 0,
+  Acidez1 REAL NOT NULL DEFAULT 0,
+  Acidez2 REAL NOT NULL DEFAULT 0,
+  
   
   FOREIGN KEY (id_grupos) REFERENCES practica1 (id_grupos)
 )
@@ -737,7 +746,6 @@ CREATE TABLE _resultados_practica1 (
   }
   Future<double> getPesoInicial() async {
     final db = await database;
-    // Asumiendo que 'peso_inicial' es el nombre de la columna para el peso en tu tabla practica1.
     final List<Map<String, dynamic>> result = await db.query(
       'practica1',
       columns: ['peso_inicial'],
@@ -747,7 +755,6 @@ CREATE TABLE _resultados_practica1 (
     if (result.isNotEmpty) {
       return result.first['peso_inicial'] ?? 0.0;
     } else {
-      // Devuelve un valor predeterminado o maneja la ausencia de datos.
       return 0;
     }
   }
@@ -764,7 +771,7 @@ CREATE TABLE _resultados_practica1 (
     if (result.isNotEmpty) {
       return result.first['peso_escaldado'] ?? 0.0;
     } else {
-      return 0;  // Devuelve un valor predeterminado o maneja la ausencia de datos
+      return 0;
     }
   }
 
@@ -777,9 +784,9 @@ CREATE TABLE _resultados_practica1 (
       limit: 1,
     );
     if (result.isNotEmpty) {
-      return result.first['peso_cascara'] ?? 0.0; // Asegúrate de manejar los valores nulos.
+      return result.first['peso_cascara'] ?? 0.0;
     } else {
-      return 0; // Devuelve un valor predeterminado o maneja la ausencia de datos.
+      return 0;
     }
   }
   Future<double> getPesoPulpa() async {
@@ -789,7 +796,7 @@ CREATE TABLE _resultados_practica1 (
     if (result.isNotEmpty) {
       return result.first['peso_pulpa'] ?? 0.0;
     } else {
-      return 0; // Devuelve un valor predeterminado o maneja la ausencia de datos.
+      return 0;
     }
   }
 
@@ -807,7 +814,7 @@ CREATE TABLE _resultados_practica1 (
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['brix_1'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
+      return result.first['brix_1'] ?? 0.0;
     }
     return 0.0;
   }
@@ -816,7 +823,7 @@ CREATE TABLE _resultados_practica1 (
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['ph_1'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
+      return result.first['ph_1'] ?? 0.0;
     }
     return 0.0;
   }
@@ -825,7 +832,7 @@ CREATE TABLE _resultados_practica1 (
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['acidez_1'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
+      return result.first['acidez_1'] ?? 0.0;
     }
     return 0.0;
   }
@@ -836,7 +843,7 @@ CREATE TABLE _resultados_practica1 (
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['brix_2'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
+      return result.first['brix_2'] ?? 0.0;
     }
     return 0.0;
   }
@@ -845,7 +852,7 @@ CREATE TABLE _resultados_practica1 (
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['ph_2'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
+      return result.first['ph_2'] ?? 0.0;
     }
     return 0.0;
   }
@@ -854,16 +861,42 @@ CREATE TABLE _resultados_practica1 (
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['acidez_2'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas']?? 0.0;
+      return result.first['acidez_2']?? 0.0;
     }
     return 0.0;
   }
 
-  Future<double> getPerdidas_empacado() async {
+  Future<double> getPerdidasolla() async {
     final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['perdidas_empacado'], orderBy: 'id_grupos DESC', limit: 1);
+    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['perdidas_olla'], orderBy: 'id_grupos DESC', limit: 1);
     if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
+      return result.first['perdidas_olla'] ?? 0.0;
+    }
+    return 0.0;
+  }
+  Future<double> getPerdidasollaenvasado() async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['perdidas_olla_empacado'], orderBy: 'id_grupos DESC', limit: 1);
+    if (result.isNotEmpty) {
+      return result.first['perdidas_olla_empacado'] ?? 0.0;
+    }
+    return 0.0;
+  }
+
+  Future<double> getPulpaTotal() async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['peso_pulpa_empacada'], orderBy: 'id_grupos DESC', limit: 1);
+    if (result.isNotEmpty) {
+      return result.first['peso_pulpa_empacada'] ?? 0.0;
+    }
+    return 0.0;
+  }
+
+  Future<double> getBrixFruta() async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['brix_fruta'], orderBy: 'id_grupos DESC', limit: 1);
+    if (result.isNotEmpty) {
+      return result.first['brix_fruta'] ?? 0.0;
     }
     return 0.0;
   }
@@ -876,6 +909,9 @@ CREATE TABLE _resultados_practica1 (
     //  await db.execute('DROP TABLE nombre_tabla');
     //}
 
+    if (oldVersion < 12) {
+      await db.execute('ALTER TABLE practica1 ADD COLUMN perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0');
+    }
     Future close() async {
       final db = await instance.database;
 

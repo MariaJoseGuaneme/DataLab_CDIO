@@ -12,7 +12,6 @@ import 'package:base/paginas/vistas_estudiantes/p_24.dart';
 import 'package:base/paginas/vistas_estudiantes/p_25.dart';
 import 'package:base/paginas/vistas_estudiantes/p_26.dart';
 import 'package:base/paginas/vistas_estudiantes/p_27.dart';
-import 'package:base/paginas/vistas_estudiantes/p_29.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
 import 'package:sqflite/sqflite.dart';
@@ -74,10 +73,7 @@ class _Menu extends State<Menu> {
           'title': 'Empacado',
           'color': const Color.fromARGB(255, 245, 236, 107)
         },
-        {
-          'title': 'Almacenado',
-          'color': const Color.fromARGB(255, 238, 235, 87)
-        },
+
         {'title': 'Exportar', 'color': const Color.fromARGB(255, 243, 15, 15)},
       ];
 
@@ -140,10 +136,6 @@ class _Menu extends State<Menu> {
         case 'Empacado':
           _currentBody =
               const RecepcionPage27(); // Cambia a la página de recepción
-          break;
-        case 'Almacenado':
-          _currentBody =
-              const RecepcionPage29(); // Cambia a la página de recepción
           break;
 
         // Añade casos para otras secciones
@@ -242,7 +234,10 @@ Future<void> calcularYGuardarResultados() async {
     double Peso_semillas = practica['peso_semillas'] as double;
     double Acidez_1_ml = practica['acidez_1'] as double;
     double Acidez_2_ml = practica['acidez_2'] as double;
-    double Perdidas_empacado = practica['perdidas_empacado'] as double;
+    double Perdidas_olla = practica['perdidas_olla'] as double;
+    double Peso_pulpa_empacada = practica['peso_pulpa_empacada'] as double;
+    double perdidas_olla_empacado = practica['perdidas_olla_empacado']as double;
+
 
     double Producto_obtener = unidadesEmpaque * unidadesProducir;
     double cascara_y_semilla = Peso_semillas + Peso_cascara;
@@ -262,8 +257,7 @@ Future<void> calcularYGuardarResultados() async {
     } else {
       Perdidas_despulpado = 0;
     }
-    double Perdidas_Escaldado_gr = (Peso_inicial - cascara_y_semilla) -
-        Peso_pulpa;
+    double Perdidas_Escaldado_gr = Peso_inicial-Peso_escaldado;
     double Perdidas_Escaldado;
     if (Peso_escaldado > 0) {
       Perdidas_Escaldado = Perdidas_Escaldado_gr * 100 / Peso_escaldado;
@@ -301,8 +295,15 @@ Future<void> calcularYGuardarResultados() async {
     } else {
       Rendimiento_producto = 0;
     }
-    //double Acidez_10
-    //double Acidez_2
+    double Acidez1 = ((0.064)*(0.1)*Acidez_1_ml/1.0)*(100);
+    double Acidez2 = ((0.064)*(0.1)*Acidez_2_ml/1.0)*(100);
+    double Perdidas_empacado_gr = (Total_Formulacion-Peso_pulpa_empacada);
+    double Perdidas_empacado;
+    if (Total_Formulacion > 0) {
+      Perdidas_empacado = Perdidas_empacado_gr*100/Total_Formulacion;
+    } else {
+      Perdidas_empacado = 0;
+    }
 
 
     Map<String, dynamic> resultado = {
@@ -324,8 +325,10 @@ Future<void> calcularYGuardarResultados() async {
       'Fruta_fresca_formulacion': Fruta_fresca_formulacion,
       'Fruta_fresca_real': Fruta_fresca_real,
       'Rendimiento_producto': Rendimiento_producto,
-
-
+      'Acidez1' : Acidez1,
+      'Acidez2' : Acidez2,
+      'Perdidas_empacado_gr' : Perdidas_empacado_gr,
+      'Perdidas_empacado' : Perdidas_empacado,
     };
 
     // Aquí, verifica si el resultado para id_grupos ya existe en resultados_practica1.

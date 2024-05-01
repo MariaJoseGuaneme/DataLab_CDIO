@@ -13,6 +13,7 @@ class PagInicio9aPulpa extends StatefulWidget {
 
 class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
   final TextEditingController _frutaController = TextEditingController();
+  final TextEditingController _brixController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
 
@@ -25,8 +26,11 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
 
   void _cargarPesoInicial() async {
     final String fruta = await _databaseH.getFruta();
+    final double brix = await _databaseH.getBrixFruta();
     setState(() {
       _frutaController.text = fruta.toString();
+      _brixController.text = brix.toString();
+
     });
   }
 
@@ -35,6 +39,13 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
     final String fruta = _frutaController.text;
     await _dbManager.insertSingleDataPractica1('fruta', fruta, context);
       }
+  void _guardarBrix() async {
+    final String brixSr = _brixController.text;
+    final double? brix = double.tryParse(brixSr);
+    await _dbManager.insertSingleDataPractica1('brix_fruta', brix, context);
+  }
+
+
 
 
   @override
@@ -85,10 +96,25 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
                         hintText: 'Introduzca el nombre de la fruta',
                       ),
                     ),
+                    const Text(
+                      'Ingrese los grados Brix de la fruta',
+                      style: TextStyle(fontSize: 22),
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      controller: _brixController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Brix',
+                        hintText: 'Grados Brix de la fruta',
+                      ),
+                    ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
                       onPressed: (){
                         _guardarFruta();
+                        _guardarBrix();
                         Navigator.push(context,
                             MaterialPageRoute(builder:(context) => const PagInicio10() ));
                       },
