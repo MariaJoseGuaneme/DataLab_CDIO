@@ -28,18 +28,19 @@ class _PagInicio11State extends State<PagInicio11> {
 
   void _cargarDatos() async {
       final double pPulpa = await _databaseH.getP_pulpa();
-      final double pacidoascortico = await _databaseH.getP_acido_ascorbico();
+      final double pacidoascorbico = await _databaseH.getP_acido_ascorbico();
       final double pacidocitrico = await _databaseH.getP_acido_citrico();
       final double pbenzoatosodio = await _databaseH.getP_benzonato_sodio();
       final double psorbatopotasio = await _databaseH.getP_sorbato_potasio();
       setState(() {
-        _ppulpaController.text = pPulpa.toString();
-        _pacidoascorbicoController.text = pacidoascortico.toString();
-        _pacidocitricoController.text = pacidocitrico.toString();
-        _pbenzoatosodioController.text = pbenzoatosodio.toString();
-        _psorbatopotasioController.text = psorbatopotasio.toString();
+        _ppulpaController.text = pPulpa == 0.0 ? "" : pPulpa.toString();
+        _pacidoascorbicoController.text = pacidoascorbico == 0.0 ? "" : pacidoascorbico.toString();
+        _pacidocitricoController.text = pacidocitrico == 0.0 ? "" : pacidocitrico.toString();
+        _pbenzoatosodioController.text = pbenzoatosodio == 0.0 ? "" : pbenzoatosodio.toString();
+        _psorbatopotasioController.text = psorbatopotasio == 0.0 ? "" : psorbatopotasio.toString();
       });
-    }
+
+  }
 
 
 

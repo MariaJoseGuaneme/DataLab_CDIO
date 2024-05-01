@@ -27,7 +27,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
  void _cargarPesoInicial() async {
       final double pesoInicial = await _databaseH.getPesoInicial();
       setState(() {
-        _pesoController.text = pesoInicial.toString();
+        _pesoController.text = pesoInicial == 0 ? "" :pesoInicial.toString();
       });
     }
 

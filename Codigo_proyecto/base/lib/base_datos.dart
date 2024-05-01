@@ -104,7 +104,10 @@ class Practica1 {
   final double brix2;
   final double ph2;
   final double acidez2;
-  final double perdidasEmpacado;
+  final double perdidasolla;
+  final double perdidasOllaEmpacado;
+  final double brixFruta;
+  final double pesoPulpaEmpacada;
 
   Practica1({
     required this.idGrupos,
@@ -129,7 +132,10 @@ class Practica1 {
     required this.brix2,
     required this.ph2,
     required this.acidez2,
-    required this.perdidasEmpacado,
+    required this.perdidasolla,
+    required this.perdidasOllaEmpacado,
+    required this.brixFruta,
+    required this.pesoPulpaEmpacada,
   });
 
   Map<String, dynamic> toMap() {
@@ -156,7 +162,11 @@ class Practica1 {
       'brix_2': brix2,
       'ph_2': ph2,
       'acidez_2': acidez2,
-      'perdidas_empacado': perdidasEmpacado,
+      'perdidas_olla': perdidasolla,
+      'persidas_olla_empacado' : perdidasOllaEmpacado,
+      'brix_fruta' : brixFruta,
+      'peso_pulpa_empacada' : pesoPulpaEmpacada,
+
     };
   }
 
@@ -184,7 +194,10 @@ class Practica1 {
       brix2: map['brix_2'] as double,
       ph2: map['ph_2'] as double,
       acidez2: map['acidez_2'] as double,
-      perdidasEmpacado: map['perdidas_empacado'] as double,
+      perdidasolla: map['perdidas_empacado'] as double,
+      perdidasOllaEmpacado: map['perdidas_olla_empacado'] as double,
+      brixFruta: map['brix_fruta'] as double,
+      pesoPulpaEmpacada: map['peso_pulpa_empacada'] as double,
     );
   }
 }
@@ -224,52 +237,73 @@ class Practica2 {
 class ResultadosPractica1 {
   final int idGrupos;
   final double productoObtener;
+  final double cascara_y_semilla;
   final double rendimientoFruta;
   final double perdidasDespulpado;
-  final double perdidasEmpaquetado;
+  final double perdidasDespulpado_gr;
+  final double perdidasEscaldado_gr;
+  final double perdidasEscaldado;
+  final double perdidasEmpacado_gr;
+  final double perdidasEmpacado;
+  final double totalFormulacion;
   final double grPulpa;
   final double grAcidoAscorbico;
   final double grAcidoCitrico;
   final double grBenzonatoSodio;
   final double grSorbatoPotasio;
-  final double totalFormulacion;
-  final double cascaraYSemilla;
-  final double perdidasEscaldado;
-  final double perdidasEvaporado;
+  final double frutaFrescaFormulacion;
+  final double frutaFrescaReal; // Añadido para coincidir con la tabla
+  final double rendimientoProducto; // Añadido para coincidir con la tabla
+  final double acidez1;
+  final double acidez2;
 
   ResultadosPractica1({
     required this.idGrupos,
     required this.productoObtener,
+    required this.cascara_y_semilla,
     required this.rendimientoFruta,
     required this.perdidasDespulpado,
-    required this.perdidasEmpaquetado,
+    required this.perdidasDespulpado_gr,
+    required this.perdidasEscaldado_gr,
+    required this.perdidasEscaldado,
+    required this.perdidasEmpacado_gr,
+    required this.perdidasEmpacado,
+    required this.totalFormulacion,
     required this.grPulpa,
     required this.grAcidoAscorbico,
     required this.grAcidoCitrico,
     required this.grBenzonatoSodio,
     required this.grSorbatoPotasio,
-    required this.totalFormulacion,
-    required this.cascaraYSemilla,
-    required this.perdidasEscaldado,
-    required this.perdidasEvaporado,
+    required this.frutaFrescaFormulacion,
+    required this.frutaFrescaReal,
+    required this.rendimientoProducto,
+    required this.acidez1,
+    required this.acidez2,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id_grupos': idGrupos,
       'Producto_obtener': productoObtener,
+      'cascara_y_semilla': cascara_y_semilla,
       'Rendimiento_fruta': rendimientoFruta,
       'Perdidas_despulpado': perdidasDespulpado,
-      'Perdidas_empaquetado': perdidasEmpaquetado,
+      'Perdidas_despulpado_gr': perdidasDespulpado_gr,
+      'Perdidas_Escaldado_gr': perdidasEscaldado_gr,
+      'Perdidas_Escaldado': perdidasEscaldado,
+      'Perdidas_empacado_gr': perdidasEmpacado_gr,
+      'Perdidas_empacado': perdidasEmpacado,
+      'Total_Formulacion': totalFormulacion,
       'gr_pulpa': grPulpa,
       'gr_acidoAscorbico': grAcidoAscorbico,
       'gr_acidoCitrico': grAcidoCitrico,
       'gr_benzonatoSodio': grBenzonatoSodio,
       'gr_sorbatoPotasio': grSorbatoPotasio,
-      'Total_Formulacion': totalFormulacion,
-      'cascara_y_semilla': cascaraYSemilla,
-      'Perdidas_escaldado': perdidasEscaldado,
-      'Perdidas_evaporado': perdidasEvaporado,
+      'Fruta_fresca_formulacion': frutaFrescaFormulacion,
+      'Fruta_fresca_real': frutaFrescaReal,
+      'Rendimiento_producto': rendimientoProducto,
+      'Acidez1': acidez1,
+      'Acidez2': acidez2,
     };
   }
 
@@ -277,18 +311,25 @@ class ResultadosPractica1 {
     return ResultadosPractica1(
       idGrupos: map['id_grupos'] as int,
       productoObtener: map['Producto_obtener'] as double,
+      cascara_y_semilla: map['cascara_y_semilla'] as double,
       rendimientoFruta: map['Rendimiento_fruta'] as double,
       perdidasDespulpado: map['Perdidas_despulpado'] as double,
-      perdidasEmpaquetado: map['Perdidas_empaquetado'] as double,
+      perdidasDespulpado_gr: map['Perdidas_despulpado_gr'] as double,
+      perdidasEscaldado_gr: map['Perdidas_Escaldado_gr'] as double,
+      perdidasEscaldado: map['Perdidas_Escaldado'] as double,
+      perdidasEmpacado_gr: map['Perdidas_empacado_gr'] as double,
+      perdidasEmpacado: map['Perdidas_empacado'] as double,
+      totalFormulacion: map['Total_Formulacion'] as double,
       grPulpa: map['gr_pulpa'] as double,
       grAcidoAscorbico: map['gr_acidoAscorbico'] as double,
       grAcidoCitrico: map['gr_acidoCitrico'] as double,
       grBenzonatoSodio: map['gr_benzonatoSodio'] as double,
       grSorbatoPotasio: map['gr_sorbatoPotasio'] as double,
-      totalFormulacion: map['Total_Formulacion'] as double,
-      cascaraYSemilla: map['cascara_y_semilla'] as double,
-      perdidasEscaldado: map['Perdidas_escaldado'] as double,
-      perdidasEvaporado: map['Perdidas_evaporado'] as double,
+      frutaFrescaFormulacion: map['Fruta_fresca_formulacion'] as double,
+      frutaFrescaReal: map['Fruta_fresca_real'] as double,
+      rendimientoProducto: map['Rendimiento_producto'] as double,
+      acidez1: map['Acidez1'] as double,
+      acidez2: map['Acidez2'] as double,
     );
   }
 }
@@ -438,6 +479,8 @@ CREATE TABLE _resultados_practica1 (
   }
 
 
+// FUNCIONES DE PROFESOR
+
   // Insertar un profesor
   Future<int> insertProfesor(Profesor profesor) async {
     final db = await database;
@@ -486,6 +529,8 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+  // FUNCIONES ESTUDIANTE
+
   // Insertar un estudiante
   Future<int> insertEstudiante(Estudiante estudiante) async {
     final db = await database;
@@ -533,6 +578,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+// FUNCIONES GRUPO
 
   // Insertar un grupo
   Future<int> insertGrupo(Grupo grupo) async {
@@ -581,6 +627,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+// FUNIONES PRÁCTICA
 
 // Leer una práctica por su ID de grupo
   Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {
@@ -653,7 +700,7 @@ CREATE TABLE _resultados_practica1 (
     return null;
   }
 
-  //A continuación se presentan las funciones de get para obtener los valores iniciales
+  // FUNCIONES GET
 
   Future<String> getFruta() async {
     final db = await database;

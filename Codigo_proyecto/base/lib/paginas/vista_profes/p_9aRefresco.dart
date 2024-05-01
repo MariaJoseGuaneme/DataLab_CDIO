@@ -26,7 +26,7 @@ class _PagInicio9aRefrescoState extends State<PagInicio9aRefresco> {
   void _cargarPesoInicial() async {
     final String fruta = await _databaseH.getFruta();
     setState(() {
-      _frutaController.text = fruta.toString();
+      _frutaController.text = fruta == 'Na'? "": fruta.toString();
     });
   }
 

@@ -28,8 +28,8 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
     final String fruta = await _databaseH.getFruta();
     final double brix = await _databaseH.getBrixFruta();
     setState(() {
-      _frutaController.text = fruta.toString();
-      _brixController.text = brix.toString();
+      _frutaController.text = fruta == 'Na'? "":fruta.toString();
+      _brixController.text = brix == 0? "" :brix.toString();
 
     });
   }

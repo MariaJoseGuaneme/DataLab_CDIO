@@ -24,7 +24,7 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
   void _cargarPesoCascara() async {
       final double pesoCascara = await _databaseH.getPesoCascara();
       setState(() {
-        _pesoCascaraController.text = pesoCascara.toString();
+        _pesoCascaraController.text = pesoCascara== 0 ? "":pesoCascara.toString();
       });
     }
 

@@ -25,7 +25,7 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
 
       final double pesoEscaldado = await _databaseH.getPesoEscaldado();
       setState(() {
-        _pesoEscaldadoController.text = pesoEscaldado.toString();
+        _pesoEscaldadoController.text = pesoEscaldado == 0.0 ? "" : pesoEscaldado.toString();
       });
     }
 

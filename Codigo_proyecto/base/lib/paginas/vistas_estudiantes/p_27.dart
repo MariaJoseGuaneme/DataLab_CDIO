@@ -30,9 +30,9 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
       final double perdidas_olla_envasado = await _databaseH.getPerdidasollaenvasado();
       final double pulpaTotal = await _databaseH.getPulpaTotal();
       setState(() {
-        _perdidasollaController.text = perdidas_olla.toString();
-        _perdidasollaempacadaController.text = perdidas_olla_envasado.toString();
-        _pulpatotalController.text = pulpaTotal.toString();
+        _perdidasollaController.text = perdidas_olla == 0.0 ? "" : perdidas_olla.toString();
+        _perdidasollaempacadaController.text = perdidas_olla_envasado == 0.0 ? "" : perdidas_olla_envasado.toString();
+        _pulpatotalController.text = pulpaTotal == 0.0 ? "" : pulpaTotal.toString();
       });
     }
 
@@ -83,7 +83,6 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
     if (perdidasSr.isNotEmpty) {
       final double? perdidas = double.tryParse(perdidasSr);
       if (perdidas != null) {
-        // Actualiza solo el campo de pesoInicial
         try {
           await _dbManager.insertSingleDataPractica1('peso_pulpa_empacada', perdidas, context);
         } catch (e) {

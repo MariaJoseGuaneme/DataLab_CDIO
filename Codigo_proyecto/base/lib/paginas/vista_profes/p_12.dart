@@ -27,8 +27,8 @@ class _PagInicio12State extends State<PagInicio12> {
       final double uproducir = await _databaseH.getUnidades_producir();
       final double uempaque = await _databaseH.getUnidades_empaque();
       setState(() {
-        _unidadesProducirController.text = uproducir.toString();
-        _unidadesEmpaqueController.text = uempaque.toString();
+        _unidadesProducirController.text = uproducir == 0 ? "" :uproducir.toString();
+        _unidadesEmpaqueController.text = uempaque == 0 ? "" :uempaque.toString();
       });
     }
 

@@ -28,8 +28,8 @@ class _PagInicio13State extends State<PagInicio13> {
       final double tiempoEscaldado = await _databaseH.getTiempo_escaldado();
       final double tiempoEnfriamiento = await _databaseH.getTiempo_enfriamiento();
        setState(() {
-        _tiempoEscaldadoController.text = tiempoEscaldado.toString();
-        _tiempoEnfriamientoController.text = tiempoEnfriamiento.toString();
+        _tiempoEscaldadoController.text = tiempoEscaldado == 0 ? "" :tiempoEscaldado.toString();
+        _tiempoEnfriamientoController.text = tiempoEnfriamiento == 0 ? "" :tiempoEnfriamiento.toString();
       });
     }
   }

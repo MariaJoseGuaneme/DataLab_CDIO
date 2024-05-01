@@ -24,13 +24,15 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
   }
 
   void _cargarDatos() async {
-      final double pesoPulpa = await _databaseH.getPesoPulpa();
-      final double pesoSemillas = await _databaseH.getPesoSemillas();
-      setState(() {
-        _pesoPulpaController.text = pesoPulpa.toString();
-        _pesoSemillasController.text = pesoSemillas.toString();
-      });
-    }
+    final double pesoPulpa = await _databaseH.getPesoPulpa();
+    final double pesoSemillas = await _databaseH.getPesoSemillas();
+
+    setState(() {
+      _pesoPulpaController.text = pesoPulpa == 0.0 ? "" : pesoPulpa.toString();
+      _pesoSemillasController.text = pesoSemillas == 0.0 ? "" : pesoSemillas.toString();
+    });
+  }
+
 
   void _guardarPesoPulpa() async {
     final String pesoStr = _pesoPulpaController.text;

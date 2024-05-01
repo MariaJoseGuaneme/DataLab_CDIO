@@ -24,15 +24,17 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
   }
 
   void _cargarDatos() async {
-      final brix1 = await _databaseH.getBrix2();
-      final ph1 = await _databaseH.getPh2();
-      final acidez1 = await _databaseH.getAcidez2();
-      setState(() {
-        _brixController.text = brix1.toString();
-        _phController.text = ph1.toString();
-        _acidezController.text = acidez1.toString();
-      });
-    }
+    final double brix1 = await _databaseH.getBrix2(); // Deberías verificar si esto es un error tipográfico y debería ser getBrix1
+    final double ph1 = await _databaseH.getPh2(); // Deberías verificar si esto es un error tipográfico y debería ser getPh1
+    final double acidez1 = await _databaseH.getAcidez2(); // Deberías verificar si esto es un error tipográfico y debería ser getAcidez1
+
+    setState(() {
+      _brixController.text = brix1 == 0.0 ? "" : brix1.toString();
+      _phController.text = ph1 == 0.0 ? "" : ph1.toString();
+      _acidezController.text = acidez1 == 0.0 ? "" : acidez1.toString();
+    });
+  }
+
 
 
 

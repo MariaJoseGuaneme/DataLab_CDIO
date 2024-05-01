@@ -10,7 +10,7 @@ class DatabaseManager {
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 
 
-
+// ESTUDIANTE
   Future<void> insertStudent(String correo, BuildContext context) async {
     if (correo.isNotEmpty) {
       Estudiante newEstudiante = Estudiante(
@@ -74,6 +74,8 @@ Future<void> deleteStudent(int id, BuildContext context) async {
   );
 }
 
+// PROFESOR
+
 // Insertar un nuevo profesor
   Future<void> insertProfesor(String correo, String contrasena, BuildContext context) async {
     Profesor newProfesor = Profesor(correo: correo, contrasena: contrasena);
@@ -125,6 +127,8 @@ Future<void> deleteStudent(int id, BuildContext context) async {
     }
   }
 
+  // PRÁCTICA
+
   // Eliminar una práctica por ID de grupo
   Future<void> deletePractica1(int idGrupos, BuildContext context) async {
     try {
@@ -150,11 +154,8 @@ Future<void> deleteStudent(int id, BuildContext context) async {
       // Si existe, actualiza el registro existente.
       try {
         int count = await _dbHelper.updateSingleDataPractica1(columnName, value);
-        if (count == 1) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Dato actualizado con éxito en practica1'))
-          );
-        } else {
+        if (count != 1)
+          {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('No se encontró el registro para actualizar'))
           );

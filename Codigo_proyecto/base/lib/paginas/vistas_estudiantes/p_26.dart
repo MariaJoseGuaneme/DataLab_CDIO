@@ -24,15 +24,16 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
   }
 
   void _cargarDatos() async {
-      final brix2 = await _databaseH.getBrix2();
-      final ph2 = await _databaseH.getPh2();
-      final acidez2 = await _databaseH.getAcidez2();
-      setState(() {
-        _brix2Controller.text = brix2.toString();
-        _ph2Controller.text = ph2.toString();
-        _acidez2Controller.text = acidez2.toString();
-      });
-    }
+    final double brix2 = await _databaseH.getBrix2();
+    final double ph2 = await _databaseH.getPh2();
+    final double acidez2 = await _databaseH.getAcidez2();
+
+    setState(() {
+      _brix2Controller.text = brix2 == 0.0 ? "" : brix2.toString();
+      _ph2Controller.text = ph2 == 0.0 ? "" : ph2.toString();
+      _acidez2Controller.text = acidez2 == 0.0 ? "" : acidez2.toString();
+    });
+  }
 
   void _guardarDatos() async {
     // Convertir los valores de los controladores a números
