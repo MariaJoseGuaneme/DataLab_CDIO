@@ -1,5 +1,5 @@
-import 'package:base/paginas/vista_profes/p_5.dart';
-import 'package:base/paginas/vista_profes/p_6.dart';
+import 'package:base/paginas/vista_profes/p_16.dart';
+import 'package:base/funciones_proyecto/select_actividad_profe.dart';
 import 'package:flutter/material.dart';
 
 class PagInicio4 extends StatefulWidget {
@@ -24,7 +24,8 @@ class _PagInicio4State extends State<PagInicio4> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Confirmar'),
-          content: Text('¿Estás seguro de que quieres borrar "${grupos[index]}"?'),
+          content:
+              Text('¿Estás seguro de que quieres borrar "${grupos[index]}"?'),
           actions: <Widget>[
             TextButton(
               child: const Text('Cancelar'),
@@ -84,7 +85,9 @@ class _PagInicio4State extends State<PagInicio4> {
             IconButton(
               icon: const Icon(Icons.edit),
               onPressed: () {
-                // Acción para editar el grupo
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio16()),
+                ); // Acción para editar el grupo
               },
             ),
             PopupMenuButton<String>(
@@ -103,7 +106,9 @@ class _PagInicio4State extends State<PagInicio4> {
           ],
         ),
         onTap: () {
-          // Aquí puedes definir la acción al tocar el grupo si es necesario
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const Select_p()),
+          ); // Aquí puedes definir la acción al tocar el grupo si es necesario
         },
       ),
     );
