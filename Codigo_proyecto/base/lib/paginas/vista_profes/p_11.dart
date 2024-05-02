@@ -18,7 +18,8 @@ class _PagInicio11State extends State<PagInicio11> {
   final TextEditingController _psorbatopotasioController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -27,11 +28,11 @@ class _PagInicio11State extends State<PagInicio11> {
   }
 
   void _cargarDatos() async {
-      final double pPulpa = await _databaseH.getP_pulpa();
-      final double pacidoascorbico = await _databaseH.getP_acido_ascorbico();
-      final double pacidocitrico = await _databaseH.getP_acido_citrico();
-      final double pbenzoatosodio = await _databaseH.getP_benzonato_sodio();
-      final double psorbatopotasio = await _databaseH.getP_sorbato_potasio();
+      final double pPulpa = await _databaseH.getNumericValue(practica,'p_pulpa',idGrupo);
+      final double pacidoascorbico = await _databaseH.getNumericValue(practica, 'p_acido_ascorbico', idGrupo);
+      final double pacidocitrico = await _databaseH.getNumericValue(practica, 'p_acido_citrico', idGrupo);
+      final double pbenzoatosodio = await _databaseH.getNumericValue(practica, 'p_benzonato_sodio', idGrupo);
+      final double psorbatopotasio = await _databaseH.getNumericValue(practica, 'p_sorbato_potasio', idGrupo);
       setState(() {
         _ppulpaController.text = pPulpa == 0.0 ? "" : pPulpa.toString();
         _pacidoascorbicoController.text = pacidoascorbico == 0.0 ? "" : pacidoascorbico.toString();
@@ -46,103 +47,34 @@ class _PagInicio11State extends State<PagInicio11> {
 
   void _guardarP_pulpa() async {
     final String ppulpaStr = _ppulpaController.text;
-    if (ppulpaStr.isNotEmpty) {
-      final double? ppulpa = double.tryParse(ppulpaStr);
-      if (ppulpa != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('p_pulpa', ppulpa, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el porcentaje: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? ppulpa = double.tryParse(ppulpaStr);
+    await _dbManager.insertSingleDataPractica1('p_pulpa', ppulpa, idGrupo, context);
   }
 
   void _guardarP_ascorbico() async {
     final String pascorbicoStr = _pacidoascorbicoController.text;
-    if (pascorbicoStr.isNotEmpty) {
-      final double? pascorbico = double.tryParse(pascorbicoStr);
-      if (pascorbico != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('p_acido_ascorbico', pascorbico, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el porcentaje: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? pascorbico = double.tryParse(pascorbicoStr);
+    await _dbManager.insertSingleDataPractica1('p_acido_ascorbico', pascorbico, idGrupo, context);
   }
 
   void _guardarP_citrico() async {
     final String pcitricoStr = _pacidocitricoController.text;
-    if (pcitricoStr.isNotEmpty) {
-      final double? pcitrico = double.tryParse(pcitricoStr);
-      if (pcitrico != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('p_acido_citrico', pcitrico, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el porcentaje: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? pcitrico = double.tryParse(pcitricoStr);
+    await _dbManager.insertSingleDataPractica1('p_acido_citrico', pcitrico, idGrupo, context);
   }
 
   void _guardarP_benzonato() async {
     final String pbenzonatoStr = _pbenzoatosodioController.text;
-    if (pbenzonatoStr.isNotEmpty) {
-      final double? pbenzonato = double.tryParse(pbenzonatoStr);
-      if (pbenzonato != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('p_benzonato_sodio', pbenzonato, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el porcentaje: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? pbenzonato = double.tryParse(pbenzonatoStr);
+    await _dbManager.insertSingleDataPractica1('p_benzonato_sodio', pbenzonato,idGrupo, context);
   }
 
   void _guardarP_sorbato() async {
     final String psorbatoStr = _psorbatopotasioController.text;
-    if (psorbatoStr.isNotEmpty) {
-      final double? psorbato = double.tryParse(psorbatoStr);
-      if (psorbato != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('p_sorbato_potasio', psorbato, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el porcentaje: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? psorbato = double.tryParse(psorbatoStr);
+    await _dbManager.insertSingleDataPractica1('p_sorbato_potasio', psorbato, idGrupo, context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

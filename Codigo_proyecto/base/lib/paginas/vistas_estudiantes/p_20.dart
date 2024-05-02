@@ -14,6 +14,8 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
   final TextEditingController _pesoCascaraController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -22,7 +24,7 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
   }
 
   void _cargarPesoCascara() async {
-      final double pesoCascara = await _databaseH.getPesoCascara();
+      final double pesoCascara = await _databaseH.getNumericValue(practica,'peso_cascara', idGrupo);
       setState(() {
         _pesoCascaraController.text = pesoCascara== 0 ? "":pesoCascara.toString();
       });
@@ -31,22 +33,8 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
 
   void _guardarPesoCascara() async {
     final String pesoStr = _pesoCascaraController.text;
-    if (pesoStr.isNotEmpty) {
-      final double? peso = double.tryParse(pesoStr);
-      if (peso != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('peso_cascara', peso, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? peso = double.tryParse(pesoStr);
+    await _dbManager.insertSingleDataPractica1('peso_cascara', peso, idGrupo, context);
   }
 
   @override

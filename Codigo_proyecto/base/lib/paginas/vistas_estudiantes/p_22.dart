@@ -15,7 +15,8 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
   final TextEditingController _pesoSemillasController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -24,8 +25,8 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
   }
 
   void _cargarDatos() async {
-    final double pesoPulpa = await _databaseH.getPesoPulpa();
-    final double pesoSemillas = await _databaseH.getPesoSemillas();
+    final double pesoPulpa = await _databaseH.getNumericValue(practica,'peso_pulpa', idGrupo);
+    final double pesoSemillas = await _databaseH.getNumericValue(practica, 'peso_semillas', idGrupo);
 
     setState(() {
       _pesoPulpaController.text = pesoPulpa == 0.0 ? "" : pesoPulpa.toString();
@@ -36,44 +37,14 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
 
   void _guardarPesoPulpa() async {
     final String pesoStr = _pesoPulpaController.text;
-    if (pesoStr.isNotEmpty) {
-      final double? peso = double.tryParse(pesoStr);
-      if (peso != null) {
-        // Actualiza solo el campo de pesoInicial
-        try {
-          await _dbManager.insertSingleDataPractica1('peso_pulpa', peso, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? peso = double.tryParse(pesoStr);
+    await _dbManager.insertSingleDataPractica1('peso_pulpa', peso, idGrupo, context);
   }
 
   void _guardarPesoSemilla() async {
     final String pesoStr = _pesoSemillasController.text;
-    if (pesoStr.isNotEmpty) {
-      final double? peso = double.tryParse(pesoStr);
-      if (peso != null) {
-        // Actualiza solo el campo de pesoInicial
-        try {
-          await _dbManager.insertSingleDataPractica1('peso_semillas', peso, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? peso = double.tryParse(pesoStr);
+    await _dbManager.insertSingleDataPractica1('peso_semillas', peso, idGrupo,  context);
   }
 
   @override

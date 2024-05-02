@@ -15,7 +15,8 @@ class _PagInicio12State extends State<PagInicio12> {
   final TextEditingController _unidadesEmpaqueController = TextEditingController();
   final DatabaseManager _dbManager = DatabaseManager();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
-
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -24,57 +25,26 @@ class _PagInicio12State extends State<PagInicio12> {
   }
 
   void _cargarDatos() async {
-      final double uproducir = await _databaseH.getUnidades_producir();
-      final double uempaque = await _databaseH.getUnidades_empaque();
+      final double uproducir = await _databaseH.getNumericValue(practica, 'unidades_producir', idGrupo);
+      final double uempaque = await _databaseH.getNumericValue(practica, 'unidades_empaque', idGrupo);
       setState(() {
         _unidadesProducirController.text = uproducir == 0 ? "" :uproducir.toString();
         _unidadesEmpaqueController.text = uempaque == 0 ? "" :uempaque.toString();
       });
     }
 
-
-
   void _guardarUnidadesProducir() async {
     final String uproducirStr = _unidadesProducirController.text;
-    if (uproducirStr.isNotEmpty) {
-      final double? uproducir = double.tryParse(uproducirStr);
-      if (uproducir != null) {
-        // Actualiza solo el campo de pesoInicial
-        try {
-          await _dbManager.insertSingleDataPractica1('unidades_producir', uproducir, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? uproducir = double.tryParse(uproducirStr);
+    await _dbManager.insertSingleDataPractica1('unidades_producir', uproducir, idGrupo, context);
   }
 
   void _guardarUnidadesEmpaque() async {
     final String uempaqueStr = _unidadesEmpaqueController.text;
-    if (uempaqueStr.isNotEmpty) {
-      final double? uempaque = double.tryParse(uempaqueStr);
-      if (uempaque != null) {
-        // Actualiza solo el campo de pesoInicial
-        try {
-          await _dbManager.insertSingleDataPractica1('unidades_empaque', uempaque, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? uempaque = double.tryParse(uempaqueStr);
+    await _dbManager.insertSingleDataPractica1('unidades_empaque', uempaque, idGrupo, context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -334,9 +334,7 @@ class ResultadosPractica1 {
   }
 }
 
-
-
-
+// DATA BASE HELPER ----------------------------------------------------------------------------------
 class DatabaseHelper {
 
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -479,7 +477,7 @@ CREATE TABLE _resultados_practica1 (
   }
 
 
-// FUNCIONES DE PROFESOR
+// FUNCIONES DE PROFESOR ------------------------------------------------------
 
   // Insertar un profesor
   Future<int> insertProfesor(Profesor profesor) async {
@@ -529,7 +527,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
-  // FUNCIONES ESTUDIANTE
+  // FUNCIONES ESTUDIANTE -----------------------------------------------------
 
   // Insertar un estudiante
   Future<int> insertEstudiante(Estudiante estudiante) async {
@@ -578,7 +576,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
-// FUNCIONES GRUPO
+// FUNCIONES GRUPO ------------------------------------------------------------
 
   // Insertar un grupo
   Future<int> insertGrupo(Grupo grupo) async {
@@ -627,7 +625,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
-// FUNIONES PRÁCTICA
+// FUNIONES PRÁCTICA ---------------------------------------------------------
 
 // Leer una práctica por su ID de grupo
   Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {
@@ -656,6 +654,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+  // Actualizar un valor de una columna de los resultados de la practica1
   Future<int> updateColumnaResultadoPractica1(int idGrupos,String nombreColumna, dynamic valor) async {
     final db = await database;
     return await db.update(
@@ -666,6 +665,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+  // Eliminar un Valor de una columna de los resultados de la practica1
   Future<int> deleteValorColumnaResultadoPractica1(int idGrupos,String nombreColumna) async {
     final db = await database;
     return await db.update(
@@ -677,6 +677,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+  // Insertar un valor de una columna de los resultados de la practica1
   Future<int> insertValorColumnaResultadoPractica1(int idGrupos,
       String nombreColumna, dynamic valor) async {
     final db = await database;
@@ -685,6 +686,7 @@ CREATE TABLE _resultados_practica1 (
     return await db.insert('_resultados_practica1', data);
   }
 
+  // Leer un valor de una columna de los resultados de la practica1
   Future<dynamic> leerValorColumnaResultadoPractica1(int idGrupos,
       String nombreColumna) async {
     final db = await database;
@@ -700,254 +702,71 @@ CREATE TABLE _resultados_practica1 (
     return null;
   }
 
-  // FUNCIONES GET
+  // FUNCIONES GET --------------------------------------------------------------
 
-  Future<String> getFruta() async {
+  Future<double> getNumericValue(String tableName, String columnName, int idGrupo) async {
     final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['fruta'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['fruta'];
+    final List<Map<String, dynamic>> result = await db.query(
+        tableName,
+        columns: [columnName],
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    );
+    if (result.isNotEmpty && result.first[columnName] != null) {
+      return result.first[columnName] as double;
+    }
+    return 0.0;
+  }
+
+  Future<String> getTextValue(String tableName, String columnName, int idGrupo) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+        tableName,
+        columns: [columnName],
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    );
+    if (result.isNotEmpty && result.first[columnName] != null) {
+      return result.first[columnName] as String;
     }
     return 'Na';
   }
 
-  Future<double> getUnidades_producir() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['unidades_producir'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['unidades_producir'] ?? 0.0;
-    }
-    return 0.0;
-  }
+  // PARA LA FORMULACIÓN ------------------------------------------------------
 
-  Future<double> getUnidades_empaque() async {
+  Future<Map<String, dynamic>> getComponentData(int idGrupo) async {
     final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['unidades_empaque'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['unidades_empaque'] ?? 0.0;
-    }
-    return 0.0;
-  }
+    // Recuperar porcentajes de la tabla practica1
+    final Map<String, dynamic> percentages = (await db.query(
+        'practica1',
+        columns: ['p_pulpa', 'p_acido_ascorbico', 'p_acido_citrico', 'p_benzonato_sodio', 'p_sorbato_potasio'],
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    )).first;
 
-  Future<double> getTiempo_escaldado() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['tiempo_escaldado'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['tiempo_escaldado']?? 0.0;
-    }
-    return 0.0;
-  }
+    // Recuperar gramos de la tabla _resultados_practica1
+    final Map<String, dynamic> grams = (await db.query(
+        '_resultados_practica1',
+        columns: ['Total_Formulacion', 'gr_pulpa', 'gr_acidoAscorbico', 'gr_acidoCitrico', 'gr_benzonatoSodio', 'gr_sorbatoPotasio'],
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    )).first;
 
-  Future<double> getTiempo_enfriamiento() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['tiempo_enfriamiento'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['tiempo_enfriamiento'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getP_pulpa() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['p_pulpa'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['p_pulpa'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getP_acido_ascorbico() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['p_acido_ascorbico'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['p_acido_ascorbico'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getP_acido_citrico() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['p_acido_citrico'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['p_acido_citrico'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getP_benzonato_sodio() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['p_benzonato_sodio'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['p_benzonato_sodio'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getP_sorbato_potasio() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['p_sorbato_potasio'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['p_sorbato_potasio'] ?? 0.0;
-    }
-    return 0.0;
-  }
-  Future<double> getPesoInicial() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query(
-      'practica1',
-      columns: ['peso_inicial'],
-      orderBy: 'id_grupos DESC',
-      limit: 1,
-    );
-    if (result.isNotEmpty) {
-      return result.first['peso_inicial'] ?? 0.0;
-    } else {
-      return 0;
-    }
+    // Calcular porcentajes y retornar datos combinados
+    return {
+      "Total_Formulacion": grams['Total_Formulacion'],
+      "Componentes": [
+        {"name": "Pulpa", "grams": grams['gr_pulpa'], "percentage": percentages['p_pulpa']},
+        {"name": "Ácido Ascórbico", "grams": grams['gr_acidoAscorbico'], "percentage": percentages['p_acido_ascorbico']},
+        {"name": "Ácido Cítrico", "grams": grams['gr_acidoCitrico'], "percentage": percentages['p_acido_citrico']},
+        {"name": "Benzoato de Sodio", "grams": grams['gr_benzonatoSodio'], "percentage": percentages['p_benzonato_sodio']},
+        {"name": "Sorbato de Potasio", "grams": grams['gr_sorbatoPotasio'], "percentage": percentages['p_sorbato_potasio']}
+      ]
+    };
   }
 
 
-  Future<double> getPesoEscaldado() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query(
-      'practica1',
-      columns: ['peso_escaldado'],  // Asegúrate que el nombre de la columna está correcto
-      orderBy: 'id_grupos DESC',
-      limit: 1,
-    );
-    if (result.isNotEmpty) {
-      return result.first['peso_escaldado'] ?? 0.0;
-    } else {
-      return 0;
-    }
-  }
-
-  Future<double> getPesoCascara() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query(
-      'practica1',
-      columns: ['peso_cascara'],
-      orderBy: 'id_grupos DESC',
-      limit: 1,
-    );
-    if (result.isNotEmpty) {
-      return result.first['peso_cascara'] ?? 0.0;
-    } else {
-      return 0;
-    }
-  }
-  Future<double> getPesoPulpa() async {
-    final db = await database;
-
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['peso_pulpa'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['peso_pulpa'] ?? 0.0;
-    } else {
-      return 0;
-    }
-  }
-
-  Future<double> getPesoSemillas() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['peso_semillas'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['peso_semillas'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  // En tu DatabaseManager
-  Future<double> getBrix1() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['brix_1'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['brix_1'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getPh1() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['ph_1'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['ph_1'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getAcidez1() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['acidez_1'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['acidez_1'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-
-// En tu DatabaseManager
-  Future<double> getBrix2() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['brix_2'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['brix_2'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getPh2() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['ph_2'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['ph_2'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getAcidez2() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['acidez_2'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['acidez_2']?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getPerdidasolla() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['perdidas_olla'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['perdidas_olla'] ?? 0.0;
-    }
-    return 0.0;
-  }
-  Future<double> getPerdidasollaenvasado() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['perdidas_olla_empacado'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['perdidas_olla_empacado'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getPulpaTotal() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['peso_pulpa_empacada'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['peso_pulpa_empacada'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
-  Future<double> getBrixFruta() async {
-    final db = await database;
-    final List<Map<String, dynamic>> result = await db.query('practica1', columns: ['brix_fruta'], orderBy: 'id_grupos DESC', limit: 1);
-    if (result.isNotEmpty) {
-      return result.first['brix_fruta'] ?? 0.0;
-    }
-    return 0.0;
-  }
-
+  // VERSIONES BASE DE DATOS -------------------------------------------------
   Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
     //if (oldVersion < 2) {
     // Aquí agregarías el SQL para modificar la estructura de la base de datos

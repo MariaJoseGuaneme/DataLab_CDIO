@@ -15,6 +15,8 @@ class _PagInicio9aRefrescoState extends State<PagInicio9aRefresco> {
   final TextEditingController _frutaController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  String practica = 'practica1';
+  int idGrupo = 1;
 
   @override
   void initState() {
@@ -24,7 +26,7 @@ class _PagInicio9aRefrescoState extends State<PagInicio9aRefresco> {
 
 
   void _cargarPesoInicial() async {
-    final String fruta = await _databaseH.getFruta();
+    final String fruta = await _databaseH.getTextValue(practica,'fruta', idGrupo);
     setState(() {
       _frutaController.text = fruta == 'Na'? "": fruta.toString();
     });
@@ -33,9 +35,8 @@ class _PagInicio9aRefrescoState extends State<PagInicio9aRefresco> {
 
   void _guardarFruta() async {
     final String fruta = _frutaController.text;
-    await _dbManager.insertSingleDataPractica1('fruta', fruta, context);//Acá toca cambiar el 1 por un 2 cuando se cree la otra funciín
+    await _dbManager.insertSingleDataPractica1('fruta', fruta, idGrupo, context);//Acá toca cambiar el 1 por un 2 cuando se cree la otra funciín
   }
-
 
   @override
   Widget build(BuildContext context) {

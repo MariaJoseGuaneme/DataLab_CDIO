@@ -16,6 +16,8 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
   final TextEditingController _acidezController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -24,9 +26,9 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
   }
 
   void _cargarDatos() async {
-    final double brix1 = await _databaseH.getBrix2(); // Deberías verificar si esto es un error tipográfico y debería ser getBrix1
-    final double ph1 = await _databaseH.getPh2(); // Deberías verificar si esto es un error tipográfico y debería ser getPh1
-    final double acidez1 = await _databaseH.getAcidez2(); // Deberías verificar si esto es un error tipográfico y debería ser getAcidez1
+    final double ph1 = await _databaseH.getNumericValue(practica,'ph_1', idGrupo);
+    final double brix1 = await _databaseH.getNumericValue(practica, 'brix_1', idGrupo);
+    final double acidez1 = await _databaseH.getNumericValue(practica,'acidez_1' , idGrupo); //Esta es ml de NaOH utilizados
 
     setState(() {
       _brixController.text = brix1 == 0.0 ? "" : brix1.toString();
@@ -36,44 +38,16 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
   }
 
 
-
-
   void _guardarDatos() async {
-    // Convertir los valores de los controladores a números
     final double? brixValue = double.tryParse(_brixController.text);
     final double? phValue = double.tryParse(_phController.text);
     final double? acidezValue = double.tryParse(_acidezController.text);
 
-    // Guardar Brix
-    try {
-      await _dbManager.insertSingleDataPractica1('brix_1', brixValue, context);
+    await _dbManager.insertSingleDataPractica1('brix_1', brixValue, idGrupo, context);
 
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar Brix: ${e.toString()}')),
-      );
-    }
+    await _dbManager.insertSingleDataPractica1('ph_1', phValue, idGrupo, context);
 
-    // Guardar pH
-    try {
-      await _dbManager.insertSingleDataPractica1('ph_1', phValue, context );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar pH: ${e.toString()}')),
-      );
-    }
-
-    // Guardar Acidez
-    try {
-      await _dbManager.insertSingleDataPractica1('acidez_1', acidezValue, context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Valor de Acidez guardado con éxito')),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar Acidez: ${e.toString()}')),
-      );
-    }
+    await _dbManager.insertSingleDataPractica1('acidez_1', acidezValue, idGrupo, context);
   }
 
 
@@ -151,7 +125,7 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Acidez',
-                        hintText: 'Introduzca la acidez',
+                        hintText: 'Introduzca los ml de NaOH utilizados',
                       ),
                       keyboardType: const TextInputType.numberWithOptions(
                           decimal: true),

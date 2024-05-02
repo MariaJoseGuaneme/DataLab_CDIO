@@ -16,6 +16,8 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
   final TextEditingController _brixController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -25,8 +27,8 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
 
 
   void _cargarPesoInicial() async {
-    final String fruta = await _databaseH.getFruta();
-    final double brix = await _databaseH.getBrixFruta();
+    final String fruta = await _databaseH.getTextValue(practica,'fruta', idGrupo);
+    final double brix = await _databaseH.getNumericValue(practica, 'brix_fruta', idGrupo );
     setState(() {
       _frutaController.text = fruta == 'Na'? "":fruta.toString();
       _brixController.text = brix == 0? "" :brix.toString();
@@ -35,18 +37,17 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
   }
 
 
+
+
   void _guardarFruta() async {
     final String fruta = _frutaController.text;
-    await _dbManager.insertSingleDataPractica1('fruta', fruta, context);
+    await _dbManager.insertSingleDataPractica1('fruta', fruta, idGrupo, context);
       }
   void _guardarBrix() async {
     final String brixSr = _brixController.text;
     final double? brix = double.tryParse(brixSr);
-    await _dbManager.insertSingleDataPractica1('brix_fruta', brix, context);
+    await _dbManager.insertSingleDataPractica1('brix_fruta', brix, idGrupo, context);
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {

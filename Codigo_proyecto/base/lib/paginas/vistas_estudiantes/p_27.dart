@@ -17,6 +17,8 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
   final TextEditingController _pulpatotalController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -26,9 +28,9 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
 
 
   void _cargarPerdidas() async {
-      final double perdidas_olla = await _databaseH.getPerdidasolla();
-      final double perdidas_olla_envasado = await _databaseH.getPerdidasollaenvasado();
-      final double pulpaTotal = await _databaseH.getPulpaTotal();
+      final double perdidas_olla = await _databaseH.getNumericValue(practica, 'perdidas_olla', idGrupo);
+      final double perdidas_olla_envasado = await _databaseH.getNumericValue(practica, 'perdidas_olla_empacado', idGrupo);
+      final double pulpaTotal = await _databaseH.getNumericValue(practica, 'peso_pulpa_empacada', idGrupo);
       setState(() {
         _perdidasollaController.text = perdidas_olla == 0.0 ? "" : perdidas_olla.toString();
         _perdidasollaempacadaController.text = perdidas_olla_envasado == 0.0 ? "" : perdidas_olla_envasado.toString();
@@ -37,65 +39,21 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
     }
 
   void _guardarPesoolla() async {
-    final String perdidasSr = _perdidasollaController.text;
-    if (perdidasSr.isNotEmpty) {
-      final double? perdidas = double.tryParse(perdidasSr);
-      if (perdidas != null) {
-        // Actualiza solo el campo de pesoInicial
-        try {
-          await _dbManager.insertSingleDataPractica1('perdidas_olla', perdidas, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final String pesoSr = _perdidasollaController.text;
+    final double? peso = double.tryParse(pesoSr);
+    await _dbManager.insertSingleDataPractica1('perdidas_olla', peso,idGrupo, context);
   }
 
   void _guardarPesoollaenvasado() async {
-    final String perdidasSr = _perdidasollaempacadaController.text;
-    if (perdidasSr.isNotEmpty) {
-      final double? perdidas = double.tryParse(perdidasSr);
-      if (perdidas != null) {
-        // Actualiza solo el campo de pesoInicial
-        try {
-          await _dbManager.insertSingleDataPractica1('perdidas_olla_empacado', perdidas, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final String pesoSr = _perdidasollaempacadaController.text;
+    final double? peso = double.tryParse(pesoSr);
+    await _dbManager.insertSingleDataPractica1('perdidas_olla_empacado', peso, idGrupo, context);
   }
 
   void _guardarPulpaTotal() async {
     final String perdidasSr = _pulpatotalController.text;
-    if (perdidasSr.isNotEmpty) {
-      final double? perdidas = double.tryParse(perdidasSr);
-      if (perdidas != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('peso_pulpa_empacada', perdidas, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? perdidas = double.tryParse(perdidasSr);
+    await _dbManager.insertSingleDataPractica1('peso_pulpa_empacada', perdidas,idGrupo, context);
   }
 
 

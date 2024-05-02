@@ -16,6 +16,8 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
   final TextEditingController _acidez2Controller = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -24,9 +26,9 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
   }
 
   void _cargarDatos() async {
-    final double brix2 = await _databaseH.getBrix2();
-    final double ph2 = await _databaseH.getPh2();
-    final double acidez2 = await _databaseH.getAcidez2();
+    final double brix2 = await _databaseH.getNumericValue(practica, 'brix_2', idGrupo);
+    final double ph2 = await _databaseH.getNumericValue(practica, 'ph_2', idGrupo);
+    final double acidez2 = await _databaseH.getNumericValue(practica,'acidez_2', idGrupo);
 
     setState(() {
       _brix2Controller.text = brix2 == 0.0 ? "" : brix2.toString();
@@ -36,38 +38,15 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
   }
 
   void _guardarDatos() async {
-    // Convertir los valores de los controladores a números
     final double? brixValue2 = double.tryParse(_brix2Controller.text);
     final double? phValue2 = double.tryParse(_ph2Controller.text);
     final double? acidezValue2 = double.tryParse(_acidez2Controller.text);
 
+      await _dbManager.insertSingleDataPractica1('brix_2', brixValue2, idGrupo, context);
 
-    // Guardar Brix
-    try {
-      await _dbManager.insertSingleDataPractica1('brix_2', brixValue2, context);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar Brix: ${e.toString()}')),
-      );
-    }
+      await _dbManager.insertSingleDataPractica1('ph_2', phValue2, idGrupo, context );
 
-    // Guardar pH
-    try {
-      await _dbManager.insertSingleDataPractica1('ph_2', phValue2, context );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar pH: ${e.toString()}')),
-      );
-    }
-
-    // Guardar Acidez
-    try {
-      await _dbManager.insertSingleDataPractica1('acidez_2', acidezValue2, context);
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar Acidez: ${e.toString()}')),
-      );
-    }
+      await _dbManager.insertSingleDataPractica1('acidez_2', acidezValue2, idGrupo, context);
   }
 
 

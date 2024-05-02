@@ -16,6 +16,8 @@ class _PagInicio13State extends State<PagInicio13> {
   final TextEditingController _frutaController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   late final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = 1;
+  String practica = 'practica1';
 
   @override
   void initState() {
@@ -25,8 +27,8 @@ class _PagInicio13State extends State<PagInicio13> {
 
   void _cargarDatos() async {
      {
-      final double tiempoEscaldado = await _databaseH.getTiempo_escaldado();
-      final double tiempoEnfriamiento = await _databaseH.getTiempo_enfriamiento();
+      final double tiempoEscaldado = await _databaseH.getNumericValue(practica, 'tiempo_escaldado', idGrupo);
+      final double tiempoEnfriamiento = await _databaseH.getNumericValue(practica, 'tiempo_enfriamiento', idGrupo);
        setState(() {
         _tiempoEscaldadoController.text = tiempoEscaldado == 0 ? "" :tiempoEscaldado.toString();
         _tiempoEnfriamientoController.text = tiempoEnfriamiento == 0 ? "" :tiempoEnfriamiento.toString();
@@ -37,43 +39,15 @@ class _PagInicio13State extends State<PagInicio13> {
 
   void _guardarTiempoEscaldado() async {
     final String tiempoEscaldadoStr = _tiempoEscaldadoController.text;
-    if (tiempoEscaldadoStr.isNotEmpty) {
-      final double? tiempoEscaldado = double.tryParse(tiempoEscaldadoStr);
-      if (tiempoEscaldado != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('tiempo_escaldado', tiempoEscaldado, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el tiempo: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? tiempoEscaldado = double.tryParse(tiempoEscaldadoStr);
+    await _dbManager.insertSingleDataPractica1('tiempo_escaldado', tiempoEscaldado, idGrupo, context);
   }
 
 
   void _guardarTiempoEnfriamiento() async {
     final String tenfriamientoStr = _tiempoEnfriamientoController.text;
-    if (tenfriamientoStr.isNotEmpty) {
-      final double? tEnfriamiento = double.tryParse(tenfriamientoStr);
-      if (tEnfriamiento != null) {
-        try {
-          await _dbManager.insertSingleDataPractica1('tiempo_enfriamiento', tEnfriamiento, context);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error al guardar el peso: ${e.toString()}')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Por favor, ingrese un número válido.')),
-        );
-      }
-    }
+    final double? tEnfriamiento = double.tryParse(tenfriamientoStr);
+    await _dbManager.insertSingleDataPractica1('tiempo_enfriamiento', tEnfriamiento, idGrupo, context);
   }
 
   @override
