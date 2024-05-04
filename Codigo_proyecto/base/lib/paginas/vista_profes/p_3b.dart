@@ -1,16 +1,15 @@
-import 'package:base/paginas/vista_profes/p_3b.dart';
-import 'package:base/paginas/vista_profes/p_4.dart';
 import 'package:flutter/material.dart';
 
-class PagInicio3a extends StatefulWidget {
-  const PagInicio3a({Key? key}) : super(key: key);
+class PagInicio3b extends StatefulWidget {
+  const PagInicio3b({Key? key}) : super(key: key);
 
   @override
-  State<PagInicio3a> createState() => _PagInicio3aState();
+  State<PagInicio3b> createState() => _PagInicio3bState();
 }
 
-class _PagInicio3aState extends State<PagInicio3a> {
+class _PagInicio3bState extends State<PagInicio3b> {
   bool _obscureText = true;
+  bool _obscureText2 = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +100,32 @@ class _PagInicio3aState extends State<PagInicio3a> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 50.0),
+                    TextField(
+                      obscureText: _obscureText2,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock_outline_rounded),
+                        hintText: 'Confirmar Contraseña',
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureText2
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText2 = !_obscureText2;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -114,35 +139,12 @@ class _PagInicio3aState extends State<PagInicio3a> {
                     elevation: 5.0,
                     child: MaterialButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio4()),);// Implementar la lógica de inicio de sesión
+                        // Implementar la lógica de inicio de sesión
                       },
                       minWidth: 100.0,
                       height: 42.0,
                       child: Text(
-                        'Ingresar',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200),
-                child: Container(
-                  width: 100.0,
-                  child: Material(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10.0),
-                    elevation: 5.0,
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio3b()),);// Implementar la lógica de Registrarse
-                      },
-                      minWidth: 50.0,
-                      height: 42.0,
-                      child: Text(
-                        'Registrarse',
+                        'Crear Cuenta',
                         style: TextStyle(color: Colors.white, fontSize: 17.0),
                       ),
                     ),

@@ -35,10 +35,7 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
 
     });
   }
-
-
-
-
+  
   void _guardarFruta() async {
     final String fruta = _frutaController.text;
     await _dbManager.insertSingleDataPractica1('fruta', fruta, idGrupo, context);

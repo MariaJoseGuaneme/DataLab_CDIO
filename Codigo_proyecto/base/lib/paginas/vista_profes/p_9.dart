@@ -1,5 +1,4 @@
 import 'package:base/paginas/vista_profes/p_9aPulpa.dart';
-import 'package:base/paginas/vista_profes/p_9aRefresco.dart';
 import 'package:flutter/material.dart';
 
 class PagInicio9 extends StatefulWidget {
@@ -58,7 +57,7 @@ class _PagInicio9 extends State<PagInicio9> {
                 _buildPracticaButton(context, 'PULPA', Color.fromARGB(255, 57, 174, 247), () 
                 {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));}),
                 _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () 
-                {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aRefresco()));}),
+                {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));}),
               ],
             ),
           ),

@@ -168,8 +168,11 @@ class DatabaseManager {
     var exists = Sqflite.firstIntValue(await db.rawQuery(
         'SELECT COUNT(*) FROM practica1 WHERE id_grupos = ?', [idGrupos]));
     if (exists == 0) {
-      // Si no existe un registro para ese idGrupos, inserta uno nuevo.
-      await db.insert('practica1', {'id_grupos': idGrupos, columnName: value});
+      // Si no existe, inserta un nuevo registro con `id_grupos` igual a 1.
+      await db.insert('practica1', {'id_grupos': 1, columnName: value});
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Nuevo registro creado con éxito en practica1'))   ,
+      );
     } else {
       // Si ya existe, actualiza el registro existente para ese idGrupos.
       try {
