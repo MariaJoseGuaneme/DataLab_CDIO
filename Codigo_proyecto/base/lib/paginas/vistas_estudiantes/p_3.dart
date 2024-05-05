@@ -1,20 +1,19 @@
-import 'package:base/paginas/vista_profes/p_3b.dart';
-import 'package:base/paginas/vista_profes/p_4.dart';
-import 'package:flutter/material.dart';
-import 'package:base/base_datos.dart';
-import '../../preferences.dart';
 
-class PagInicio3a extends StatefulWidget {
-  const PagInicio3a({Key? key}) : super(key: key);
+import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
+import 'package:flutter/material.dart';
+import 'package:base/base_datos_manager.dart';
+import 'package:base/paginas/vistas_estudiantes/p_4.dart';
+
+class PagInicio3e extends StatefulWidget {
+  const PagInicio3e({Key? key}) : super(key: key);
 
   @override
-  State<PagInicio3a> createState() => _PagInicio3aState();
+  State<PagInicio3e> createState() => _PagInicio3eState();
 }
 
-class _PagInicio3aState extends State<PagInicio3a> {
+class _PagInicio3eState extends State<PagInicio3e> {
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
   bool _obscureText = true;
 
   @override
@@ -40,12 +39,12 @@ class _PagInicio3aState extends State<PagInicio3a> {
               Flexible(
                 child: Image.asset(
                   'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
-                  height: 120.0,
+                  height: 140.0,
                 ),
               ),
               SizedBox(height: 48.0),
               Text(
-                'INGRESA TUS DATOS',
+                'INGRESA TU CORREO',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22.0,
@@ -58,7 +57,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                 padding: const EdgeInsets.symmetric(
                     vertical: 60.0,
                     horizontal:
-                        8.0), // Asegúrate de usar 'const' para optimizar
+                    8.0), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10.0),
@@ -83,32 +82,6 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       ),
                     ),
                     SizedBox(height: 50.0),
-                    TextField(
-                      controller: passwordController,
-                      obscureText: _obscureText,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock_outline_rounded),
-                        hintText: 'Contraseña',
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        suffixIcon: IconButton(
-                          icon: Icon(_obscureText
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -123,56 +96,29 @@ class _PagInicio3aState extends State<PagInicio3a> {
                     child: MaterialButton(
                       onPressed: () async {
                         final email = emailController.text.trim();
-                        final password = passwordController.text;
-
-                        if (email.isEmpty || password.isEmpty) {
+                        if (email.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Por favor, rellena todos los campos')),
+                            SnackBar(content: Text('Por favor, rellena el campo')),
                           );
                           return;
                         }
 
                         // Verificar las credenciales.
-                        var profesor = await _databaseH.getProfesorByEmail(email);
-                        if (profesor != null && profesor.contrasena == password) {
-                          await UserPreferences.setIdProfesor(profesor.id!); // Asegúrate de que el ID está disponible
+                        var estudiante = await _dbManager.getEstudianteByEmail(email);
+                        if (estudiante != null ) {
                           Navigator.of(context).pushReplacement(MaterialPageRoute(
-                              builder: (context) => const PagInicio4()),
+                              builder: (context) => const Select_e()), // Ajusta esta línea según corresponda
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Credenciales incorrectas')),
+                            SnackBar(content: Text('Correo no registrado')),
                           );
                         }
-
                       },
                       minWidth: 100.0,
                       height: 42.0,
                       child: Text(
                         'Ingresar',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200),
-                child: Container(
-                  width: 100.0,
-                  child: Material(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10.0),
-                    elevation: 5.0,
-                    child: MaterialButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio3b()),);// Implementar la lógica de Registrarse
-                      },
-                      minWidth: 50.0,
-                      height: 42.0,
-                      child: Text(
-                        'Registrarse',
                         style: TextStyle(color: Colors.white, fontSize: 17.0),
                       ),
                     ),

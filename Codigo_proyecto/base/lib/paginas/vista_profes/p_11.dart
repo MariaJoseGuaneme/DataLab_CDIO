@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:base/base_datos.dart';
 import 'package:base/base_datos_manager.dart';
 
+import '../../preferences.dart';
+
 class PagInicio11 extends StatefulWidget {
   const PagInicio11({super.key});
 
@@ -18,8 +20,8 @@ class _PagInicio11State extends State<PagInicio11> {
   final TextEditingController _psorbatopotasioController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-  int idGrupo = 1;
-  String practica = 'practica1';
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
@@ -48,31 +50,31 @@ class _PagInicio11State extends State<PagInicio11> {
   void _guardarP_pulpa() async {
     final String ppulpaStr = _ppulpaController.text;
     final double? ppulpa = double.tryParse(ppulpaStr);
-    await _dbManager.insertSingleDataPractica1('p_pulpa', ppulpa, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'p_pulpa', ppulpa, idGrupo, context);
   }
 
   void _guardarP_ascorbico() async {
     final String pascorbicoStr = _pacidoascorbicoController.text;
     final double? pascorbico = double.tryParse(pascorbicoStr);
-    await _dbManager.insertSingleDataPractica1('p_acido_ascorbico', pascorbico, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'p_acido_ascorbico', pascorbico, idGrupo, context);
   }
 
   void _guardarP_citrico() async {
     final String pcitricoStr = _pacidocitricoController.text;
     final double? pcitrico = double.tryParse(pcitricoStr);
-    await _dbManager.insertSingleDataPractica1('p_acido_citrico', pcitrico, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'p_acido_citrico', pcitrico, idGrupo, context);
   }
 
   void _guardarP_benzonato() async {
     final String pbenzonatoStr = _pbenzoatosodioController.text;
     final double? pbenzonato = double.tryParse(pbenzonatoStr);
-    await _dbManager.insertSingleDataPractica1('p_benzonato_sodio', pbenzonato,idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'p_benzonato_sodio', pbenzonato,idGrupo, context);
   }
 
   void _guardarP_sorbato() async {
     final String psorbatoStr = _psorbatopotasioController.text;
     final double? psorbato = double.tryParse(psorbatoStr);
-    await _dbManager.insertSingleDataPractica1('p_sorbato_potasio', psorbato, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica,'p_sorbato_potasio', psorbato, idGrupo, context);
   }
 
   @override

@@ -34,6 +34,22 @@ class DatabaseManager {
     }
   }
 
+  Future<Estudiante?> getEstudianteByEmail(String email) async {
+    final db = await _dbHelper.database;
+    final maps = await db.query(
+      'estudiantes',
+      columns: ['id', 'id_grupos', 'correo'],
+      where: 'correo = ?',
+      whereArgs: [email],
+    );
+
+    if (maps.isNotEmpty) {
+      return Estudiante.fromMap(maps.first);
+    } else {
+      return null;
+    }
+  }
+
 
   Future<List<Estudiante>> getAllStudents() async {
     final db = await _dbHelper.database;
@@ -87,20 +103,18 @@ class DatabaseManager {
 // PROFESOR
 
 // Insertar un nuevo profesor
-  Future<void> insertProfesor(String correo, String contrasena,
+  Future<void> insertProfesor(String email, String password,
       BuildContext context) async {
-    Profesor newProfesor = Profesor(correo: correo, contrasena: contrasena);
-
+    Profesor newProfesor = Profesor(correo: email, contrasena: password);
     try {
-      await _dbHelper.insertProfesor(newProfesor);
+      final db = await _dbHelper.database;
+      await db.insert('profesores', newProfesor.toMap());
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profesor guardado con éxito'))
+          SnackBar(content: Text('Profesor registrado exitosamente'))
       );
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Error al guardar el profesor: ${e.toString()}'))
-      );
+      print('Error al insertar profesor: $e');
+      throw Exception('Failed to insert profesor');
     }
   }
 
@@ -161,34 +175,44 @@ class DatabaseManager {
     }
   }
 
-  // Función modificada para insertar o actualizar datos con un idGrupos variable
-  Future<void> insertSingleDataPractica1(String columnName, dynamic value,
-      int idGrupos, BuildContext context) async {
+  // Función modificada para insertar o actualizar datos con un idGrupos variable y un nombre de tabla variable
+  Future<void> insertSingleDataPractica(String practicaTableName,
+      String columnName, dynamic value, int idGrupos,
+      BuildContext context) async {
     final db = await _dbHelper.database;
+    // Verificar si ya existe un registro para ese idGrupos en la tabla especificada
     var exists = Sqflite.firstIntValue(await db.rawQuery(
-        'SELECT COUNT(*) FROM practica1 WHERE id_grupos = ?', [idGrupos]));
+        'SELECT COUNT(*) FROM $practicaTableName WHERE id_grupos = ?',
+        [idGrupos]));
+
     if (exists == 0) {
-      // Si no existe, inserta un nuevo registro con `id_grupos` igual a 1.
-      await db.insert('practica1', {'id_grupos': 1, columnName: value});
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Nuevo registro creado con éxito en practica1'))   ,
-      );
+      // Si no existe, inserta un nuevo registro.
+      try {
+        await db.insert(
+            practicaTableName, {'id_grupos': idGrupos, columnName: value});
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(
+              'Error al insertar en $practicaTableName: ${e.toString()}')),
+        );
+      }
     } else {
       // Si ya existe, actualiza el registro existente para ese idGrupos.
       try {
         int count = await db.update(
-            'practica1', {columnName: value}, where: 'id_grupos = ?',
+            practicaTableName, {columnName: value}, where: 'id_grupos = ?',
             whereArgs: [idGrupos]);
         if (count != 1) {
           ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content: Text('No se encontró el registro para actualizar'))
+            SnackBar(content: Text(
+                'No se encontró el registro para actualizar en $practicaTableName')),
           );
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text('Error al actualizar el dato: ${e.toString()}'))
+          SnackBar(content: Text(
+              'Error al actualizar el dato en $practicaTableName: ${e
+                  .toString()}')),
         );
       }
     }

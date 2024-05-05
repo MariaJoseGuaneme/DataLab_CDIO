@@ -1,6 +1,8 @@
 import 'package:base/paginas/vista_profes/p_9aPulpa.dart';
 import 'package:flutter/material.dart';
 
+import '../../preferences.dart';
+
 class PagInicio9 extends StatefulWidget {
   const PagInicio9({super.key});
 
@@ -46,22 +48,26 @@ class _PagInicio9 extends State<PagInicio9> {
           ),
           const Spacer(),
           Expanded(
-            flex: 2,
+           flex: 2,
             child: GridView.count(
               padding: const EdgeInsets.all(20),
               crossAxisCount: 2,
-              crossAxisSpacing: 20, // Espacio entre columnas
-              mainAxisSpacing: 20, // Espacio entre filas
-              childAspectRatio: buttonAspectRatio,
-              children: <Widget>[
-                _buildPracticaButton(context, 'PULPA', Color.fromARGB(255, 57, 174, 247), () 
-                {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));}),
-                _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () 
-                {Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));}),
-              ],
-            ),
-          ),
-        ],
+               crossAxisSpacing: 20, // Espacio entre columnas
+               mainAxisSpacing: 20, // Espacio entre filas
+               childAspectRatio: buttonAspectRatio,
+               children: <Widget>[
+              _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 57, 174, 247), () async {
+               await UserPreferences.setPracticaSeleccionada('practica1'); // Guarda 'practica1' para PULPA
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));
+              }),
+              _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () async {
+                await UserPreferences.setPracticaSeleccionada('practica2'); // Guarda 'practica2' para REFRESCO
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa())); // Asegúrate de actualizar esto si REFRESCO va a otra página
+             }),
+          ],
+       ),
+     )
+    ],
       ),
     );
   }

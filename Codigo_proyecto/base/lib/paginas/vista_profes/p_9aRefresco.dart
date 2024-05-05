@@ -35,7 +35,7 @@ class _PagInicio9aRefrescoState extends State<PagInicio9aRefresco> {
 
   void _guardarFruta() async {
     final String fruta = _frutaController.text;
-    await _dbManager.insertSingleDataPractica1('fruta', fruta, idGrupo, context);//Acá toca cambiar el 1 por un 2 cuando se cree la otra funciín
+    await _dbManager.insertSingleDataPractica(practica, 'fruta', fruta, idGrupo, context);//Acá toca cambiar el 1 por un 2 cuando se cree la otra funciín
   }
 
   @override

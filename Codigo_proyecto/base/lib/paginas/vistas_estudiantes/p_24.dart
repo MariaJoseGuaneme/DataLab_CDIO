@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart'; // Asegúrate de que la importación es correcta
-
+import 'package:base/funciones_proyecto/select_proceso.dart';
 class RecepcionPage24 extends StatefulWidget {
   const RecepcionPage24({super.key});
 
@@ -14,6 +14,7 @@ class _RecepcionPage24State extends State<RecepcionPage24> {
   @override
   void initState() {
     super.initState();
+    calcularYGuardarResultados();
     componentData = DatabaseHelper.instance.getComponentData(1);
   }
 

@@ -1,4 +1,6 @@
+import 'package:base/paginas/vista_profes/p_3a.dart';
 import 'package:flutter/material.dart';
+import 'package:base/base_datos_manager.dart';
 
 class PagInicio3b extends StatefulWidget {
   const PagInicio3b({Key? key}) : super(key: key);
@@ -8,8 +10,24 @@ class PagInicio3b extends StatefulWidget {
 }
 
 class _PagInicio3bState extends State<PagInicio3b> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+
   bool _obscureText = true;
   bool _obscureText2 = true;
+
+
+  @override
+  void dispose() {
+  // Es importante limpiar los controladores cuando el widget sea desmontado.
+  emailController.dispose();
+  passwordController.dispose();
+  confirmPasswordController.dispose();
+  super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +78,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -76,6 +95,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                     ),
                     SizedBox(height: 50.0),
                     TextField(
+                      controller: passwordController,
                       obscureText: _obscureText,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -102,6 +122,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                     ),
                     SizedBox(height: 50.0),
                     TextField(
+                      controller: confirmPasswordController,
                       obscureText: _obscureText2,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -120,7 +141,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                               : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
-                              _obscureText2 = !_obscureText2;
+                              _obscureText = !_obscureText;
                             });
                           },
                         ),
@@ -138,8 +159,39 @@ class _PagInicio3bState extends State<PagInicio3b> {
                     borderRadius: BorderRadius.circular(10.0),
                     elevation: 5.0,
                     child: MaterialButton(
-                      onPressed: () {
-                        // Implementar la lógica de inicio de sesión
+                      onPressed: () async {
+                        // Obtener los valores de los TextFields.
+                        final email = emailController.text.trim();  // Asegúrate de inicializar un TextEditingController para los campos
+                        final password = passwordController.text;
+                        final confirmPassword = confirmPasswordController.text;
+
+                        // Validar que los campos no están vacíos y que la contraseña y confirmar contraseña son iguales.
+                        if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Por favor, rellena todos los campos')),
+                          );
+                          return;
+                        }
+
+                        if (password != confirmPassword) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Las contraseñas no coinciden')),
+                          );
+                          return;
+                        }
+
+                        // Intentar registrar al profesor.
+                        try {
+                          await _dbManager.insertProfesor(email, password, context);
+                          // Navegar a la pantalla de inicio después de registrar
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (context) => const PagInicio3a()), // Asegúrate de tener esta página o ajustar según corresponda
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Error al registrar: ${e.toString()}')),
+                          );
+                        }
                       },
                       minWidth: 100.0,
                       height: 42.0,

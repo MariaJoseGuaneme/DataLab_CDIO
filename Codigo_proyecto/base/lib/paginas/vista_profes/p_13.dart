@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 
+import '../../preferences.dart';
+
 class PagInicio13 extends StatefulWidget {
   const PagInicio13({super.key});
 
@@ -16,8 +18,8 @@ class _PagInicio13State extends State<PagInicio13> {
   final TextEditingController _frutaController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   late final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-  int idGrupo = 1;
-  String practica = 'practica1';
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
@@ -40,14 +42,14 @@ class _PagInicio13State extends State<PagInicio13> {
   void _guardarTiempoEscaldado() async {
     final String tiempoEscaldadoStr = _tiempoEscaldadoController.text;
     final double? tiempoEscaldado = double.tryParse(tiempoEscaldadoStr);
-    await _dbManager.insertSingleDataPractica1('tiempo_escaldado', tiempoEscaldado, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'tiempo_escaldado', tiempoEscaldado, idGrupo, context);
   }
 
 
   void _guardarTiempoEnfriamiento() async {
     final String tenfriamientoStr = _tiempoEnfriamientoController.text;
     final double? tEnfriamiento = double.tryParse(tenfriamientoStr);
-    await _dbManager.insertSingleDataPractica1('tiempo_enfriamiento', tEnfriamiento, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'tiempo_enfriamiento', tEnfriamiento, idGrupo, context);
   }
 
   @override

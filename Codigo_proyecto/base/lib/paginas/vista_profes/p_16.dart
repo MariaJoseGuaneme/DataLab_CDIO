@@ -1,37 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:base/base_datos.dart';
+import '../../preferences.dart';
 
 class PagInicio16 extends StatefulWidget {
-  const PagInicio16({Key? key}) : super(key: key);
+  const PagInicio16({super.key});
 
   @override
   _PagInicio16State createState() => _PagInicio16State();
 }
 
 class _PagInicio16State extends State<PagInicio16> {
-  List<String> correos = [
-    'ejemplo1@uqvirtual.edu.co',
-    'ejemplo2@uqvirtual.edu.co',
-    'ejemplo3@uqvirtual.edu.co',
-  ];
-
+  final DatabaseHelper _databaseH = DatabaseHelper.instance;
+  List<Estudiante> estudiantes = [];  // Lista de objetos Estudiante
   final TextEditingController _emailController = TextEditingController();
 
-  void _agregarCorreo() {
-    if (_emailController.text.isNotEmpty) {
-      setState(() {
-        correos.add(_emailController.text);
-        _emailController.clear();
-      });
-    }
+  @override
+  void initState() {
+    super.initState();
+    _cargarCorreos();
+  }
+
+  Future<void> _cargarCorreos() async {
+    int idGrupo = UserPreferences.getIdGrupo();
+    estudiantes = await _databaseH.getEstudiantesPorGrupo(idGrupo);
+    setState(() {});
   }
 
   void _borrarCorreo(int index) {
+    UserPreferences.setIdGrupo(estudiantes[index].idGrupos);
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Confirmar'),
-          content: Text('¿Estás seguro de que quieres borrar "${correos[index]}"?'),
+          content: const Text('¿Estás seguro de que quieres borrar este correo?'),
           actions: <Widget>[
             TextButton(
               child: const Text('Cancelar'),
@@ -39,11 +41,10 @@ class _PagInicio16State extends State<PagInicio16> {
             ),
             TextButton(
               child: const Text('Borrar'),
-              onPressed: () {
-                setState(() {
-                  correos.removeAt(index);
-                });
+              onPressed: () async {
                 Navigator.of(context).pop();
+                await _databaseH.deleteEstudiante(estudiantes[index].id!);
+                _cargarCorreos();
               },
             ),
           ],
@@ -52,15 +53,28 @@ class _PagInicio16State extends State<PagInicio16> {
     );
   }
 
+  void _agregarCorreo() async {
+    if (_emailController.text.isNotEmpty) {
+      int idGrupo = UserPreferences.getIdGrupo();  // Usar el idGrupo actual de SharedPreferences
+      Estudiante nuevoEstudiante = Estudiante(
+        idGrupos: idGrupo,
+        correo: _emailController.text.trim(),
+      );
+      await _databaseH.insertEstudiante(nuevoEstudiante);
+      _emailController.clear();
+      _cargarCorreos();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Por favor, introduce un correo")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Correos en este grupo'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        title: const Text('Correos en este grupo'),
       ),
       body: Column(
         children: <Widget>[
@@ -84,13 +98,13 @@ class _PagInicio16State extends State<PagInicio16> {
               controller: _emailController,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.person_add_alt_1),
+                prefixIcon: const Icon(Icons.person_add_alt_1),
                 hintText: "Correo electrónico",
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: _agregarCorreo,
                 ),
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
                 filled: true,
@@ -100,11 +114,11 @@ class _PagInicio16State extends State<PagInicio16> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: correos.length,
+              itemCount: estudiantes.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Icon(Icons.email),
-                  title: Text(correos[index]),
+                  leading: const Icon(Icons.email),
+                  title: Text(estudiantes[index].correo),
                   trailing: PopupMenuButton<String>(
                     onSelected: (String result) {
                       if (result == 'Borrar') {

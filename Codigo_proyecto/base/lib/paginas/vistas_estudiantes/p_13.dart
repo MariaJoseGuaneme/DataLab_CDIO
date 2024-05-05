@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
-// Asegúrate de importar el DatabaseManager
+
+import '../../preferences.dart';
+
 
 class RecepcionPage13 extends StatefulWidget {
   const RecepcionPage13({super.key});
@@ -16,8 +18,8 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
   final TextEditingController _pesoController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-  int idGrupo = 1;
-  String practica = 'practica1';
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
@@ -37,7 +39,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
  void _guardarPesoInicial() async {
   final String pesoStr = _pesoController.text;
   final double? peso = double.tryParse(pesoStr);
-  await _dbManager.insertSingleDataPractica1('peso_inicial', peso, idGrupo, context);
+  await _dbManager.insertSingleDataPractica(practica, 'peso_inicial', peso, idGrupo, context);
 }
 
 

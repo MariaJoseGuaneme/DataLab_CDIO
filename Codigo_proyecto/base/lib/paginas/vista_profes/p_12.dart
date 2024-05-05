@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 
+import '../../preferences.dart';
+
 class PagInicio12 extends StatefulWidget {
   const PagInicio12({super.key});
 
@@ -15,8 +17,8 @@ class _PagInicio12State extends State<PagInicio12> {
   final TextEditingController _unidadesEmpaqueController = TextEditingController();
   final DatabaseManager _dbManager = DatabaseManager();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
-  int idGrupo = 1;
-  String practica = 'practica1';
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
@@ -36,13 +38,13 @@ class _PagInicio12State extends State<PagInicio12> {
   void _guardarUnidadesProducir() async {
     final String uproducirStr = _unidadesProducirController.text;
     final double? uproducir = double.tryParse(uproducirStr);
-    await _dbManager.insertSingleDataPractica1('unidades_producir', uproducir, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'unidades_producir', uproducir, idGrupo, context);
   }
 
   void _guardarUnidadesEmpaque() async {
     final String uempaqueStr = _unidadesEmpaqueController.text;
     final double? uempaque = double.tryParse(uempaqueStr);
-    await _dbManager.insertSingleDataPractica1('unidades_empaque', uempaque, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'unidades_empaque', uempaque, idGrupo, context);
   }
 
   @override

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart'; // Asegúrate de importar tu DatabaseManager
 import 'package:base/base_datos.dart';
 
+import '../../preferences.dart';
+
 class RecepcionPage23 extends StatefulWidget {
   const RecepcionPage23({super.key});
 
@@ -16,8 +18,8 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
   final TextEditingController _acidezController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-  int idGrupo = 1;
-  String practica = 'practica1';
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
@@ -43,11 +45,11 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
     final double? phValue = double.tryParse(_phController.text);
     final double? acidezValue = double.tryParse(_acidezController.text);
 
-    await _dbManager.insertSingleDataPractica1('brix_1', brixValue, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'brix_1', brixValue, idGrupo, context);
 
-    await _dbManager.insertSingleDataPractica1('ph_1', phValue, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'ph_1', phValue, idGrupo, context);
 
-    await _dbManager.insertSingleDataPractica1('acidez_1', acidezValue, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'acidez_1', acidezValue, idGrupo, context);
   }
 
 

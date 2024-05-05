@@ -216,6 +216,7 @@ class _Menu extends State<Menu> {
 Future<void> calcularYGuardarResultados() async {
   final db = await DatabaseHelper.instance.database;
   final _databaseH = DatabaseHelper.instance;
+  //_databaseH.borrarRegistroPractica(); NO DESCOMENTAR, gracias
   final practica1 = await db.query(
       'practica1'); // Obtén todos los datos de la tabla practica1.
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 import 'package:base/paginas/vista_profes/p_10.dart';
+
+import '../../preferences.dart';
 
 class PagInicio9aPulpa extends StatefulWidget {
   const PagInicio9aPulpa({super.key});
@@ -16,8 +17,8 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
   final TextEditingController _brixController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-  int idGrupo = 1;
-  String practica = 'practica1';
+  String practica = UserPreferences.getPracticaSeleccionada();
+  int idGrupo = UserPreferences.getIdGrupo();
 
   @override
   void initState() {
@@ -35,15 +36,15 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
 
     });
   }
-  
+
   void _guardarFruta() async {
     final String fruta = _frutaController.text;
-    await _dbManager.insertSingleDataPractica1('fruta', fruta, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'fruta', fruta, idGrupo, context);
       }
   void _guardarBrix() async {
     final String brixSr = _brixController.text;
     final double? brix = double.tryParse(brixSr);
-    await _dbManager.insertSingleDataPractica1('brix_fruta', brix, idGrupo, context);
+    await _dbManager.insertSingleDataPractica( practica, 'brix_fruta', brix, idGrupo, context);
   }
 
   @override

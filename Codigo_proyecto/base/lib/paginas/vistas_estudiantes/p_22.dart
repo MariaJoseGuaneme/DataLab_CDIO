@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
-import 'package:flutter/services.dart';// Asegúrate de importar el DatabaseManager
+import 'package:flutter/services.dart';
+
+import '../../preferences.dart';// Asegúrate de importar el DatabaseManager
 
 class RecepcionPage22 extends StatefulWidget {
   const RecepcionPage22({super.key});
@@ -15,8 +17,8 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
   final TextEditingController _pesoSemillasController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
-  int idGrupo = 1;
-  String practica = 'practica1';
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
@@ -38,13 +40,13 @@ class _RecepcionPage22State extends State<RecepcionPage22> {
   void _guardarPesoPulpa() async {
     final String pesoStr = _pesoPulpaController.text;
     final double? peso = double.tryParse(pesoStr);
-    await _dbManager.insertSingleDataPractica1('peso_pulpa', peso, idGrupo, context);
+    await _dbManager.insertSingleDataPractica(practica, 'peso_pulpa', peso, idGrupo, context);
   }
 
   void _guardarPesoSemilla() async {
     final String pesoStr = _pesoSemillasController.text;
     final double? peso = double.tryParse(pesoStr);
-    await _dbManager.insertSingleDataPractica1('peso_semillas', peso, idGrupo,  context);
+    await _dbManager.insertSingleDataPractica(practica, 'peso_semillas', peso, idGrupo,  context);
   }
 
   @override

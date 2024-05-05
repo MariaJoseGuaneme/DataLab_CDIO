@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+
 class Profesor {
   final int? id;
   final String correo;
@@ -486,6 +487,22 @@ CREATE TABLE _resultados_practica1 (
   }
 
 
+  Future<Profesor?> getProfesorByEmail(String email) async {
+    final db = await database;
+    final maps = await db.query(
+      'profesores',
+      columns: ['id_profesores', 'correo', 'contrasena'],
+      where: 'correo = ?',
+      whereArgs: [email],
+    );
+
+    if (maps.isNotEmpty) {
+      return Profesor.fromMap(maps.first);
+    } else {
+      return null;
+    }
+  }
+
   // Leer todos los profesores
   Future<List<Profesor>> getAllProfesores() async {
     final db = await database;
@@ -527,6 +544,7 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+
   // FUNCIONES ESTUDIANTE -----------------------------------------------------
 
   // Insertar un estudiante
@@ -544,15 +562,21 @@ CREATE TABLE _resultados_practica1 (
     });
   }
 
-  // Leer un estudiante por su ID
-  Future<Estudiante?> getEstudianteById(int id) async {
-    final db = await database;
-    final maps = await db.query(
-        'estudiantes', where: 'id = ?', whereArgs: [id]);
+  Future<List<Estudiante>> getEstudiantesPorGrupo(int idGrupo) async {
+    final db = await database;  // Obtiene la instancia de la base de datos
+    final List<Map<String, dynamic>> maps = await db.query(
+        'estudiantes',  // Asume que la tabla se llama 'estudiantes'
+        where: 'id_grupos = ?',  // Usa el nombre correcto de la columna para el ID del grupo
+        whereArgs: [idGrupo]
+    );
+
     if (maps.isNotEmpty) {
-      return Estudiante.fromMap(maps.first);
+      return List.generate(maps.length, (i) {
+        return Estudiante.fromMap(maps[i]);  // Asegúrate de que la clase Estudiante tiene este constructor
+      });
+    } else {
+      return [];  // Retorna una lista vacía si no hay estudiantes
     }
-    return null;
   }
 
   // Actualizar un estudiante
@@ -576,12 +600,23 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
+  Future<void> deleteAllEstudiantesAndResetAutoincrement() async {
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.rawDelete("DELETE FROM estudiantes"); // Borra todos los registros
+      await txn.rawInsert("DELETE FROM sqlite_sequence WHERE name='estudiantes'"); // Restablece el autoincremental
+    });
+  }
+
 // FUNCIONES GRUPO ------------------------------------------------------------
 
-  // Insertar un grupo
-  Future<int> insertGrupo(Grupo grupo) async {
+  // Método en DatabaseManager para insertar grupo
+  Future<int> insertGrupo(String nombre, int idProfesor) async {
     final db = await database;
-    return await db.insert('grupos', grupo.toMap());
+    return await db.insert('grupos', {
+      'nombre': nombre,
+      'id_profesores': idProfesor
+    });
   }
 
   // Leer todos los grupos
@@ -615,14 +650,33 @@ CREATE TABLE _resultados_practica1 (
     );
   }
 
-  // Eliminar un grupo
-  Future<int> deleteGrupo(int id) async {
+  Future<List<Grupo>> getGruposPorProfesor(int idProfesor) async {
     final db = await database;
-    return await db.delete(
-      'grupos',
-      where: 'id_grupos = ?',
-      whereArgs: [id],
+    final List<Map<String, dynamic>> maps = await db.query(
+        'grupos',
+        where: 'id_profesores = ?',
+        whereArgs: [idProfesor]
     );
+
+    return List.generate(maps.length, (i) => Grupo.fromMap(maps[i]));
+  }
+
+  // Método en DatabaseManager para eliminar grupo
+  Future<void> deleteGrupo(int idGrupo) async {
+    final db = await database;
+    await db.delete(
+        'grupos',
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    );
+  }
+
+  Future<void> deleteAllGruposAndResetAutoincrement() async {
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.rawDelete("DELETE FROM grupos"); // Borra todos los registros
+      await txn.rawInsert("DELETE FROM sqlite_sequence WHERE name='grupos'"); // Restablece el autoincremental
+    });
   }
 
 // FUNIONES PRÁCTICA ---------------------------------------------------------
@@ -642,8 +696,17 @@ CREATE TABLE _resultados_practica1 (
   Future<int> deletePractica(int idGrupos) async {
     final db = await database;
     return await db.delete(
-        '_resultados_practica1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
+        'practica1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
   }
+
+  Future<void> borrarRegistroPractica() async {
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.rawDelete("DELETE FROM '_resultados_practica1'"); // Borra todos los registros
+      await txn.rawInsert("DELETE FROM sqlite_sequence WHERE name = '_resultados_practica1'"); // Restablece el autoincremental
+    });
+  }
+
 
   // Función para actualizar un solo dato en practica1
   Future<int> updateSingleDataPractica1(String columnName,dynamic value) async {
