@@ -1,0 +1,188 @@
+import 'package:base/paginas/vista_profes/p_3b.dart';
+import 'package:base/paginas/vista_profes/p_4.dart';
+import 'package:flutter/material.dart';
+import 'package:base/base_datos.dart';
+import '../../preferences.dart';
+
+class PagInicio3a extends StatefulWidget {
+  const PagInicio3a({Key? key}) : super(key: key);
+
+  @override
+  State<PagInicio3a> createState() => _PagInicio3aState();
+}
+
+class _PagInicio3aState extends State<PagInicio3a> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Flexible(
+                child: Image.asset(
+                  'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
+                  height: 120.0,
+                ),
+              ),
+              SizedBox(height: 48.0),
+              Text(
+                'INGRESA TUS DATOS',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 48.0),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 60.0,
+                    horizontal:
+                        8.0), // Asegúrate de usar 'const' para optimizar
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.account_circle_sharp),
+                        hintText: 'Correo institucional',
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 50.0),
+                    TextField(
+                      controller: passwordController,
+                      obscureText: _obscureText,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock_outline_rounded),
+                        hintText: 'Contraseña',
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 50.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                child: Container(
+                  child: Material(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10.0),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () async {
+                        final email = emailController.text.trim();
+                        final password = passwordController.text;
+
+                        if (email.isEmpty || password.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Por favor, rellena todos los campos')),
+                          );
+                          return;
+                        }
+
+                        // Verificar las credenciales.
+                        var profesor = await _databaseH.getProfesorByEmail(email);
+                        if (profesor != null && profesor.contrasena == password) {
+                          await UserPreferences.setIdProfesor(profesor.id!); // Asegúrate de que el ID está disponible
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (context) => const PagInicio4()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Credenciales incorrectas')),
+                          );
+                        }
+
+                      },
+                      minWidth: 100.0,
+                      height: 42.0,
+                      child: Text(
+                        'Ingresar',
+                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 200),
+                child: Container(
+                  width: 100.0,
+                  child: Material(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10.0),
+                    elevation: 5.0,
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio3b()),);// Implementar la lógica de Registrarse
+                      },
+                      minWidth: 50.0,
+                      height: 42.0,
+                      child: Text(
+                        'Registrarse',
+                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

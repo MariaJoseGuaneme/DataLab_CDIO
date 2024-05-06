@@ -1,26 +1,18 @@
-import 'package:flutter/foundation.dart';
+import 'package:base/paginas/vistas_estudiantes/p_11.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Menup extends StatefulWidget {
+  const Menup({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Proceso de producción',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const MyHomePage(),
-    );
-  }
+  State<Menup> createState() => _Menup();
 }
 
-class MyHomePage extends StatelessWidget {
+class _Menup extends State<Menup> {
+  // Inicializa una variable para mantener el widget actual mostrado en el body
+  Widget _currentBody = const Center(
+    child: Text('Contenido principal aquí'),
+  );
   List<Map<String, dynamic>> get sections => [
         {
           'title': 'Recepción',
@@ -75,7 +67,20 @@ class MyHomePage extends StatelessWidget {
         },
       ];
 
-  const MyHomePage({super.key});
+  void _changeContent(String sectionTitle) {
+    // Actualiza el estado del widget body dependiendo de la sección
+    setState(() {
+      switch (sectionTitle) {
+        case 'Recepción':
+          _currentBody =
+              const RecepcionPage(); // Cambia a la página de recepción
+          break;
+        // Añade casos para otras secciones
+        default:
+          _currentBody = const Center(child: Text('Contenido principal aquí'));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,45 +106,17 @@ class MyHomePage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         foregroundColor:
                             const Color.fromARGB(255, 231, 228, 228),
-                        backgroundColor: section['color'], // Text color
+                        backgroundColor: section['color'],
                       ),
-                      onPressed: () {
-                        // Handle the button press
-                        if (kDebugMode) {
-                          print('${section['title']} presionado');
-                        }
-                      },
+                      onPressed: () => _changeContent(section['title']),
                       child: Text(section['title']),
                     ),
                   ),
                 )),
-            ListTile(
-              title: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.red, // Text color
-                ),
-                onPressed: () {
-                  // Handle the export action
-                  if (kDebugMode) {
-                    print('Exportar');
-                  }
-                },
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Exportar'),
-                    Icon(Icons.download),
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       ),
-      body: const Center(
-        child: Text('Contenido principal aquí'),
-      ),
+      body: _currentBody, // Usa la variable de estado para mostrar el contenido
     );
   }
 }

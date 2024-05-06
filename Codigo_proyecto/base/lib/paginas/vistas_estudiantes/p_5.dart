@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:base/funciones_proyecto/select_proceso.dart';
 
 class PagInicio5 extends StatefulWidget {
   const PagInicio5({super.key});
@@ -11,12 +11,9 @@ class PagInicio5 extends StatefulWidget {
 class _PagInicio5 extends State<PagInicio5> {
   @override
   Widget build(BuildContext context) {
-    // Obtiene el tamaño de la pantalla
     var size = MediaQuery.of(context).size;
-    
-    // Ajusta la relación de aspecto según el diseño deseado
     double buttonWidth = size.width / 2.0;
-    double buttonHeight = buttonWidth / 2.0; // Hacer el botón cuadrado o cerca de esa proporción
+    double buttonHeight = buttonWidth / 2.0;
     double buttonAspectRatio = buttonWidth / buttonHeight;
 
     return Scaffold(
@@ -29,6 +26,7 @@ class _PagInicio5 extends State<PagInicio5> {
         elevation: 0,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center, // Centra los elementos de la columna verticalmente
         children: [
           Container(
             padding: const EdgeInsets.all(10),
@@ -45,20 +43,22 @@ class _PagInicio5 extends State<PagInicio5> {
             ),
           ),
           Expanded(
-            child: GridView.count(
-              padding: const EdgeInsets.all(20),
-              crossAxisCount: 2,
-              crossAxisSpacing: 20, // Espacio entre columnas
-              mainAxisSpacing: 20, // Espacio entre filas
-              childAspectRatio: buttonAspectRatio,
-              children: <Widget>[
-                _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169)),
-                _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161)),
-                _buildPracticaButton(context, 'NÉCTAR', const Color.fromARGB(255, 38, 134, 45)),
-                _buildPracticaButton(context, 'MERMELADA', const Color.fromARGB(255, 56, 142, 60)),
-                _buildPracticaButton(context, 'BOCADILLO', const Color.fromARGB(255, 26, 115, 232)),
-                _buildPracticaButton(context, 'FRUTAS EN ALMIBAR', const Color.fromARGB(255, 2, 136, 209)),
-              ],
+            child: Center(
+              child: GridView.count(
+                padding: const EdgeInsets.all(20),
+                crossAxisCount: 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                childAspectRatio: buttonAspectRatio,
+                children: <Widget>[
+                  _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169), () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu()));
+                  }),
+                  _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () {
+                    // Navegación a la página de refresco
+                  }),
+                ],
+              ),
             ),
           ),
         ],
@@ -66,21 +66,20 @@ class _PagInicio5 extends State<PagInicio5> {
     );
   }
 
-  Widget _buildPracticaButton(BuildContext context, String etiqueta, Color color) {
+  Widget _buildPracticaButton(BuildContext context, String etiqueta, Color color, VoidCallback onPressed) {
     return Padding(
-      padding: const EdgeInsets.all(20), // Añade padding alrededor del botón para más espacio
+      padding: const EdgeInsets.all(20),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black, backgroundColor: color, // Color del texto del botón
-          padding: const EdgeInsets.symmetric(vertical: 16.0), // Ajusta el padding dentro del botón
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          foregroundColor: Colors.white,
+          backgroundColor: color,
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        onPressed: () {
-          // Manejar la pulsación del botón
-        },
+        onPressed: onPressed,
         child: Text(etiqueta),
       ),
     );

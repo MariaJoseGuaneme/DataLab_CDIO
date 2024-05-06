@@ -1,21 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 
-import '../../preferences.dart';
+import '../../preferences.dart';// Asegúrate de importar el DatabaseManager
 
-
-class RecepcionPage13 extends StatefulWidget {
-  const RecepcionPage13({super.key});
+class RecepcionPage16 extends StatefulWidget {
+  const RecepcionPage16({super.key});
 
   @override
-  _RecepcionPage13State createState() => _RecepcionPage13State();
+  _RecepcionPage16State createState() => _RecepcionPage16State();
 }
 
-class _RecepcionPage13State extends State<RecepcionPage13> {
-  final TextEditingController _pesoController = TextEditingController();
+class _RecepcionPage16State extends State<RecepcionPage16> {
+  final TextEditingController _pesoEscaldadoController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
   final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
   int idGrupo = UserPreferences.getIdGrupo();
@@ -24,24 +22,23 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
   @override
   void initState() {
     super.initState();
-    _cargarPesoInicial();
+    _cargarPesoEscaldado();
   }
 
+  void _cargarPesoEscaldado() async {
 
- void _cargarPesoInicial() async {
-      final double pesoInicial = await _databaseH.getNumericValue(practica,'peso_inicial', idGrupo);
+      final double pesoEscaldado = await _databaseH.getNumericValue(practica, 'peso_escaldado', idGrupo);
       setState(() {
-        _pesoController.text = pesoInicial == 0 ? "" :pesoInicial.toString();
+        _pesoEscaldadoController.text = pesoEscaldado == 0.0 ? "" : pesoEscaldado.toString();
       });
     }
 
 
- void _guardarPesoInicial() async {
-  final String pesoStr = _pesoController.text;
-  final double? peso = double.tryParse(pesoStr);
-  await _dbManager.insertSingleDataPractica(practica, 'peso_inicial', peso, idGrupo, context);
-}
-
+  void _guardarPesoEscaldado() async {
+    final String pesoStr = _pesoEscaldadoController.text;
+    final double? peso = double.tryParse(pesoStr);
+    await _dbManager.insertSingleDataPractica(practica, 'peso_escaldado', peso, idGrupo, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +68,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child: const Text(
-                        '3. PESADO',
+                        '5. ESCALDADO',
                         style: TextStyle(color: Colors.white, fontSize: 24),
                         textAlign: TextAlign.center,
                       ),
@@ -81,20 +78,20 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child: const Text(
-                        'Descripción del proceso de pesado. Aquí va el contenido descriptivo sobre cómo se maneja el pesado en tu proceso.',
+                        'Descripción del proceso de escaldado. Aquí va el contenido descriptivo sobre cómo se maneja el escaldado en tu proceso.',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      'Ingrese el peso inicial',
+                      'Ingrese el peso escaldado',
                       style: TextStyle(fontSize: 16),
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 8.0),
                     TextField(
-                      controller: _pesoController,
+                      controller: _pesoEscaldadoController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Peso',
@@ -107,7 +104,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: _guardarPesoInicial,
+                      onPressed: _guardarPesoEscaldado,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,
