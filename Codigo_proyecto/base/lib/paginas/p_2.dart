@@ -1,3 +1,5 @@
+import 'package:base/paginas/vista_profes/p_3a.dart';
+import 'package:base/paginas/vistas_estudiantes/p_3.dart';
 import 'package:flutter/material.dart';
 
 class PagInicio2 extends StatefulWidget {
@@ -12,12 +14,12 @@ class _PagInicio2 extends State<PagInicio2> {
   Widget build(BuildContext context) { //appBar
     return Scaffold(
      backgroundColor: Colors.white,
-     body: inicio(),
+     body: inicio(context),
 );
 }
 }
 
-Widget inicio(){
+Widget inicio(context){
 return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -49,8 +51,15 @@ return Center(
            Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Container(
-                width: 200,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const PagInicio3a()),
+                  );
+                  // Handle INSERTAR DATOS tap
+                },
+              child: Container(
+                width: 225,
             height: 100,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 89, 135, 213),
@@ -59,15 +68,24 @@ return Center(
             ),
 
             child: const Center(
-            child: Text('Profesor',
+            child: Text('PROFESOR',
              style: TextStyle(color: Colors.white,fontSize: 30,
               fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,)
             ),
               ),
+              ),
               const SizedBox(width: 60,),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const PagInicio3e()),
+                  );
+                  // Handle INSERTAR DATOS tap
+                },
+                child:
               Container(
-                width: 200,
+                width: 225,
             height: 100,
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 85, 223, 138),
@@ -76,17 +94,15 @@ return Center(
             ),
 
             child: const Center(
-            child: Text('Estudiante',
+            child: Text('ESTUDIANTE',
              style: TextStyle(color: Colors.white,fontSize: 30,
               fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,)
             ),
               )
+              ),
             ],
-
-
            )
-            
         ],
       )
    );
