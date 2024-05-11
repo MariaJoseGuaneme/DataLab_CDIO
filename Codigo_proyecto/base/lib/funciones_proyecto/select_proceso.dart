@@ -12,8 +12,9 @@ import 'package:base/paginas/vistas_estudiantes/p_24.dart';
 import 'package:base/paginas/vistas_estudiantes/p_25.dart';
 import 'package:base/paginas/vistas_estudiantes/p_26.dart';
 import 'package:base/paginas/vistas_estudiantes/p_27.dart';
-import 'package:base/paginas/vistas_estudiantes/p_29.dart';
 import 'package:flutter/material.dart';
+import 'package:base/base_datos.dart';
+import 'package:sqflite/sqflite.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -72,10 +73,7 @@ class _Menu extends State<Menu> {
           'title': 'Empacado',
           'color': const Color.fromARGB(255, 245, 236, 107)
         },
-        {
-          'title': 'Almacenado',
-          'color': const Color.fromARGB(255, 238, 235, 87)
-        },
+
         {'title': 'Exportar', 'color': const Color.fromARGB(255, 243, 15, 15)},
       ];
 
@@ -93,7 +91,7 @@ class _Menu extends State<Menu> {
           break;
         case 'Pesado':
           _currentBody =
-              const RecepcionPage13(); // Cambia a la página de recepción
+              RecepcionPage13(); // Cambia a la página de recepción
           break;
         case 'Desinfección':
           _currentBody =
@@ -138,10 +136,6 @@ class _Menu extends State<Menu> {
         case 'Empacado':
           _currentBody =
               const RecepcionPage27(); // Cambia a la página de recepción
-          break;
-        case 'Almacenado':
-          _currentBody =
-              const RecepcionPage29(); // Cambia a la página de recepción
           break;
 
         // Añade casos para otras secciones
@@ -189,7 +183,7 @@ class _Menu extends State<Menu> {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () =>
-                        _exportData(), // Acción especial para exportar datos
+                        calcularYGuardarResultados(), // Acción especial para exportar datos
                   ),
                 );
               } else {
@@ -217,4 +211,146 @@ class _Menu extends State<Menu> {
   void _exportData() {
     // Implementa la lógica para exportar datos aquí
   }
+}
+
+Future<void> calcularYGuardarResultados() async {
+  final db = await DatabaseHelper.instance.database;
+  final _databaseH = DatabaseHelper.instance;
+  //_databaseH.borrarRegistroPractica(); NO DESCOMENTAR, gracias
+  final practica1 = await db.query(
+      'practica1'); // Obtén todos los datos de la tabla practica1.
+
+  for (var practica in practica1) { // Itera a través de los datos de practica1 y realiza los cálculos.
+    double unidadesProducir = practica['unidades_producir'] as double;
+    double unidadesEmpaque = practica['unidades_empaque'] as double;
+    double P_pulpa = practica['p_pulpa'] as double;
+    double P_acido_ascorbico = practica['p_acido_ascorbico'] as double;
+    double P_acido_citrico = practica['p_acido_citrico'] as double;
+    double P_benzonato_sodio = practica['p_benzonato_sodio'] as double;
+    double P_sorbato_potasio = practica['p_sorbato_potasio'] as double;
+    double Peso_inicial = practica['peso_inicial'] as double;
+    double Peso_escaldado = practica['peso_escaldado'] as double;
+    double Peso_cascara = practica['peso_cascara'] as double;
+    double Peso_pulpa = practica['peso_pulpa'] as double;
+    double Peso_semillas = practica['peso_semillas'] as double;
+    double Acidez_1_ml = practica['acidez_1'] as double;
+    double Acidez_2_ml = practica['acidez_2'] as double;
+    double Perdidas_olla = practica['perdidas_olla'] as double;
+    double Peso_pulpa_empacada = practica['peso_pulpa_empacada'] as double;
+    double perdidas_olla_empacado = practica['perdidas_olla_empacado']as double;
+
+
+    double Producto_obtener = unidadesEmpaque * unidadesProducir;
+    double cascara_y_semilla = Peso_semillas + Peso_cascara;
+    double Rendimiento_fruta;
+    if (Peso_inicial > 0) {
+      Rendimiento_fruta =
+          (Peso_inicial - cascara_y_semilla) * 100 / Peso_inicial;
+    } else {
+      Rendimiento_fruta = 0;
+    }
+    double Perdidas_despulpado_gr = (Peso_inicial - cascara_y_semilla) -
+        Peso_pulpa;
+    double Perdidas_despulpado;
+    if ((Peso_inicial - cascara_y_semilla) > 0) {
+      Perdidas_despulpado =
+          Perdidas_despulpado_gr * 100 / (Peso_inicial - cascara_y_semilla);
+    } else {
+      Perdidas_despulpado = 0;
+    }
+    double Perdidas_Escaldado_gr = Peso_inicial-Peso_escaldado;
+    double Perdidas_Escaldado;
+    if (Peso_escaldado > 0) {
+      Perdidas_Escaldado = Perdidas_Escaldado_gr * 100 / Peso_escaldado;
+    } else {
+      Perdidas_Escaldado = 0;
+    }
+    double Total_Formulacion;
+    if (P_pulpa > 0) {
+      Total_Formulacion = (Peso_pulpa * 100) / P_pulpa;
+    } else {
+      Total_Formulacion = 0;
+    }
+    double gr_pulpa = (Total_Formulacion * P_pulpa) / 100;
+    double gr_acidoAscorbico = (Total_Formulacion * P_acido_ascorbico) / 100;
+    double gr_acidoCitrico = (Total_Formulacion * P_acido_citrico) / 100;
+    double gr_benzonatoSodio = (Total_Formulacion * P_benzonato_sodio) / 100;
+    double gr_sorbatoPotasio = (Total_Formulacion * P_sorbato_potasio) / 100;
+    double Fruta_fresca_formulacion;
+    if (Perdidas_despulpado > 0) {
+      Fruta_fresca_formulacion = gr_pulpa * 100 / Perdidas_despulpado;
+    } else {
+      Fruta_fresca_formulacion = 0;
+    }
+    double Fruta_fresca_real;
+    if ((100 - Perdidas_Escaldado - Perdidas_despulpado) > 0) {
+      Fruta_fresca_real = Fruta_fresca_formulacion * 100 /
+          (100 - Perdidas_Escaldado - Perdidas_despulpado);
+    } else {
+      Fruta_fresca_real = 0;
+    }
+    double Rendimiento_producto;
+
+    if (Total_Formulacion > 0) {
+      Rendimiento_producto = (Producto_obtener / Total_Formulacion) * 100;
+    } else {
+      Rendimiento_producto = 0;
+    }
+    double Acidez1 = ((0.064)*(0.1)*Acidez_1_ml/1.0)*(100);
+    double Acidez2 = ((0.064)*(0.1)*Acidez_2_ml/1.0)*(100);
+    double Perdidas_empacado_gr = (Total_Formulacion-Peso_pulpa_empacada);
+    double Perdidas_empacado;
+    if (Total_Formulacion > 0) {
+      Perdidas_empacado = Perdidas_empacado_gr*100/Total_Formulacion;
+    } else {
+      Perdidas_empacado = 0;
+    }
+
+
+    Map<String, dynamic> resultado = {
+      // Construye el mapa para el resultado de practica1 que se insertará o actualizará en resultados_practica1.
+      'id_grupos': practica['id_grupos'],
+      'Producto_obtener': Producto_obtener,
+      'cascara_y_semilla': cascara_y_semilla,
+      'Rendimiento_fruta': Rendimiento_fruta,
+      'Perdidas_despulpado_gr': Perdidas_despulpado_gr,
+      'Perdidas_despulpado': Perdidas_despulpado,
+      'Perdidas_Escaldado_gr': Perdidas_Escaldado_gr,
+      'Perdidas_Escaldado': Perdidas_Escaldado,
+      'Total_Formulacion': Total_Formulacion,
+      'gr_pulpa': gr_pulpa,
+      'gr_acidoAscorbico': gr_acidoAscorbico,
+      'gr_acidoCitrico': gr_acidoCitrico,
+      'gr_benzonatoSodio': gr_benzonatoSodio,
+      'gr_sorbatoPotasio': gr_sorbatoPotasio,
+      'Fruta_fresca_formulacion': Fruta_fresca_formulacion,
+      'Fruta_fresca_real': Fruta_fresca_real,
+      'Rendimiento_producto': Rendimiento_producto,
+      'Acidez1' : Acidez1,
+      'Acidez2' : Acidez2,
+      'Perdidas_empacado_gr' : Perdidas_empacado_gr,
+      'Perdidas_empacado' : Perdidas_empacado,
+    };
+
+    // Aquí, verifica si el resultado para id_grupos ya existe en resultados_practica1.
+    final existente = await db.query(
+      '_resultados_practica1',
+      where: 'id_grupos = ?',
+      whereArgs: [practica['id_grupos']],
+    );
+
+    if (existente.isNotEmpty) {
+      // Actualiza si ya existe un registro con ese id_grupos.
+      await db.update(
+        '_resultados_practica1',
+        resultado,
+        where: 'id_grupos = ?',
+        whereArgs: [practica['id_grupos']],
+      );
+    } else {
+      // Inserta un nuevo registro si no existe.
+      await db.insert('_resultados_practica1', resultado);
+    }
+  }
+ // await _databaseH.deletePractica(1); // Modificar qué tabla borrar en base_datos
 }

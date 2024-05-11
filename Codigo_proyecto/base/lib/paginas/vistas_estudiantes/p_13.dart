@@ -1,8 +1,47 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:base/base_datos_manager.dart';
+import 'package:base/base_datos.dart';
 
-class RecepcionPage13 extends StatelessWidget {
+import '../../preferences.dart';
+
+
+class RecepcionPage13 extends StatefulWidget {
   const RecepcionPage13({super.key});
+
+  @override
+  _RecepcionPage13State createState() => _RecepcionPage13State();
+}
+
+class _RecepcionPage13State extends State<RecepcionPage13> {
+  final TextEditingController _pesoController = TextEditingController();
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarPesoInicial();
+  }
+
+
+ void _cargarPesoInicial() async {
+      final double pesoInicial = await _databaseH.getNumericValue(practica,'peso_inicial', idGrupo);
+      setState(() {
+        _pesoController.text = pesoInicial == 0 ? "" :pesoInicial.toString();
+      });
+    }
+
+
+ void _guardarPesoInicial() async {
+  final String pesoStr = _pesoController.text;
+  final double? peso = double.tryParse(pesoStr);
+  await _dbManager.insertSingleDataPractica(practica, 'peso_inicial', peso, idGrupo, context);
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,21 +94,20 @@ class RecepcionPage13 extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     TextField(
+                      controller: _pesoController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Peso',
                         hintText: 'Introduzca el peso en kilogramos',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _guardarPesoInicial,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

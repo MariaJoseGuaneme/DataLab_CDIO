@@ -1,8 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:base/base_datos_manager.dart'; // Importa tu DatabaseManager
+import 'package:base/base_datos.dart';
 
-class RecepcionPage20 extends StatelessWidget {
+import '../../preferences.dart';
+
+class RecepcionPage20 extends StatefulWidget {
   const RecepcionPage20({super.key});
+
+  @override
+  _RecepcionPage20State createState() => _RecepcionPage20State();
+}
+
+class _RecepcionPage20State extends State<RecepcionPage20> {
+  final TextEditingController _pesoCascaraController = TextEditingController();
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarPesoCascara();
+  }
+
+  void _cargarPesoCascara() async {
+      final double pesoCascara = await _databaseH.getNumericValue(practica,'peso_cascara', idGrupo);
+      setState(() {
+        _pesoCascaraController.text = pesoCascara== 0 ? "":pesoCascara.toString();
+      });
+    }
+
+
+  void _guardarPesoCascara() async {
+    final String pesoStr = _pesoCascaraController.text;
+    final double? peso = double.tryParse(pesoStr);
+    await _dbManager.insertSingleDataPractica(practica, 'peso_cascara', peso, idGrupo, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,21 +90,20 @@ class RecepcionPage20 extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     TextField(
+                      controller: _pesoCascaraController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Peso',
                         hintText: 'Introduzca el peso en kilogramos',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                        FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _guardarPesoCascara,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

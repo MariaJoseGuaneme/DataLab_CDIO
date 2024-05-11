@@ -1,6 +1,4 @@
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
-import 'package:base/paginas/vistas_estudiantes/p_7.dart';
-import 'package:base/paginas/vistas_estudiantes/p_11.dart';
 import 'package:flutter/material.dart';
 
 class Select_e extends StatefulWidget {
@@ -66,9 +64,6 @@ Widget inicio(BuildContext context) {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const PagInicio7()),
-                );
               },
               child: Container(
                 width: 200,

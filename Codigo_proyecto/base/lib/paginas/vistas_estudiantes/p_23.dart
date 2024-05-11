@@ -1,14 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:base/base_datos_manager.dart'; // Asegúrate de importar tu DatabaseManager
+import 'package:base/base_datos.dart';
 
-class RecepcionPage23 extends StatelessWidget {
+import '../../preferences.dart';
+
+class RecepcionPage23 extends StatefulWidget {
   const RecepcionPage23({super.key});
+
+  @override
+  _RecepcionPage23State createState() => _RecepcionPage23State();
+}
+
+class _RecepcionPage23State extends State<RecepcionPage23> {
+  final TextEditingController _brixController = TextEditingController();
+  final TextEditingController _phController = TextEditingController();
+  final TextEditingController _acidezController = TextEditingController();
+  final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
+  final DatabaseManager _dbManager = DatabaseManager(); //instancia del manager
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarDatos();
+  }
+
+  void _cargarDatos() async {
+    final double ph1 = await _databaseH.getNumericValue(practica,'ph_1', idGrupo);
+    final double brix1 = await _databaseH.getNumericValue(practica, 'brix_1', idGrupo);
+    final double acidez1 = await _databaseH.getNumericValue(practica,'acidez_1' , idGrupo); //Esta es ml de NaOH utilizados
+
+    setState(() {
+      _brixController.text = brix1 == 0.0 ? "" : brix1.toString();
+      _phController.text = ph1 == 0.0 ? "" : ph1.toString();
+      _acidezController.text = acidez1 == 0.0 ? "" : acidez1.toString();
+    });
+  }
+
+
+  void _guardarDatos() async {
+    final double? brixValue = double.tryParse(_brixController.text);
+    final double? phValue = double.tryParse(_phController.text);
+    final double? acidezValue = double.tryParse(_acidezController.text);
+
+    await _dbManager.insertSingleDataPractica(practica, 'brix_1', brixValue, idGrupo, context);
+
+    await _dbManager.insertSingleDataPractica(practica, 'ph_1', phValue, idGrupo, context);
+
+    await _dbManager.insertSingleDataPractica(practica, 'acidez_1', acidezValue, idGrupo, context);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
+      appBar: AppBar(
+        title: const Text('Control Fisicoquímico'),
+      ),
+      body:
+           Center(child:
+          Stack(
         children: <Widget>[
           Positioned(
             bottom: 0,
@@ -38,86 +91,59 @@ class RecepcionPage23 extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16.0),
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      color: Colors.green.shade300,
-                      child: const Text(
-                        'Descripción del proceso . Aquí va el contenido descriptivo sobre cómo se maneja el proceso en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    const Text(
-                      'Ingrese los °Brix',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 8.0),
+                    // Agregar los demás elementos del formulario aquí
                     TextField(
+                      controller: _brixController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'los °Brix',
+                        labelText: 'Brix',
+                        hintText: 'Introduzca los °Brix',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                            RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 16.0),
-                    // Nuevo texto de etiqueta para el segundo cuadro de texto
-                    const Text(
-                      'Ingrese el ph',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 8.0),
-                    // Segundo cuadro de texto
                     TextField(
+                      controller: _phController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Ph',
-                        hintText: 'Introduzca el ph',
+                        labelText: 'pH',
+                        hintText: 'Introduzca el pH',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                            RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 16.0),
-                    // Nuevo texto de etiqueta para el segundo cuadro de texto
-                    const Text(
-                      'Ingrese la acidez',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 8.0),
-                    // Segundo cuadro de texto
                     TextField(
+                      controller: _acidezController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Acidez de la fruta',
-                        hintText: 'Introduzca la acidez',
+                        labelText: 'Acidez',
+                        hintText: 'Introduzca los ml de NaOH utilizados',
                       ),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\,?\d*')),
+                            RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
                     const SizedBox(height: 18.0),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _guardarDatos,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,
                       ),
-                      child: const Text('Aceptar'),
+                      child: const Text('Guardar Datos'),
                     ),
                   ],
                 ),
@@ -126,6 +152,7 @@ class RecepcionPage23 extends StatelessWidget {
           ),
         ],
       ),
+           )
     );
   }
 }

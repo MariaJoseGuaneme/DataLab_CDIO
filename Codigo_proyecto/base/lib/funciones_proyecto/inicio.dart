@@ -48,7 +48,7 @@ return Center(
 
             const SizedBox(height: 20.0,),
            ElevatedButton(
-            onPressed: (){ 
+            onPressed: (){
               Navigator.push(context,
                MaterialPageRoute(builder:(context) => const PagInicio2() ));
             }, 
