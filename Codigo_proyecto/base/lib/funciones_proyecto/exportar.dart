@@ -1,45 +1,38 @@
-import 'dart:io';
+import 'package:sendgrid_mailer/sendgrid_mailer.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
 
-sendEmail(BuildContext context //For showing snackbar
-    ) async {
-  String username = 'mateovargas25123@gmail.com'; //Your Email
-  String password = 'qdko jkhl igmb ilup'; // 16 Digits App Password Generated From Google Account
+// Lista de correos electrónicos remitentes
+List<String> recipientEmails = [
+  'marlons.espinosaj@gmail.com',
+  'sapeov2004@gmail.com',
+  'mateovarcla@gmail.com',
+  // Añade más correos según necesites
+];
 
-  final smtpServer = gmail(username, password);
-  // Use the SmtpServer class to configure an SMTP server:
-  // final smtpServer = SmtpServer('smtp.domain.com');
-  // See the named arguments of SmtpServer for further configuration
-  // options.
+// Función para enviar correos electrónicos
+void sendEmail(BuildContext context) async {
+  // Crear una instancia de Mailer con tu clave API de SendGrid
 
-  // Create our message.
-  final message = Message()
-        ..from = Address(username, 'DataLab+')
-        ..recipients.add('marlons.espinosaj@gmail.com')
-        // ..ccRecipients.addAll(['abc@gmail.com', 'xyz@gmail.com']) // For Adding Multiple Recipients
-        // ..bccRecipients.add(Address('a@gmail.com')) For Binding Carbon Copy of Sent Email
-        ..subject = 'Frueva de ke no cirbe'
-        ..text = 'Chúpalooooooooooo'
-      // ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>"; // For Adding Html in email
-      // ..attachments = [
-      //   FileAttachment(File('image.png'))  //For Adding Attachments
-      //     ..location = Location.inline
-      //     ..cid = '<myimg@3.141>'
-      // ]
-      ;
+  // Dirección de correo electrónico desde donde se enviarán los correos
+  final fromAddress = Address('mateovargas25123@gmail.com');
 
-  try {
-    final sendReport = await send(message, smtpServer);
-    print('Message sent: ' + sendReport.toString());
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("Mail Send Successfully")));
-  } on MailerException catch (e) {
-    print('Message not sent.');
-    print(e.message);
-    for (var p in e.problems) {
-      print('Problem: ${p.code}: ${p.msg}');
-    }
+  // Bucle para enviar un correo a cada dirección en la lista de remitentes
+  for (var recipientEmail in recipientEmails) {
+    final toAddress = Address(recipientEmail);
+    final content = Content('text/plain', 'Este es el contenido del correo.');
+    final subject = 'Asunto del correo';
+    final personalization = Personalization([toAddress]);
+
+    final email = Email([personalization], fromAddress, subject, content: [content]);
+    
+    mailer.send(email).then((result) {
+      // Manejo de la respuesta de SendGrid
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Correo enviado a $recipientEmail: ${result.isValue}'))
+      );
+    }).catchError((error) {
+      // Manejo de errores
+      print('Error enviando correo a $recipientEmail: $error');
+    });
   }
 }
