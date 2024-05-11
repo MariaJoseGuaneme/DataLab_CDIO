@@ -1,7 +1,10 @@
-import 'package:base/paginas/vista_profes/p_11.dart';
+import 'package:base/paginas/vista_profes/p_11_pulpa.dart';
+import 'package:base/paginas/vista_profes/p_11_refresco.dart';
 import 'package:base/paginas/vista_profes/p_12.dart';
 import 'package:base/paginas/vista_profes/p_13.dart';
 import 'package:flutter/material.dart';
+
+import '../../preferences.dart';
 
 class PagInicio10 extends StatefulWidget {
   const PagInicio10({Key? key}) : super(key: key);
@@ -11,6 +14,9 @@ class PagInicio10 extends StatefulWidget {
 }
 
 class _PagInicio10State extends State<PagInicio10> {
+  String practica = UserPreferences.getPracticaSeleccionada();
+  int idGrupo = UserPreferences.getIdGrupo();
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +67,13 @@ class _PagInicio10State extends State<PagInicio10> {
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio11()),);
-                  },
+                    if(practica == 'practica1'){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio11_pulpa()),);
+                  }
+                    if(practica == 'practica2'){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio11_refresco()),);
+                    }
+                    },
                   child: const Text(
                     'FORMULACIÓN',
                     style: TextStyle(color: Colors.black, fontSize: 20),

@@ -1,7 +1,7 @@
 
 //import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
 //import 'package:base/funciones_proyecto/select_actividad_profe.dart';
-import 'package:base/funciones_proyecto/select_proceso.dart';
+import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
 import 'package:base/paginas/vista_profes/p_3a.dart';
 import 'package:base/preferences.dart';
 import 'package:flutter/material.dart';

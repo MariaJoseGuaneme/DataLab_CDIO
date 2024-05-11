@@ -5,14 +5,14 @@ import 'package:base/base_datos_manager.dart';
 
 import '../../preferences.dart';
 
-class PagInicio11 extends StatefulWidget {
-  const PagInicio11({super.key});
+class PagInicio11_pulpa extends StatefulWidget {
+  const PagInicio11_pulpa({super.key});
 
   @override
-  State<PagInicio11> createState() => _PagInicio11State();
+  State<PagInicio11_pulpa> createState() => _PagInicio11_pulpaState();
 }
 //todos los p(pulpa, acido ascorbico, acido citrico, benzoato de sodio, sorbato de potasio)
-class _PagInicio11State extends State<PagInicio11> {
+class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
   final TextEditingController _ppulpaController = TextEditingController();
   final TextEditingController _pacidoascorbicoController = TextEditingController();
   final TextEditingController _pacidocitricoController = TextEditingController();

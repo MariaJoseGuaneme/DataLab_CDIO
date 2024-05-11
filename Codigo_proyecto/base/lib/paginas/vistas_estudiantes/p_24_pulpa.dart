@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart'; // Asegúrate de que la importación es correcta
-import 'package:base/funciones_proyecto/select_proceso.dart';
-class RecepcionPage24 extends StatefulWidget {
-  const RecepcionPage24({super.key});
+import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
+
+import '../../preferences.dart';
+class RecepcionPage24_pulpa extends StatefulWidget {
+  const RecepcionPage24_pulpa({super.key});
 
   @override
-  _RecepcionPage24State createState() => _RecepcionPage24State();
+  _RecepcionPage24State_pulpa createState() => _RecepcionPage24State_pulpa();
 }
 
-class _RecepcionPage24State extends State<RecepcionPage24> {
+class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
   late Future<Map<String, dynamic>> componentData;
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
 
   @override
   void initState() {
     super.initState();
     calcularYGuardarResultados();
-    componentData = DatabaseHelper.instance.getComponentData(1);
+    componentData = DatabaseHelper.instance.getComponentData1(idGrupo);
   }
 
   @override

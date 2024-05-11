@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:base/funciones_proyecto/select_proceso.dart';
-
+import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
+import 'package:base/funciones_proyecto/select_proceso_refresco.dart';
 class PagInicio5 extends StatefulWidget {
   const PagInicio5({super.key});
 
@@ -52,10 +52,10 @@ class _PagInicio5 extends State<PagInicio5> {
                 childAspectRatio: buttonAspectRatio,
                 children: <Widget>[
                   _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169), () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu_pulpa()));
                   }),
                   _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () {
-                    // Navegación a la página de refresco
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu_refresco()));// Navegación a la página de refresco
                   }),
                 ],
               ),

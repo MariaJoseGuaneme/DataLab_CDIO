@@ -5,14 +5,14 @@ import 'package:base/paginas/vista_profes/p_10.dart';
 
 import '../../preferences.dart';
 
-class PagInicio9aPulpa extends StatefulWidget {
-  const PagInicio9aPulpa({super.key});
+class PagInicio9a extends StatefulWidget {
+  const PagInicio9a({super.key});
 
   @override
-  _PagInicio9aPulpaState createState() => _PagInicio9aPulpaState();
+  _PagInicio9aState createState() => _PagInicio9aState();
 }
 
-class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
+class _PagInicio9aState extends State<PagInicio9a> {
   final TextEditingController _frutaController = TextEditingController();
   final TextEditingController _brixController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
@@ -117,7 +117,6 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
                         Navigator.push(context,
                             MaterialPageRoute(builder:(context) => const PagInicio10() ));
                       },
-                      //onPressed: _guardarFruta,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

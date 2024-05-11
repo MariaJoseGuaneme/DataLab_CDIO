@@ -8,7 +8,7 @@ import 'package:base/paginas/vistas_estudiantes/p_20.dart';
 import 'package:base/paginas/vistas_estudiantes/p_21.dart';
 import 'package:base/paginas/vistas_estudiantes/p_22.dart';
 import 'package:base/paginas/vistas_estudiantes/p_23.dart';
-import 'package:base/paginas/vistas_estudiantes/p_24.dart';
+import 'package:base/paginas/vistas_estudiantes/p_24_pulpa.dart';
 import 'package:base/paginas/vistas_estudiantes/p_25.dart';
 import 'package:base/paginas/vistas_estudiantes/p_26.dart';
 import 'package:base/paginas/vistas_estudiantes/p_27.dart';
@@ -16,14 +16,14 @@ import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
 import 'package:sqflite/sqflite.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({super.key});
+class Menu_pulpa extends StatefulWidget {
+  const Menu_pulpa({super.key});
 
   @override
-  State<Menu> createState() => _Menu();
+  State<Menu_pulpa> createState() => _Menu();
 }
 
-class _Menu extends State<Menu> {
+class _Menu extends State<Menu_pulpa> {
   // Inicializa una variable para mantener el widget actual mostrado en el body
   Widget _currentBody = const Center(
     child: Text('Contenido principal aquí'),
@@ -123,7 +123,7 @@ class _Menu extends State<Menu> {
           break;
         case 'Formulación':
           _currentBody =
-              const RecepcionPage24(); // Cambia a la página de recepción
+              const RecepcionPage24_pulpa(); // Cambia a la página de recepción
           break;
         case 'Mezclado':
           _currentBody =
@@ -235,14 +235,15 @@ Future<void> calcularYGuardarResultados() async {
     double Peso_semillas = practica['peso_semillas'] as double;
     double Acidez_1_ml = practica['acidez_1'] as double;
     double Acidez_2_ml = practica['acidez_2'] as double;
-    double Perdidas_olla = practica['perdidas_olla'] as double;
+    double Perdidas_olla = practica['perdidas_olla'] as double; //peso de la olla sola
     double Peso_pulpa_empacada = practica['peso_pulpa_empacada'] as double;
-    double perdidas_olla_empacado = practica['perdidas_olla_empacado']as double;
+    double perdidas_olla_empacado = practica['perdidas_olla_empacado']as double; // peso de la olla después de empacar su producto
 
 
     double Producto_obtener = unidadesEmpaque * unidadesProducir;
     double cascara_y_semilla = Peso_semillas + Peso_cascara;
     double Rendimiento_fruta;
+
     if (Peso_inicial > 0) {
       Rendimiento_fruta =
           (Peso_inicial - cascara_y_semilla) * 100 / Peso_inicial;

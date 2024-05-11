@@ -1,4 +1,4 @@
-import 'package:base/paginas/vista_profes/p_9aPulpa.dart';
+import 'package:base/paginas/vista_profes/p_9a.dart';
 import 'package:flutter/material.dart';
 
 import '../../preferences.dart';
@@ -58,11 +58,11 @@ class _PagInicio9 extends State<PagInicio9> {
                children: <Widget>[
               _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 57, 174, 247), () async {
                await UserPreferences.setPracticaSeleccionada('practica1'); // Guarda 'practica1' para PULPA
-               Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9a()));
               }),
               _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () async {
                 await UserPreferences.setPracticaSeleccionada('practica2'); // Guarda 'practica2' para REFRESCO
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa())); // Asegúrate de actualizar esto si REFRESCO va a otra página
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9a())); // Asegúrate de actualizar esto si REFRESCO va a otra página
              }),
           ],
        ),
