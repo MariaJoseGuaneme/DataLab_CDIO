@@ -1,5 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 
 class Profesor {
@@ -827,6 +829,19 @@ CREATE TABLE _resultados_practica1 (
       ]
     };
   }
+
+
+
+  void guardarDatosMarlon() async {
+    final List<Estudiante> estudiantes = await getEstudiantesPorGrupo(1);
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/estudiantes.txt');
+    final text = estudiantes.map((e) => '${e.id}, ${e.correo}').join('\n');
+    await file.writeAsString(text);
+    print('${directory.path}/estudiantes.txt');
+  }
+
+
 
 
   // VERSIONES BASE DE DATOS -------------------------------------------------

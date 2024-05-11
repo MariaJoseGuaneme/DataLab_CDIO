@@ -1,6 +1,7 @@
 import 'package:base/paginas/vista_profes/p_3a.dart';
 import 'package:base/paginas/vistas_estudiantes/p_3.dart';
 import 'package:flutter/material.dart';
+import 'package:base/base_datos.dart';
 
 class PagInicio2 extends StatefulWidget {
   const PagInicio2({super.key});
