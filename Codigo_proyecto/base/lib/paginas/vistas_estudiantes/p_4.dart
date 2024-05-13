@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:base/base_datos.dart';
 
 class PagInicio4 extends StatefulWidget {
   const PagInicio4({super.key});
@@ -87,7 +88,6 @@ Widget inicio(BuildContext context) {
             const SizedBox(width: 60),
             GestureDetector(
               onTap: () {
-
               },
               child: Container(
                 width: 200,

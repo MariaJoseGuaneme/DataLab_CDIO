@@ -611,7 +611,7 @@ CREATE TABLE _resultados_practica2 (
     });
   }
 
-  Future<List<Estudiante>> getEstudiantesPorGrupo(int idGrupo) async {
+  Future<List<Estudiante>> getEstudiantesPorGrupo(int idGrupo) async {                 // FUNCIÓN MATEO 5
     final db = await database;  // Obtiene la instancia de la base de datos
     final List<Map<String, dynamic>> maps = await db.query(
         'estudiantes',  // Asume que la tabla se llama 'estudiantes'
@@ -621,12 +621,31 @@ CREATE TABLE _resultados_practica2 (
 
     if (maps.isNotEmpty) {
       return List.generate(maps.length, (i) {
-        return Estudiante.fromMap(maps[i]);  // Asegúrate de que la clase Estudiante tiene este constructor
+        return Estudiante.fromMap(maps[i]);
       });
     } else {
       return [];  // Retorna una lista vacía si no hay estudiantes
     }
   }
+
+  // Esta función genera el archivo CSV de los estudiantes
+  Future<String> generateStudentsCSV() async {
+    final db = await instance.database;
+    final data = await db.query('estudiantes');
+    final directory = await getApplicationDocumentsDirectory();
+    File file = File('${directory.path}/students.csv');
+    print('${directory.path}/students.csv');
+
+    // Crea o sobrescribe el archivo CSV
+    String csvData = 'ID, Grupo ID, Correo\n';
+    for (var row in data) {
+      csvData += '${row['id']},${row['id_grupos']},${row['correo']}\n';
+    }
+    await file.writeAsString(csvData);
+
+    return file.path; // Devuelve la ruta del archivo
+  }
+
 
   // Actualizar un estudiante
   Future<int> updateEstudiante(Estudiante estudiante) async {
@@ -731,7 +750,7 @@ CREATE TABLE _resultados_practica2 (
 // FUNIONES PRÁCTICA ---------------------------------------------------------
 
 // Leer una práctica por su ID de grupo
-  Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {
+  Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {                // OPCIÓN MATEO
     final db = await database;
     final maps = await db.query(
         'practica1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
@@ -812,6 +831,21 @@ CREATE TABLE _resultados_practica2 (
       return maps.first[nombreColumna];
     }
     return null;
+  }
+
+  Future<dynamic> readSpecificData(String tableName, int idGrupos, String columnName) async { //OPCIÓN PRINCIPAL DE MATEO
+    final db = await instance.database;
+    final maps = await db.query(
+      tableName,
+      columns: [columnName],
+      where: 'id_grupos = ?',
+      whereArgs: [idGrupos],
+    );
+
+    if (maps.isNotEmpty) {
+      return maps.first[columnName];
+    }
+    throw Exception('ID not found');
   }
 
   // FUNCIONES GET --------------------------------------------------------------
