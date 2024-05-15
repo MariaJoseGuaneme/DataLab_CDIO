@@ -209,6 +209,7 @@ class _Menu extends State<Menu_pulpa> {
 
 // Método para manejar la exportación de datos
   void _exportData() {
+
     sendEmail(context);// Implementa la lógica para exportar datos aquí
   }
 }

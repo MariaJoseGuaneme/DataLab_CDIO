@@ -7,6 +7,8 @@ import 'package:path_provider/path_provider.dart';
 //import 'package:csv/csv.dart';
 import 'package:excel/excel.dart' as excel1;
 
+import '../preferences.dart';
+
 // Lista de correos electrónicos remitentes
 List<String> recipientEmails = [
   'marlons.espinosaj@gmail.com',
@@ -24,6 +26,9 @@ List<String> recipientEmails = [
 
 // Función para enviar correos electrónicos
 void sendEmail(BuildContext context) async {
+ int idGrupo = UserPreferences.getIdGrupo();
+ String practica = UserPreferences.getPracticaSeleccionada();
+
   print('Cualquier mensaje');
   // Crear una instancia de Mailer con tu clave API de SendGrid
   final mailer = Mailer('');

@@ -1,7 +1,6 @@
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'dart:io';
 
 
@@ -70,8 +69,6 @@ Widget inicio(BuildContext context) {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                Future<String> path = _databaseH.generateStudentsCSV();
-                sendEmailWithAttachment(path.toString());
               },
               child: Container(
                 width: 200,
@@ -133,19 +130,3 @@ Widget inicio(BuildContext context) {
   );
 }
 
-
-Future<void> sendEmailWithAttachment(String filePath) async {
-  final Email email = Email(
-    body: 'Aquí va el archivo de estudiantes.',
-    subject: 'Archivo CSV de Estudiantes',
-    recipients: ['datalabplus@gmail.com'],
-    attachmentPaths: [filePath],
-    isHTML: false,
-  );
-
-  try {
-    await FlutterEmailSender.send(email);
-  } catch (error) {
-    print('Error al enviar correo: $error');
-  }
-}
