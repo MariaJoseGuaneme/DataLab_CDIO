@@ -15,7 +15,7 @@ import 'package:base/paginas/vistas_estudiantes/p_27.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:base/funciones_proyecto/exportar.dart';
 class Menu extends StatefulWidget {
   const Menu({super.key});
 
@@ -209,7 +209,7 @@ class _Menu extends State<Menu> {
 
 // Método para manejar la exportación de datos
   void _exportData() {
-    // Implementa la lógica para exportar datos aquí
+    sendEmail(context);// Implementa la lógica para exportar datos aquí
   }
 }
 
