@@ -48,6 +48,13 @@ dependencies:
   csv: ^6.0.0
   excel: ^4.0.3
 
+flutter_icons:
+  android: "launcher_icon"  # Genera iconos para Android
+  ios: true      # Genera iconos para iOS
+  image_path: "assets/logo.png"  # Ruta al archivo de icono que quieres usar
+  adaptive_icon_background: "#D4EED1"  # Fondo para Android adaptive icons
+  adaptive_icon_foreground: "assets/logo.png"
+
 dev_dependencies:
 
   flutter_test:
@@ -58,7 +65,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -76,6 +83,7 @@ flutter:
     - assets/Universidad_Log.jpg
     - assets/UQ.png
     - assets/logou.jpg
+    - assets/logo.png
 
 
   fonts:
