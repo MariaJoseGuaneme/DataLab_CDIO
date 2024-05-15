@@ -748,7 +748,6 @@ CREATE TABLE _resultados_practica2 (
   }
 
 // FUNIONES PRÁCTICA ---------------------------------------------------------
-
 // Leer una práctica por su ID de grupo
   Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {                // OPCIÓN MATEO
     final db = await database;
@@ -759,6 +758,7 @@ CREATE TABLE _resultados_practica2 (
     }
     return null;
   }
+
 
 // Eliminar una práctica
   Future<int> deletePractica(int idGrupos) async {
