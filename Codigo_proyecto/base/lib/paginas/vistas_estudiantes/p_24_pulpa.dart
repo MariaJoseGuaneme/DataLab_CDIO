@@ -14,6 +14,7 @@ class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
   late Future<Map<String, dynamic>> componentData;
   int idGrupo = UserPreferences.getIdGrupo();
   String practica = UserPreferences.getPracticaSeleccionada();
+  final DatabaseHelper _databaseH = DatabaseHelper.instance;
 
   @override
   void initState() {
