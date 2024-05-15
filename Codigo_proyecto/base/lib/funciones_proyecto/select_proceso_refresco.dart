@@ -21,6 +21,8 @@ import 'package:base/paginas/vistas_estudiantes/p_35.dart';
 import 'package:base/paginas/vistas_estudiantes/p_36.dart';
 import 'package:base/base_datos.dart';
 
+import 'exportar.dart';
+
 class Menu_refresco extends StatefulWidget {
   const Menu_refresco({super.key});
 
@@ -137,13 +139,15 @@ class _Menu extends State<Menu_refresco> {
       body: _currentBody,
     );
   }
-  }
-
-
 // Método para manejar la exportación de datos
-void _exportData() {
-  // Implementa la lógica para exportar datos aquí
+  void _exportData() {
+    sendEmail(context);
+    // Implementa la lógica para exportar datos aquí
+  }
 }
+
+
+
 
 
 Future<void> calcularYGuardarResultados() async {
