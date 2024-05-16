@@ -127,15 +127,62 @@ void sendEmail(BuildContext context) async {
     sheet.cell(excel1.CellIndex.indexByString('D12')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_despulpado', idGrupo)).toString());
     cell = sheet.cell(excel1.CellIndex.indexByString('D12'));
     cell.cellStyle = cellStyle;
-print(practica);
 
-    if(practica == 'practica1'){
-        sheet.cell(excel1.CellIndex.indexByString('B13')).value = excel1.TextCellValue('Pérdidas en el envasado (%)');
-    sheet.merge(excel1.CellIndex.indexByString('B13'), excel1.CellIndex.indexByString('C13'));
-    cell = sheet.cell(excel1.CellIndex.indexByString('B13'));
+    sheet.cell(excel1.CellIndex.indexByString('F15')).value = excel1.TextCellValue('Fruta Inicial');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F15'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D13')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_empacado', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('D13'));
+    sheet.cell(excel1.CellIndex.indexByString('G15')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'peso_inicial', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('G15'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F16')).value = excel1.TextCellValue('Cáscara+Semilla');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F16'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G16')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'cascara_y_semilla', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('G16'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F17')).value = excel1.TextCellValue('Pulpa sin semilla');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F17'));
+    cell.cellStyle = cellStyle;
+
+    String aux = (await _dbHelper.readSpecificData(practica, 'peso_inicial', idGrupo)).toString();
+    String aux2 = (await _dbHelper.readSpecificData('_resultados_' + practica, 'cascara_y_semilla', idGrupo)).toString();
+    double n1 = double.parse(aux);
+    double n2 = double.parse(aux2);
+    String result = (n1-n2).toString();
+
+    sheet.cell(excel1.CellIndex.indexByString('G17')).value = excel1.TextCellValue(result);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G17'));
+    cell.cellStyle = cellStyle;
+
+
+    sheet.cell(excel1.CellIndex.indexByString('F19')).value = excel1.TextCellValue('Pérdidas');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F19'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G19')).value = excel1.TextCellValue('gr');
+    cell = sheet.cell(excel1.CellIndex.indexByString('G19'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F20')).value = excel1.TextCellValue('Despulpado');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F20'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G20')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_despulpado_gr', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('G20'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F21')).value = excel1.TextCellValue('Escaldado');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F21'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G21')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_Escaldado_gr', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('G21'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F22')).value = excel1.TextCellValue('Envasado');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F22'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G22')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_empacado_gr', idGrupo)).toString() );
+    cell = sheet.cell(excel1.CellIndex.indexByString('G22'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('E9')).value =excel1.TextCellValue('Depende de la fruta');
@@ -145,6 +192,18 @@ print(practica);
     sheet.cell(excel1.CellIndex.indexByString('F9')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'fruta', idGrupo)).toString());
     cell = sheet.cell(excel1.CellIndex.indexByString('F9'));
     cell.cellStyle = cellStyle;
+
+print(practica);
+
+    if(practica == 'practica1'){
+    sheet.cell(excel1.CellIndex.indexByString('B13')).value = excel1.TextCellValue('Pérdidas en el envasado (%)');
+    sheet.merge(excel1.CellIndex.indexByString('B13'), excel1.CellIndex.indexByString('C13'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B13'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D13')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_empacado', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('D13'));
+    cell.cellStyle = cellStyle;
+
 
 
     sheet.cell(excel1.CellIndex.indexByString('B15')).value = excel1.TextCellValue('FORMULACIÓN');
@@ -195,7 +254,7 @@ print(practica);
     cell = sheet.cell(excel1.CellIndex.indexByString('D19'));
     cell.cellStyle = cellStyle;
 
-    sheet.cell(excel1.CellIndex.indexByString('B20')).value = excel1.TextCellValue('Benzoato de sodio');
+    sheet.cell(excel1.CellIndex.indexByString('B20')).value = excel1.TextCellValue('Benzonato de sodio');
     cell = sheet.cell(excel1.CellIndex.indexByString('B20'));
     cell.cellStyle = cellStyle;
     sheet.cell(excel1.CellIndex.indexByString('C20')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'p_benzonato_sodio', idGrupo)).toString());
@@ -276,63 +335,6 @@ print(practica);
     cell = sheet.cell(excel1.CellIndex.indexByString('H6'));
     cell.cellStyle = cellStyle;
 
-
-    sheet.cell(excel1.CellIndex.indexByString('F15')).value = excel1.TextCellValue('Fruta Inicial');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F15'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G15')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'peso_inicial', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('G15'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('F16')).value = excel1.TextCellValue('Cáscara+Semilla');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F16'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G16')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'cascara_y_semilla', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('G16'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('F17')).value = excel1.TextCellValue('Pulpa sin semilla');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F17'));
-    cell.cellStyle = cellStyle;
-
-    String aux = (await _dbHelper.readSpecificData(practica, 'peso_inicial', idGrupo)).toString();
-    String aux2 = (await _dbHelper.readSpecificData('_resultados_' + practica, 'cascara_y_semilla', idGrupo)).toString();
-    double n1 = double.parse(aux);
-    double n2 = double.parse(aux2);
-    String result = (n1-n2).toString();
-
-    sheet.cell(excel1.CellIndex.indexByString('G17')).value = excel1.TextCellValue(result);
-    cell = sheet.cell(excel1.CellIndex.indexByString('G17'));
-    cell.cellStyle = cellStyle;
-
-
-    sheet.cell(excel1.CellIndex.indexByString('F19')).value = excel1.TextCellValue('Pérdidas');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F19'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G19')).value = excel1.TextCellValue('gr');
-    cell = sheet.cell(excel1.CellIndex.indexByString('G19'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('F20')).value = excel1.TextCellValue('Despulpado');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F20'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G20')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_despulpado_gr', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('G20'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('F21')).value = excel1.TextCellValue('Escaldado');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F21'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G21')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_Escaldado_gr', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('G21'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('F22')).value = excel1.TextCellValue('Envasado');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F22'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G22')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Perdidas_empacado_gr', idGrupo)).toString() );
-    cell = sheet.cell(excel1.CellIndex.indexByString('G22'));
-    cell.cellStyle = cellStyle;
 
 
     sheet.cell(excel1.CellIndex.indexByString('F25')).value = excel1.TextCellValue('Pulpa para formular');
@@ -452,7 +454,7 @@ print(practica);
     cell = sheet.cell(excel1.CellIndex.indexByString('D23'));
     cell.cellStyle = cellStyle;
 
-    sheet.cell(excel1.CellIndex.indexByString('B24')).value = excel1.TextCellValue('Benzoato de sodio');
+    sheet.cell(excel1.CellIndex.indexByString('B24')).value = excel1.TextCellValue('Benzonato de sodio');
     cell = sheet.cell(excel1.CellIndex.indexByString('B24'));
     cell.cellStyle = cellStyle;
     sheet.cell(excel1.CellIndex.indexByString('C24')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'p_benzonato_sodio', idGrupo)).toString());
@@ -508,46 +510,46 @@ print(practica);
     cell.cellStyle = cellStyle;
 
 
-    sheet.cell(excel1.CellIndex.indexByString('E5')).value = excel1.TextCellValue('PRUEBAS FISICOQUÍMICAS');
-    sheet.merge(excel1.CellIndex.indexByString('E5'), excel1.CellIndex.indexByString('H5'));
-    cell = sheet.cell(excel1.CellIndex.indexByString('E5'));
+    sheet.cell(excel1.CellIndex.indexByString('F3')).value = excel1.TextCellValue('PRUEBAS FISICOQUÍMICAS');
+    sheet.merge(excel1.CellIndex.indexByString('F3'), excel1.CellIndex.indexByString('I3'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('F3'));
     cell.cellStyle = cellStyle;
 
 
-    sheet.cell(excel1.CellIndex.indexByString('F6')).value = excel1.TextCellValue('°Brix');
+    sheet.cell(excel1.CellIndex.indexByString('G4')).value = excel1.TextCellValue('°Brix');
+    cell = sheet.cell(excel1.CellIndex.indexByString('G4'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('H4')).value = excel1.TextCellValue('pH');
+    cell = sheet.cell(excel1.CellIndex.indexByString('H4'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('I4')).value = excel1.TextCellValue('Acidez');
+    cell = sheet.cell(excel1.CellIndex.indexByString('I4'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F5')).value = excel1.TextCellValue('ANTES');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F5'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G5')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'brix_1', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('G5'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('H5')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'ph_1', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('H5'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('I5')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'acidez_1', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('I5'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F6')).value = excel1.TextCellValue('DESPUÉS');
     cell = sheet.cell(excel1.CellIndex.indexByString('F6'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G6')).value = excel1.TextCellValue('pH');
+    sheet.cell(excel1.CellIndex.indexByString('G6')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'brix_2', idGrupo)).toString());
     cell = sheet.cell(excel1.CellIndex.indexByString('G6'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('H6')).value = excel1.TextCellValue('Acidez');
+    sheet.cell(excel1.CellIndex.indexByString('H6')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'ph_2', idGrupo)).toString());
     cell = sheet.cell(excel1.CellIndex.indexByString('H6'));
     cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('E7')).value = excel1.TextCellValue('ANTES');
-    cell = sheet.cell(excel1.CellIndex.indexByString('E7'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('F7')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'brix_1', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('F7'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G7')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'ph_1', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('G7'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('H7')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'acidez_1', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('H7'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('E8')).value = excel1.TextCellValue('ANTES');
-    cell = sheet.cell(excel1.CellIndex.indexByString('E9'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('F8')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'brix_2', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('F8'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G8')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'ph_2', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('G8'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('H8')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'acidez_2', idGrupo)).toString());
-    cell = sheet.cell(excel1.CellIndex.indexByString('H8'));
+    sheet.cell(excel1.CellIndex.indexByString('I6')).value = excel1.TextCellValue((await _dbHelper.readSpecificData(practica, 'acidez_2', idGrupo)).toString());
+    cell = sheet.cell(excel1.CellIndex.indexByString('I6'));
     cell.cellStyle = cellStyle;
 
 
