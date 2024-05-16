@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
 import 'package:base/funciones_proyecto/select_proceso_refresco.dart';
+
+import '../../preferences.dart';
 class PagInicio5 extends StatefulWidget {
   const PagInicio5({super.key});
 
@@ -51,10 +53,12 @@ class _PagInicio5 extends State<PagInicio5> {
                 mainAxisSpacing: 20,
                 childAspectRatio: buttonAspectRatio,
                 children: <Widget>[
-                  _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169), () {
+                  _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169), () async {
+                    await UserPreferences.setPracticaSeleccionada('practica1'); // Guarda 'practica1' para PULPA
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu_pulpa()));
                   }),
-                  _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () {
+                  _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () async {
+                    await UserPreferences.setPracticaSeleccionada('practica2'); // Guarda 'practica2' para REFRESCO
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu_refresco()));// Navegación a la página de refresco
                   }),
                 ],

@@ -833,7 +833,7 @@ CREATE TABLE _resultados_practica2 (
     return null;
   }
 
-  Future<dynamic> readSpecificData(String tableName, int idGrupos, String columnName) async { //OPCIÓN PRINCIPAL DE MATEO
+  Future<dynamic> readSpecificData(String tableName, String columnName, int idGrupos) async { //OPCIÓN PRINCIPAL DE MATEO
     final db = await instance.database;
     final maps = await db.query(
       tableName,
@@ -873,7 +873,7 @@ CREATE TABLE _resultados_practica2 (
         whereArgs: [idGrupo]
     );
     if (result.isNotEmpty && result.first[columnName] != null) {
-      return result.first[columnName] as String;
+      return result.first[columnName] as String ;
     }
     return 'Na';
   }

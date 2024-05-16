@@ -182,8 +182,10 @@ class _Menu extends State<Menu_pulpa> {
                       backgroundColor: Colors.red,
                       textStyle: const TextStyle(fontSize: 20),
                     ),
-                    onPressed: () =>
-                        calcularYGuardarResultados(), // Acción especial para exportar datos
+                    onPressed: () {
+                      _exportData();
+                      calcularYGuardarResultados();
+                    }// Acción especial para exportar datos
                   ),
                 );
               } else {
@@ -209,7 +211,6 @@ class _Menu extends State<Menu_pulpa> {
 
 // Método para manejar la exportación de datos
   void _exportData() {
-
     sendEmail(context);// Implementa la lógica para exportar datos aquí
   }
 }
@@ -294,7 +295,7 @@ Future<void> calcularYGuardarResultados() async {
     double Rendimiento_producto;
 
     if (Total_Formulacion > 0) {
-      Rendimiento_producto = (Producto_obtener / Total_Formulacion) * 100;
+      Rendimiento_producto = ((Producto_obtener / Total_Formulacion) * 100);
     } else {
       Rendimiento_producto = 0;
     }
