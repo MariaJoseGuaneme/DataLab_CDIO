@@ -16,14 +16,14 @@ final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 void sendEmail(BuildContext context) async {
  // Lista de correos electrónicos remitentes
  List<String> recipientEmails = [
-  //'marlons.espinosaj@gmail.com',
+  'marlons.espinosaj@gmail.com',
   'mateo.vargasc@uqvirtual.edu.co',
-  'mateovarcla@gmail.com'
-  //'juanp.aricapab@uqvirtual.edu.co',
-  //'mariaj.guanemeb@uqvirtual.edu.co',
-  //'josed.perezz@uqvirtual.edu.co',
-  //'marlons.espinosaj@uqvirtual.edu.co'
-  //'perezo.santiago@uqvirtual.edu.co'
+  'mateovarcla@gmail.com',
+  'juanp.aricapab@uqvirtual.edu.co',
+  'mariaj.guanemeb@uqvirtual.edu.co',
+  'josed.perezz@uqvirtual.edu.co',
+  'marlons.espinosaj@uqvirtual.edu.co',
+  'perezo.santiago@uqvirtual.edu.co'
   // Añade más correos según necesites
  ];
 
@@ -75,7 +75,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B5'), excel1.CellIndex.indexByString('C5'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B5'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D5')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'unidades_producir', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D5')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'unidades_producir', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D5'));
     cell.cellStyle = cellStyle;
 
@@ -91,7 +91,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B7'), excel1.CellIndex.indexByString('C7'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B7'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D7')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D7')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Producto_obtener', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D7'));
     cell.cellStyle = cellStyle;
 
@@ -99,7 +99,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B9'), excel1.CellIndex.indexByString('C9'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B9'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D9')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D9')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'brix_fruta', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D9'));
     cell.cellStyle = cellStyle;
 
@@ -108,7 +108,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B10'), excel1.CellIndex.indexByString('C10'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B10'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D10')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D10')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Rendimiento_fruta', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D10'));
     cell.cellStyle = cellStyle;
 
@@ -116,7 +116,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B11'), excel1.CellIndex.indexByString('C11'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B11'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D11')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D11')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_Escaldado', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D11'));
     cell.cellStyle = cellStyle;
 
@@ -124,15 +124,16 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B12'), excel1.CellIndex.indexByString('C12'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B12'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D12')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D12')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_despulpado', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D12'));
     cell.cellStyle = cellStyle;
 
-    sheet.cell(excel1.CellIndex.indexByString('B13')).value = excel1.TextCellValue('Pérdidas en el envasado (%)');
+    if(practica == 'practica1'){
+        sheet.cell(excel1.CellIndex.indexByString('B13')).value = excel1.TextCellValue('Pérdidas en el envasado (%)');
     sheet.merge(excel1.CellIndex.indexByString('B13'), excel1.CellIndex.indexByString('C13'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B13'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D13')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D13')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_empacado', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D13'));
     cell.cellStyle = cellStyle;
 
@@ -140,13 +141,8 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('E9'), excel1.CellIndex.indexByString('E10'));
     cell = sheet.cell(excel1.CellIndex.indexByString('E9'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('F9')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('F9')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'fruta', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('F9'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('E12')).value = excel1.TextCellValue('Depende de la despulpadora y la fruta');
-    sheet.merge(excel1.CellIndex.indexByString('E12'), excel1.CellIndex.indexByString('G12'));
-    cell = sheet.cell(excel1.CellIndex.indexByString('E12'));
     cell.cellStyle = cellStyle;
 
 
@@ -154,7 +150,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B15'), excel1.CellIndex.indexByString('C15'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B15'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D15')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D15')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Total_Formulacion', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D15'));
     cell.cellStyle = cellStyle;
 
@@ -171,59 +167,59 @@ void sendEmail(BuildContext context) async {
     sheet.cell(excel1.CellIndex.indexByString('B17')).value = excel1.TextCellValue('Pulpa');
     cell = sheet.cell(excel1.CellIndex.indexByString('B17'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('C17')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('C17')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_pulpa', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('C17'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D17')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D17')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_pulpa', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D17'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('B18')).value = excel1.TextCellValue('Ácido ascórbico');
     cell = sheet.cell(excel1.CellIndex.indexByString('B18'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('C18')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('C18')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_acido_ascorbico', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('C18'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D18')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D18')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_acidoAscorbico', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D18'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('B19')).value = excel1.TextCellValue('Ácido cítrico');
     cell = sheet.cell(excel1.CellIndex.indexByString('B19'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('C19')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('C19')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_acido_citrico', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('C19'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D19')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D19')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_acidoCitrico', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D19'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('B20')).value = excel1.TextCellValue('Benzoato de sodio');
     cell = sheet.cell(excel1.CellIndex.indexByString('B20'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('C20')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('C20')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_benzonato_sodio', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('C20'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D20')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D20')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_benzonatoSodio', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D20'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('B21')).value = excel1.TextCellValue('Sorbato de potasio');
     cell = sheet.cell(excel1.CellIndex.indexByString('B21'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('C21')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('C21')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_sorbato_potasio', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('C21'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D21')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D21')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_sorbatoPotasio', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D21'));
     cell.cellStyle = cellStyle;
 
-    sheet.cell(excel1.CellIndex.indexByString('B22')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('B22')).value = excel1.TextCellValue('TOTAL');
     cell = sheet.cell(excel1.CellIndex.indexByString('B22'));
     cell.cellStyle = cellStyle;
     cell = sheet.cell(excel1.CellIndex.indexByString('C22'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D22')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D22')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Total_Formulacion', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D22'));
     cell.cellStyle = cellStyle;
 
@@ -232,7 +228,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B25'), excel1.CellIndex.indexByString('C25'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B25'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D25')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D25')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Fruta_fresca_formulacion', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D25'));
     cell.cellStyle = cellStyle;
 
@@ -240,7 +236,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B26'), excel1.CellIndex.indexByString('C26'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B26'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D26')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D26')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Fruta_fresca_real', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D26'));
     cell.cellStyle = cellStyle;
 
@@ -249,7 +245,7 @@ void sendEmail(BuildContext context) async {
     sheet.merge(excel1.CellIndex.indexByString('B28'), excel1.CellIndex.indexByString('C28'));
     cell = sheet.cell(excel1.CellIndex.indexByString('B28'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('D28')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('D28')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Rendimiento_producto', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('D28'));
     cell.cellStyle = cellStyle;
 
@@ -269,13 +265,13 @@ void sendEmail(BuildContext context) async {
     cell = sheet.cell(excel1.CellIndex.indexByString('H5'));
     cell.cellStyle = cellStyle;
 
-    sheet.cell(excel1.CellIndex.indexByString('F6')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('F6')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'brix_1', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('F6'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G6')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G6')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'ph_1', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G6'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('H6')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('H6')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'acidez_1', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('H6'));
     cell.cellStyle = cellStyle;
  
@@ -283,21 +279,28 @@ void sendEmail(BuildContext context) async {
     sheet.cell(excel1.CellIndex.indexByString('F15')).value = excel1.TextCellValue('Fruta Inicial');
     cell = sheet.cell(excel1.CellIndex.indexByString('F15'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G15')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G15')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'peso_inicial', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G15'));
     cell.cellStyle = cellStyle;
  
     sheet.cell(excel1.CellIndex.indexByString('F16')).value = excel1.TextCellValue('Cáscara+Semilla');
     cell = sheet.cell(excel1.CellIndex.indexByString('F16'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G16')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G16')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'cascara_y_semilla', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G16'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('F17')).value = excel1.TextCellValue('Pulpa sin semilla');
     cell = sheet.cell(excel1.CellIndex.indexByString('F17'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G17')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    
+    String aux = _dbHelper.getTextValue(practica, 'peso_inicial', idGrupo) as String;
+    String aux2 = _dbHelper.getTextValue(practica, 'cascara_y_semilla', idGrupo) as String;
+    double n1 = double.parse(aux);
+    double n2 = double.parse(aux2);
+    String result = (n1-n2).toString();
+
+    sheet.cell(excel1.CellIndex.indexByString('G17')).value = excel1.TextCellValue(result);
     cell = sheet.cell(excel1.CellIndex.indexByString('G17'));
     cell.cellStyle = cellStyle;
 
@@ -312,54 +315,287 @@ void sendEmail(BuildContext context) async {
     sheet.cell(excel1.CellIndex.indexByString('F20')).value = excel1.TextCellValue('Despulpado');
     cell = sheet.cell(excel1.CellIndex.indexByString('F20'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G20')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G20')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_despulpado_gr', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G20'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('F21')).value = excel1.TextCellValue('Escaldado');
     cell = sheet.cell(excel1.CellIndex.indexByString('F21'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G21')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G21')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_Escaldado_gr', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G21'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('F22')).value = excel1.TextCellValue('Envasado');
     cell = sheet.cell(excel1.CellIndex.indexByString('F22'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G22')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G22')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_empacado_gr', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G22'));
-    cell.cellStyle = cellStyle;
-
-    sheet.cell(excel1.CellIndex.indexByString('F23')).value = excel1.TextCellValue('Evaporado');
-    cell = sheet.cell(excel1.CellIndex.indexByString('F23'));
-    cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G23')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
-    cell = sheet.cell(excel1.CellIndex.indexByString('G23'));
     cell.cellStyle = cellStyle;
 
 
     sheet.cell(excel1.CellIndex.indexByString('F25')).value = excel1.TextCellValue('Pulpa para formular');
     cell = sheet.cell(excel1.CellIndex.indexByString('F25'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G25')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G25')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_pulpa', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G25'));
     cell.cellStyle = cellStyle;
 
     sheet.cell(excel1.CellIndex.indexByString('F26')).value = excel1.TextCellValue('Formulación');
     cell = sheet.cell(excel1.CellIndex.indexByString('F26'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G26')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G26')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Total_Formulacion', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G26'));
     cell.cellStyle = cellStyle;
 
-    sheet.cell(excel1.CellIndex.indexByString('F27')).value = excel1.TextCellValue('Empacada');
+    sheet.cell(excel1.CellIndex.indexByString('F27')).value = excel1.TextCellValue('Peso de la pulpa Empacada');
     cell = sheet.cell(excel1.CellIndex.indexByString('F27'));
     cell.cellStyle = cellStyle;
-    sheet.cell(excel1.CellIndex.indexByString('G27')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, '', idGrupo) as String);
+    sheet.cell(excel1.CellIndex.indexByString('G27')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'peso_pulpa_empacada', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G27'));
+    cell.cellStyle = cellStyle;
+    }else{
+        
+
+    //Practica 2
+    sheet.cell(excel1.CellIndex.indexByString('B13')).value = excel1.TextCellValue('Pérdidas por evaporación (%)');
+    sheet.merge(excel1.CellIndex.indexByString('B13'), excel1.CellIndex.indexByString('C13'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B13'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D13')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_evaporacion', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D13'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B14')).value = excel1.TextCellValue('Pérdidas en el envasado (%)');
+    sheet.merge(excel1.CellIndex.indexByString('B14'), excel1.CellIndex.indexByString('C14'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B14'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D14')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_empacado', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D14'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B15')).value = excel1.TextCellValue('Pérdidas en el homogenizado (%)');
+    sheet.merge(excel1.CellIndex.indexByString('B15'), excel1.CellIndex.indexByString('C15'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B15'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D15')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_homogenizado', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D15'));
+    cell.cellStyle = cellStyle;
+    
+
+    sheet.cell(excel1.CellIndex.indexByString('B17')).value = excel1.TextCellValue('FORMULACIÓN');
+    sheet.merge(excel1.CellIndex.indexByString('B17'), excel1.CellIndex.indexByString('C17'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B17'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D17')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Total_Formulacion', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D17'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B18')).value = excel1.TextCellValue('COMPONENTES');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B18'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C18')).value = excel1.TextCellValue('%');
+    cell = sheet.cell(excel1.CellIndex.indexByString('C18'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D18')).value = excel1.TextCellValue('gr');
+    cell = sheet.cell(excel1.CellIndex.indexByString('D18'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B19')).value = excel1.TextCellValue('Pulpa');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B19'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C19')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_pulpa', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C19'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D19')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_pulpa', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D19'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B20')).value = excel1.TextCellValue('Azúcar');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B20'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C20')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_azucar', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C20'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D20')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_azucar', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D20'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B21')).value = excel1.TextCellValue('Agua');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B21'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C21')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_agua', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C21'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D21')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_agua', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D21'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B22')).value = excel1.TextCellValue('CMC');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B22'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C22')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_CMC', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C22'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D22')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_CMC', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D22'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B23')).value = excel1.TextCellValue('Ácido ascórbico');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B23'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C23')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_acido_ascorbico', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C23'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D23')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_acidoAscorbico', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D23'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B24')).value = excel1.TextCellValue('Benzoato de sodio');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B24'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C24')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_benzonato_sodio', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C24'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D24')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_benzonatoSodio', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D24'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B25')).value = excel1.TextCellValue('Sorbato de potasio');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B25'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('C25')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'p_sorbato_potasio', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('C25'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D25')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_sorbatoPotasio', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D25'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B26')).value = excel1.TextCellValue('TOTAL');
+    cell = sheet.cell(excel1.CellIndex.indexByString('B26'));
+    cell.cellStyle = cellStyle;
+    cell = sheet.cell(excel1.CellIndex.indexByString('C26'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D26')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Total_Formulacion', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D26'));
+    cell.cellStyle = cellStyle;
+
+
+    sheet.cell(excel1.CellIndex.indexByString('B28')).value = excel1.TextCellValue('Cantidad de Fruta fresca de acuerdo a la formulación (gr)');
+    sheet.merge(excel1.CellIndex.indexByString('B28'), excel1.CellIndex.indexByString('C28'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B28'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D28')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Fruta_fresca_formulacion', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D28'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('B29')).value = excel1.TextCellValue('Cantidad de Fruta fresca real incluyendo pérdidas del proceso(gr)');
+    sheet.merge(excel1.CellIndex.indexByString('B29'), excel1.CellIndex.indexByString('C29'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B29'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D29')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Fruta_fresca_real', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D29'));
+    cell.cellStyle = cellStyle;
+
+
+    sheet.cell(excel1.CellIndex.indexByString('B31')).value = excel1.TextCellValue('Rendimiento del producto final');
+    sheet.merge(excel1.CellIndex.indexByString('B31'), excel1.CellIndex.indexByString('C28'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('B31'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('D31')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Rendimiento_producto', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('D31'));
+    cell.cellStyle = cellStyle;
+
+
+    sheet.cell(excel1.CellIndex.indexByString('E5')).value = excel1.TextCellValue('PRUEBAS FISICOQUÍMICAS');
+    sheet.merge(excel1.CellIndex.indexByString('E5'), excel1.CellIndex.indexByString('H5'));
+    cell = sheet.cell(excel1.CellIndex.indexByString('E5'));
+    cell.cellStyle = cellStyle;
+  
+    
+    sheet.cell(excel1.CellIndex.indexByString('F6')).value = excel1.TextCellValue('°Brix');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F6'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G6')).value = excel1.TextCellValue('pH');
+    cell = sheet.cell(excel1.CellIndex.indexByString('G6'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('H6')).value = excel1.TextCellValue('Acidez');
+    cell = sheet.cell(excel1.CellIndex.indexByString('H6'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('E7')).value = excel1.TextCellValue('ANTES');
+    cell = sheet.cell(excel1.CellIndex.indexByString('E7'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('F7')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'brix_1', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('F7'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G7')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'ph_1', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G7'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('H7')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'acidez_1', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('H7'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('E8')).value = excel1.TextCellValue('ANTES');
+    cell = sheet.cell(excel1.CellIndex.indexByString('E9'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('F8')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'brix_2', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('F8'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G8')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'ph_2', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G8'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('H8')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'acidez_2', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('H8'));
+    cell.cellStyle = cellStyle;
+
+
+    sheet.cell(excel1.CellIndex.indexByString('F23')).value = excel1.TextCellValue('Evapodaro');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F23'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G23')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_evaporacion_gr', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G23'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F24')).value = excel1.TextCellValue('Homogenizado');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F24'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G24')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Perdidas_homogenizado_gr', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G24'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F25')).value = excel1.TextCellValue('Olla');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F25'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G25')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'perdidas_olla', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G25'));
+    cell.cellStyle = cellStyle;
+
+
+    sheet.cell(excel1.CellIndex.indexByString('F27')).value = excel1.TextCellValue('Pulpa para formular');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F27'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G27')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'gr_pulpa', idGrupo) as String);
     cell = sheet.cell(excel1.CellIndex.indexByString('G27'));
     cell.cellStyle = cellStyle;
 
-  
+    sheet.cell(excel1.CellIndex.indexByString('F28')).value = excel1.TextCellValue('Formulación');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F28'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G28')).value = excel1.TextCellValue(_dbHelper.getTextValue('_resultados_' + practica, 'Total_Formulacion', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G28'));
+    cell.cellStyle = cellStyle;
+
+    sheet.cell(excel1.CellIndex.indexByString('F29')).value = excel1.TextCellValue('Peso del refresco Empacado');
+    cell = sheet.cell(excel1.CellIndex.indexByString('F29'));
+    cell.cellStyle = cellStyle;
+    sheet.cell(excel1.CellIndex.indexByString('G29')).value = excel1.TextCellValue(_dbHelper.getTextValue(practica, 'peso_refresco_empacado', idGrupo) as String);
+    cell = sheet.cell(excel1.CellIndex.indexByString('G29'));
+    cell.cellStyle = cellStyle;
+
+    }
+    
+    
     // Guardar el archivo Excel
     final directory = await getApplicationDocumentsDirectory();
     final filePath = '${directory.path}/estudiantes.xlsx';
