@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos.dart';
 import 'package:base/base_datos_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
@@ -72,7 +73,7 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
+              width: 200.w.h,
               height: 200,
             ),
           ),
@@ -80,21 +81,21 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints:  BoxConstraints(maxWidth: 600.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         'Ingrese los porcentajes',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     _crearTextField('Pulpa', _ppulpaController, 'Ingrese el porcentaje de pulpa'),
                     _crearTextField('Azúcar', _pazucarController, 'Ingrese el porcentaje de azúcar'),
                     _crearTextField('Agua', _paguaController, 'Ingrese el porcentaje de agua'),
@@ -102,7 +103,7 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
                     _crearTextField('Ácido ascórbico', _pacidoascorbicoController, 'Ingrese el porcentaje de ácido ascórbico'),
                     _crearTextField('Benzoato de sodio', _pbenzoatosodioController, 'Ingrese el porcentaje de benzoato de sodio'),
                     _crearTextField('Sorbato de potasio', _psorbatopotasioController, 'Ingrese el porcentaje de sorbato de potasio'),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     ElevatedButton(
                       onPressed: _guardarDatos,
                       style: ElevatedButton.styleFrom(
@@ -127,10 +128,10 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 16),
+          style:  TextStyle(fontSize: 16.sp),
           textAlign: TextAlign.left,
         ),
-        const SizedBox(height: 8.0),
+         SizedBox(height: 8.0.h),
         TextField(
           controller: controller,
           decoration: InputDecoration(
@@ -140,7 +141,7 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
         ),
-        const SizedBox(height: 16.0),
+         SizedBox(height: 16.0.h),
       ],
     );
   }

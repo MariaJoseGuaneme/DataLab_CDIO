@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos.dart';
 import 'package:base/base_datos_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
@@ -88,35 +89,35 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Center(
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints:  BoxConstraints(maxWidth: 600.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         'Ingrese los porcentajes',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Pulpa',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.sp),
                     TextField(
                       controller: _ppulpaController,
                       decoration: const InputDecoration(
@@ -126,13 +127,13 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Ácido ascórbico',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _pacidoascorbicoController,
                       decoration: const InputDecoration(
@@ -142,13 +143,13 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                    SizedBox(height: 16.0.h),
+                    Text(
                       'Ácido cítrico',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _pacidocitricoController,
                       decoration: const InputDecoration(
@@ -158,13 +159,13 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Benzoato de sodio',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _pbenzoatosodioController,
                       decoration: const InputDecoration(
@@ -174,13 +175,13 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Sorbato de potasio',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _psorbatopotasioController,
                       decoration: const InputDecoration(
@@ -190,7 +191,7 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     ElevatedButton(
                       onPressed: () {
                         _guardarP_ascorbico();

@@ -20,6 +20,7 @@ import 'package:base/paginas/vistas_estudiantes/p_34.dart';
 import 'package:base/paginas/vistas_estudiantes/p_35.dart';
 import 'package:base/paginas/vistas_estudiantes/p_36.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'exportar.dart';
 
@@ -91,7 +92,12 @@ class _Menu extends State<Menu_refresco> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Proceso de producción'),
+        title:  Text(
+          'Proceso de producción',
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 28.sp), // Ajusta el color a blanco y el tamaño del texto
+        ),
         backgroundColor: const Color.fromARGB(255, 20, 99, 22),
       ),
       drawer: Drawer(
@@ -102,7 +108,7 @@ class _Menu extends State<Menu_refresco> {
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 20, 99, 22),
               ),
-              child: Text('Selecciona el proceso', style: TextStyle(color: Colors.white, fontSize: 24)),
+              child: Text('Selecciona el proceso', style: TextStyle(color: Colors.white, fontSize: 18)),
             ),
             ...sections.map((section) {
     if (section['title'] == 'Exportar') {
@@ -114,7 +120,7 @@ class _Menu extends State<Menu_refresco> {
     style: ElevatedButton.styleFrom(
     foregroundColor: Colors.white,
     backgroundColor: Colors.red,
-    textStyle: const TextStyle(fontSize: 20),
+    textStyle:  TextStyle(fontSize: 20.sp),
     ),
     onPressed: () {
       _exportData();
@@ -122,15 +128,16 @@ class _Menu extends State<Menu_refresco> {
     ),
     );
     } else {
-    return ListTile(
-    title: ElevatedButton(
-    style: ElevatedButton.styleFrom(
-    foregroundColor: Colors.white,
-    backgroundColor: section['color'],
-    ),
-    onPressed: () => _changeContent(section['title']),
-    child: Text(section['title']),
-    ),
+    return  ListTile(
+      title: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: section['color'],
+          textStyle:  TextStyle(fontSize: 26.sp),
+        ),
+        onPressed: () => _changeContent(section['title']),
+        child: Text(section['title']),
+      ),
     );
     }
     }),

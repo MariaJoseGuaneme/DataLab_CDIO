@@ -1,6 +1,7 @@
 import 'package:base/paginas/vista_profes/p_3a.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PagInicio3b extends StatefulWidget {
   const PagInicio3b({Key? key}) : super(key: key);
@@ -42,8 +43,8 @@ class _PagInicio3bState extends State<PagInicio3b> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
+          padding:  EdgeInsets.symmetric(
+              horizontal: 50.0.w), // Asegúrate de usar 'const' para optimizar
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,25 +52,25 @@ class _PagInicio3bState extends State<PagInicio3b> {
               Flexible(
                 child: Image.asset(
                   'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
-                  height: 120.0,
+                  height: 120.0.h,
                 ),
               ),
-              SizedBox(height: 48.0),
+              SizedBox(height: 48.0.h),
               Text(
                 'INGRESA TUS DATOS',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize: 22.0.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 48.0),
+              SizedBox(height: 48.0.h),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 60.0,
+                padding:  EdgeInsets.symmetric(
+                    vertical: 60.0.h,
                     horizontal:
-                        8.0), // Asegúrate de usar 'const' para optimizar
+                        8.0.w), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10.0),
@@ -85,7 +86,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                         prefixIcon: Icon(Icons.account_circle_sharp),
                         hintText: 'Correo institucional',
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                            vertical: 10.0.h, horizontal: 20.0.w),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -93,7 +94,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 50.0),
+                    SizedBox(height: 50.0.h),
                     TextField(
                       controller: passwordController,
                       obscureText: _obscureText,
@@ -102,7 +103,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                         prefixIcon: Icon(Icons.lock_outline_rounded),
                         hintText: 'Contraseña',
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                            vertical: 10.0.h, horizontal: 20.0.w),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -120,7 +121,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 50.0),
+                    SizedBox(height: 50.0.h),
                     TextField(
                       controller: confirmPasswordController,
                       obscureText: _obscureText2,
@@ -129,7 +130,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                         prefixIcon: Icon(Icons.lock_outline_rounded),
                         hintText: 'Confirmar Contraseña',
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                            vertical: 10.0.h, horizontal: 20.0.w),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -150,9 +151,9 @@ class _PagInicio3bState extends State<PagInicio3b> {
                   ],
                 ),
               ),
-              SizedBox(height: 50.0),
+              SizedBox(height: 50.0.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                padding:  EdgeInsets.symmetric(horizontal: 200.0.w),
                 child: Container(
                   child: Material(
                     color: Colors.black,
@@ -193,11 +194,11 @@ class _PagInicio3bState extends State<PagInicio3b> {
                           );
                         }
                       },
-                      minWidth: 100.0,
-                      height: 42.0,
+                      minWidth: 100.0.w,
+                      height: 42.0.h,
                       child: Text(
                         'Crear Cuenta',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
                       ),
                     ),
                   ),

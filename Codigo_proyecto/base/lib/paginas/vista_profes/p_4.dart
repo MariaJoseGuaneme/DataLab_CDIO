@@ -2,6 +2,7 @@ import 'package:base/paginas/vista_profes/p_16.dart';
 import 'package:base/funciones_proyecto/select_actividad_profe.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../base_datos.dart';
 import '../../preferences.dart';
@@ -121,7 +122,7 @@ class _PagInicio4State extends State<PagInicio4> {
 
   Widget _grupo(Grupo grupo, int index) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      margin:  EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 8.0.h),
       child: ListTile(
         title: Text(grupo.nombre),
         trailing: Row(

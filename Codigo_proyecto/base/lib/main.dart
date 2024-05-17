@@ -1,13 +1,7 @@
-
-//import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
-//import 'package:base/funciones_proyecto/select_actividad_profe.dart';
-import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
-import 'package:base/paginas/vista_profes/p_3a.dart';
 import 'package:base/preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:base/paginas/vistas_estudiantes/p_3.dart';
 import 'package:base/funciones_proyecto/inicio.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // Importa flutter_screenutil
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-   home: PagInicio(),
+    return ScreenUtilInit(
+      designSize: const Size(768, 1024),  // Tamaño de diseño original para tablet
+      minTextAdapt: true,  // Ajusta el tamaño del texto para que se adapte también
+      builder: (context, child) => MaterialApp(
+        home: const PagInicio(),
+      ),
     );
   }
 }

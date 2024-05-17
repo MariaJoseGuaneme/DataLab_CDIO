@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecepcionPage18 extends StatelessWidget {
   const RecepcionPage18({super.key});
@@ -25,8 +26,8 @@ class RecepcionPage18 extends StatelessWidget {
               // Permite el desplazamiento cuando el contenido excede la pantalla
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(
-                    maxWidth: 600), // Limita el ancho máximo del contenido
+                constraints:  BoxConstraints(
+                    maxWidth: 600.w), // Limita el ancho máximo del contenido
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,

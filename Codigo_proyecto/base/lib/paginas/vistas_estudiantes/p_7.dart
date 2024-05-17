@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class PagInicio7 extends StatefulWidget {
@@ -34,11 +35,11 @@ class _PagInicio7 extends State<PagInicio7> {
             padding: const EdgeInsets.all(10),
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
-            child: const Text(
+            child: Text(
               'Selecciona la práctica',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 38,
+                fontSize: 38.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -48,8 +49,8 @@ class _PagInicio7 extends State<PagInicio7> {
             child: GridView.count(
               padding: const EdgeInsets.all(20),
               crossAxisCount: 2,
-              crossAxisSpacing: 20, // Espacio entre columnas
-              mainAxisSpacing: 20, // Espacio entre filas
+              crossAxisSpacing: 20.w, // Espacio entre columnas
+              mainAxisSpacing: 20.h, // Espacio entre filas
               childAspectRatio: buttonAspectRatio,
               children: <Widget>[
                 _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169)),
@@ -73,7 +74,7 @@ class _PagInicio7 extends State<PagInicio7> {
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black, backgroundColor: color, // Color del texto del botón
           padding: const EdgeInsets.symmetric(vertical: 16.0), // Ajusta el padding dentro del botón
-          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

@@ -3,6 +3,7 @@ import 'package:base/paginas/vista_profes/p_11_refresco.dart';
 import 'package:base/paginas/vista_profes/p_12.dart';
 import 'package:base/paginas/vista_profes/p_13.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
@@ -34,8 +35,8 @@ class _PagInicio10State extends State<PagInicio10> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Column(
@@ -46,11 +47,11 @@ class _PagInicio10State extends State<PagInicio10> {
               padding: const EdgeInsets.all(8.0), // Añade un poco de relleno alrededor del texto
               color: Colors.green, // Establece el color de fondo del contenedor
               width: double.infinity, // Asegura que el contenedor se extienda por toda la anchura disponible
-              child: const Text(
+              child: Text(
                 'Selecciona el tipo de información',
                 style: TextStyle(
                   color: Colors.white, // Establece el color del texto
-                  fontSize: 30.0, // Establece el tamaño del texto
+                  fontSize: 30.0.sp, // Establece el tamaño del texto
                   fontWeight: FontWeight.bold, // Hace que el texto sea en negrita
                 ),
                 textAlign: TextAlign.center,
@@ -74,27 +75,27 @@ class _PagInicio10State extends State<PagInicio10> {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio11_refresco()),);
                     }
                     },
-                  child: const Text(
+                  child:  Text(
                     'FORMULACIÓN',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(color: Colors.black, fontSize: 20.sp),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightBlue,
-                    fixedSize: const Size(150, 100), // Tamaño de los botones
+                    fixedSize:  Size(150.w, 100.h), // Tamaño de los botones
                   ),
                 ),
-                const SizedBox(height: 100), // Espacio entre los botones
+                 SizedBox(height: 100.h), // Espacio entre los botones
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio12()),);// Acción para DATOS BASE
                   },
-                  child: const Text(
+                  child: Text(
                     'DATOS BASE',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(color: Colors.black, fontSize: 20.sp),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    fixedSize: const Size(150, 100), // Tamaño de los botones
+                    fixedSize:  Size(150.w, 100.h), // Tamaño de los botones
                   ),
                 ),
                 const SizedBox(height: 100), // Espacio entre los botones
@@ -102,13 +103,13 @@ class _PagInicio10State extends State<PagInicio10> {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio13()),);// Acción para TIEMPOS
                   },
-                  child: const Text(
+                  child:  Text(
                     'TIEMPOS',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(color: Colors.black, fontSize: 20.sp),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 20, 224, 211),
-                    fixedSize: const Size(150, 100), // Tamaño de los botones
+                    fixedSize: Size(150.w, 100.sp), // Tamaño de los botones
                   ),
                 ),
               ],

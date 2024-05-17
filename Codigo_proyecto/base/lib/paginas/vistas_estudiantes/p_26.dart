@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';// Asegúrate de importar tu DatabaseManager
 
@@ -68,15 +69,15 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Center(
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints:  BoxConstraints(maxWidth: 600.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -84,13 +85,13 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         '11. CONTROL FISICO-QUIMICO',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
+                    SizedBox(height: 16.0.h),
                     // Agregar los demás elementos del formulario aquí
                     TextField(
                       controller: _brix2Controller,
@@ -106,7 +107,7 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
                             RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     TextField(
                       controller: _ph2Controller,
                       decoration: const InputDecoration(
@@ -121,7 +122,7 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
                             RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     TextField(
                       controller: _acidez2Controller,
                       decoration: const InputDecoration(
@@ -136,7 +137,7 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
                             RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
-                    const SizedBox(height: 18.0),
+                     SizedBox(height: 18.0.h),
                     ElevatedButton(
                       onPressed: _guardarDatos,
                       style: ElevatedButton.styleFrom(

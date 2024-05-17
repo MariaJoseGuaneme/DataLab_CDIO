@@ -14,6 +14,7 @@ import 'package:base/paginas/vistas_estudiantes/p_26.dart';
 import 'package:base/paginas/vistas_estudiantes/p_27.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:base/funciones_proyecto/exportar.dart';
 class Menu_pulpa extends StatefulWidget {
@@ -149,11 +150,11 @@ class _Menu extends State<Menu_pulpa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           'Proceso de producción',
           style: TextStyle(
               color: Colors.white,
-              fontSize: 24), // Ajusta el color a blanco y el tamaño del texto
+              fontSize: 28.sp), // Ajusta el color a blanco y el tamaño del texto
         ),
         backgroundColor: const Color.fromARGB(
             255, 20, 99, 22), // Color verde específico para el AppBar
@@ -162,12 +163,12 @@ class _Menu extends State<Menu_pulpa> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
+             DrawerHeader(
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 20, 99, 22),
               ),
               child: Text('Selecciona el proceso',
-                  style: TextStyle(color: Colors.white, fontSize: 24)),
+                  style: TextStyle(color: Colors.white, fontSize: 18)),
             ),
             ...sections.map((section) {
               // Aplica un estilo diferente al botón 'Exportar'
@@ -180,7 +181,7 @@ class _Menu extends State<Menu_pulpa> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.red,
-                      textStyle: const TextStyle(fontSize: 20),
+                      textStyle: TextStyle(fontSize: 20.sp),
                     ),
                     onPressed: () {
                       _exportData();
@@ -194,7 +195,7 @@ class _Menu extends State<Menu_pulpa> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: section['color'],
-                      textStyle: const TextStyle(fontSize: 20),
+                      textStyle:  TextStyle(fontSize: 26.sp),
                     ),
                     onPressed: () => _changeContent(section['title']),
                     child: Text(section['title']),

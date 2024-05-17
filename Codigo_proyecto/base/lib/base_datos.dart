@@ -357,7 +357,7 @@ class DatabaseHelper {
     final path = join(dbPath, filePath);
 
     return await openDatabase(
-        path, version: 12, onCreate: _createDB, onUpgrade: _onUpgrade);
+        path, version: 1, onCreate: _createDB, onUpgrade: _onUpgrade);
   }
 
   Future _createDB(Database db, int version) async {
@@ -414,7 +414,7 @@ CREATE TABLE practica1 (
   ph_2 REAL NOT NULL DEFAULT 0.0,
   acidez_2 REAL NOT NULL DEFAULT 0.0,
   perdidas_olla REAL NOT NULL DEFAULT 0.0,
-  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0
+  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0,
   brix_fruta REAL NOT NULL DEFAULT 0.0,
   peso_pulpa_empacada REAL NOT NULL DEFAULT 0.0
   
@@ -449,9 +449,9 @@ CREATE TABLE practica2 (
   ph_2 REAL NOT NULL DEFAULT 0.0,
   acidez_2 REAL NOT NULL DEFAULT 0.0,
   perdidas_olla REAL NOT NULL DEFAULT 0.0,
-  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0
+  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0,
   brix_fruta REAL NOT NULL DEFAULT 0.0,
-  peso_refresco_empacado REAL NOT NULL DEFAULT 0.0
+  peso_refresco_empacado REAL NOT NULL DEFAULT 0.0,
   peso_ebullicion REAL NOT NULL DEFAULT 0.0,
   peso_homogenizacion REAL NOT NULL DEFAULT 0.0
   
@@ -955,80 +955,9 @@ CREATE TABLE _resultados_practica2 (
     //  await db.execute('DROP TABLE nombre_tabla');
     //}
 
-    if (oldVersion < 13) {
-      await db.execute('''
-CREATE TABLE practica2 (
-  id_grupos INTEGER PRIMARY KEY,
-  fruta TEXT NOT NULL DEFAULT 'Na',
-  unidades_producir REAL NOT NULL DEFAULT 0.0,
-  unidades_empaque REAL NOT NULL DEFAULT 0.0,
-  tiempo_escaldado REAL NOT NULL DEFAULT 0.0,
-  tiempo_enfriamiento REAL NOT NULL DEFAULT 0.0,
-  p_pulpa REAL NOT NULL DEFAULT 0.0,
-  p_azucar REAL NOT NULL DEFAULT 0.0,
-  p_agua REAL NOT NULL DEFAULT 0.0,
-  p_CMC REAL NOT NULL DEFAULT 0.0,
-  p_acido_ascorbico REAL NOT NULL DEFAULT 0.0,
-  p_benzonato_sodio REAL NOT NULL DEFAULT 0.0,
-  p_sorbato_potasio REAL NOT NULL DEFAULT 0.0,
-  peso_inicial REAL NOT NULL DEFAULT 0.0,
-  peso_escaldado REAL NOT NULL DEFAULT 0.0,
-  peso_cascara REAL NOT NULL DEFAULT 0.0,
-  peso_pulpa REAL NOT NULL DEFAULT 0.0,
-  peso_semillas REAL NOT NULL DEFAULT 0.0,
-  brix_1 REAL NOT NULL DEFAULT 0.0,
-  ph_1 REAL NOT NULL DEFAULT 0.0,
-  acidez_1 REAL NOT NULL DEFAULT 0.0,
-  brix_2 REAL NOT NULL DEFAULT 0.0,
-  ph_2 REAL NOT NULL DEFAULT 0.0,
-  acidez_2 REAL NOT NULL DEFAULT 0.0,
-  perdidas_olla REAL NOT NULL DEFAULT 0.0,
-  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0,
-  brix_fruta REAL NOT NULL DEFAULT 0.0,
-  peso_refresco_empacado REAL NOT NULL DEFAULT 0.0,
-  peso_ebullicion REAL NOT NULL DEFAULT 0.0,
-  peso_homogenizacion REAL NOT NULL DEFAULT 0.0
-  
-)
-''');
+   // if (oldVersion < 2) {
 
-      await db.execute('''
-CREATE TABLE _resultados_practica2 (
-  id_grupos INTEGER PRIMARY KEY,
-  Producto_obtener REAL NOT NULL DEFAULT 0,
-  cascara_y_semilla REAL NOT NULL DEFAULT 0,
-  Rendimiento_fruta REAL NOT NULL DEFAULT 0,
-  Perdidas_despulpado REAL NOT NULL DEFAULT 0,
-  Perdidas_despulpado_gr REAL NOT NULL DEFAULT 0,
-  Perdidas_Escaldado_gr REAL NOT NULL DEFAULT 0,
-  Perdidas_Escaldado REAL NOT NULL DEFAULT 0,
-  Perdidas_empacado_gr REAL NOT NULL DEFAULT 0,
-  Perdidas_empacado REAL NOT NULL DEFAULT 0,
-  Perdidas_evaporacion_gr REAL NOT NULL DEFAULT 0,
-  Perdidas_evaporacion REAL NOT NULL DEFAULT 0,
-  Perdidas_homogenizado_gr REAL NOT NULL DEFAULT 0,
-  Perdidas_homogenizado REAL NOT NULL DEFAULT 0,
-  Total_Formulacion REAL NOT NULL DEFAULT 0,
-  gr_pulpa REAL NOT NULL DEFAULT 0,
-  gr_azucar REAL NOT NULL DEFAULT 0,
-  gr_agua REAL NOT NULL DEFAULT 0,
-  gr_CMC REAL NOT NULL DEFAULT 0,
-  gr_acidoAscorbico REAL NOT NULL DEFAULT 0,
-  gr_benzonatoSodio REAL NOT NULL DEFAULT 0,
-  gr_sorbatoPotasio REAL NOT NULL DEFAULT 0,
-  Fruta_fresca_formulacion REAL NOT NULL DEFAULT 0,
-  Fruta_fresca_real REAL NOT NULL DEFAULT 0,
-  Rendimiento_producto REAL NOT NULL DEFAULT 0,
-  Acidez1 REAL NOT NULL DEFAULT 0,
-  Acidez2 REAL NOT NULL DEFAULT 0,
-  perdidas_olla_gr REAL NOT NULL DEFAULT 0,
-  
-  
-  FOREIGN KEY (id_grupos) REFERENCES practica2 (id_grupos)
-)
-''');
-
-    }
+   // }
     Future close() async {
       final db = await instance.database;
 

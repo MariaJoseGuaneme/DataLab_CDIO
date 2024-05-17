@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecepcionPage32 extends StatelessWidget {
   const RecepcionPage32({super.key});
@@ -15,8 +16,8 @@ class RecepcionPage32 extends StatelessWidget {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200, // Puedes ajustar el tamaño según necesites
-              height: 200,
+              width: 200.w, // Puedes ajustar el tamaño según necesites
+              height: 200.h,
             ),
           ),
           // Contenido centrado en la página
@@ -25,8 +26,8 @@ class RecepcionPage32 extends StatelessWidget {
               // Permite el desplazamiento cuando el contenido excede la pantalla
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(
-                    maxWidth: 600), // Limita el ancho máximo del contenido
+                constraints:  BoxConstraints(
+                    maxWidth: 600.w), // Limita el ancho máximo del contenido
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -35,21 +36,21 @@ class RecepcionPage32 extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
-                      child: const Text(
+                      child: Text(
                         '16. ENFRIAMIENTO 2',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
+                    SizedBox(height: 16.0.h),
                     // Espacio para la descripción
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green
                           .shade300, // Un tono de verde más claro para la descripción
-                      child: const Text(
+                      child: Text(
                         'Descripción del proceso de recepción. Aquí va el contenido descriptivo sobre cómo se maneja la recepción en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

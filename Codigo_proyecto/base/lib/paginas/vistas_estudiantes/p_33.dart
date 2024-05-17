@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart'; // Importa tu DatabaseManager
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
@@ -50,8 +51,8 @@ class _RecepcionPage33State extends State<RecepcionPage33> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Center(
@@ -66,29 +67,29 @@ class _RecepcionPage33State extends State<RecepcionPage33> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         '17. PESADO - HOMOGENEIZADO',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
-                      child: const Text(
+                      child:  Text(
                         'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Ingrese el peso depués de homogeneización',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                    SizedBox(height: 8.0.h),
                     TextField(
                       controller: _pesoHomogeneizadoController,
                       decoration: const InputDecoration(
@@ -101,7 +102,7 @@ class _RecepcionPage33State extends State<RecepcionPage33> {
                         FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
-                    const SizedBox(height: 18.0),
+                     SizedBox(height: 18.0.h),
                     ElevatedButton(
                       onPressed: _guardarPesoHomo,
                       style: ElevatedButton.styleFrom(
