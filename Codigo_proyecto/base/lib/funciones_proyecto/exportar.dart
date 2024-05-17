@@ -16,15 +16,7 @@ final DatabaseHelper _dbHelper = DatabaseHelper.instance;
 void sendEmail(BuildContext context) async {
  // Lista de correos electrónicos remitentes
  List<String> recipientEmails = [
-  'marlons.espinosaj@gmail.com',
-  'mateo.vargasc@uqvirtual.edu.co',
-  'mateovarcla@gmail.com',
-  'juanp.aricapab@uqvirtual.edu.co',
-  'mariaj.guanemeb@uqvirtual.edu.co',
-  'josed.perezz@uqvirtual.edu.co',
-  'marlons.espinosaj@uqvirtual.edu.co',
-  'perezo.santiago@uqvirtual.edu.co'
-  // Añade más correos según necesites
+  'marieguaneme@gmail.com'
  ];
 
  int idGrupo = UserPreferences.getIdGrupo();

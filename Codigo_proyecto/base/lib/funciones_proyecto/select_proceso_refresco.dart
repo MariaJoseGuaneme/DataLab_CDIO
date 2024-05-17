@@ -116,8 +116,9 @@ class _Menu extends State<Menu_refresco> {
     backgroundColor: Colors.red,
     textStyle: const TextStyle(fontSize: 20),
     ),
-    onPressed: () =>
-    calcularYGuardarResultados(), // Acción especial para exportar datos
+    onPressed: () {
+      _exportData();
+    calcularYGuardarResultados();} // Acción especial para exportar datos
     ),
     );
     } else {
