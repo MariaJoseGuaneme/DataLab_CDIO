@@ -1,5 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 
 class Profesor {
@@ -355,7 +357,7 @@ class DatabaseHelper {
     final path = join(dbPath, filePath);
 
     return await openDatabase(
-        path, version: 11, onCreate: _createDB, onUpgrade: _onUpgrade);
+        path, version: 1, onCreate: _createDB, onUpgrade: _onUpgrade);
   }
 
   Future _createDB(Database db, int version) async {
@@ -412,40 +414,50 @@ CREATE TABLE practica1 (
   ph_2 REAL NOT NULL DEFAULT 0.0,
   acidez_2 REAL NOT NULL DEFAULT 0.0,
   perdidas_olla REAL NOT NULL DEFAULT 0.0,
-  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0
+  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0,
   brix_fruta REAL NOT NULL DEFAULT 0.0,
   peso_pulpa_empacada REAL NOT NULL DEFAULT 0.0
   
 )
 ''');
 
+
     await db.execute('''
-CREATE TABLE practica_2 (
-  id_grupos INTEGER NOT NULL,
-  dato1 $realType,
-  dato2 $realType,
-  dato3 $realType,
-  dato4 $realType,
-  dato5 $realType,
-  dato6 $realType,
-  dato7 $realType,
-  dato8 $realType,
-  dato9 $realType,
-  dato10 $realType,
-  dato11 $realType,
-  dato12 $realType,
-  dato13 $realType,
-  dato14 $realType,
-  dato15 $realType,
-  dato16 $realType,
-  dato17 $realType,
-  dato18 $realType,
-  dato19 $realType,
-  dato20 $realType,
-  dato21 $realType,
-  dato22 $realType
+CREATE TABLE practica2 (
+  id_grupos INTEGER PRIMARY KEY,
+  fruta TEXT NOT NULL DEFAULT 'Na',
+  unidades_producir REAL NOT NULL DEFAULT 0.0,
+  unidades_empaque REAL NOT NULL DEFAULT 0.0,
+  tiempo_escaldado REAL NOT NULL DEFAULT 0.0,
+  tiempo_enfriamiento REAL NOT NULL DEFAULT 0.0,
+  p_pulpa REAL NOT NULL DEFAULT 0.0,
+  p_azucar REAL NOT NULL DEFAULT 0.0,
+  p_agua REAL NOT NULL DEFAULT 0.0,
+  p_CMC REAL NOT NULL DEFAULT 0.0,
+  p_acido_ascorbico REAL NOT NULL DEFAULT 0.0,
+  p_benzonato_sodio REAL NOT NULL DEFAULT 0.0,
+  p_sorbato_potasio REAL NOT NULL DEFAULT 0.0,
+  peso_inicial REAL NOT NULL DEFAULT 0.0,
+  peso_escaldado REAL NOT NULL DEFAULT 0.0,
+  peso_cascara REAL NOT NULL DEFAULT 0.0,
+  peso_pulpa REAL NOT NULL DEFAULT 0.0,
+  peso_semillas REAL NOT NULL DEFAULT 0.0,
+  brix_1 REAL NOT NULL DEFAULT 0.0,
+  ph_1 REAL NOT NULL DEFAULT 0.0,
+  acidez_1 REAL NOT NULL DEFAULT 0.0,
+  brix_2 REAL NOT NULL DEFAULT 0.0,
+  ph_2 REAL NOT NULL DEFAULT 0.0,
+  acidez_2 REAL NOT NULL DEFAULT 0.0,
+  perdidas_olla REAL NOT NULL DEFAULT 0.0,
+  perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0,
+  brix_fruta REAL NOT NULL DEFAULT 0.0,
+  peso_refresco_empacado REAL NOT NULL DEFAULT 0.0,
+  peso_ebullicion REAL NOT NULL DEFAULT 0.0,
+  peso_homogenizacion REAL NOT NULL DEFAULT 0.0
+  
 )
 ''');
+
 
     await db.execute('''
 CREATE TABLE _resultados_practica1 (
@@ -475,6 +487,43 @@ CREATE TABLE _resultados_practica1 (
   FOREIGN KEY (id_grupos) REFERENCES practica1 (id_grupos)
 )
 ''');
+
+    await db.execute('''
+CREATE TABLE _resultados_practica2 (
+  id_grupos INTEGER PRIMARY KEY,
+  Producto_obtener REAL NOT NULL DEFAULT 0,
+  cascara_y_semilla REAL NOT NULL DEFAULT 0,
+  Rendimiento_fruta REAL NOT NULL DEFAULT 0,
+  Perdidas_despulpado REAL NOT NULL DEFAULT 0,
+  Perdidas_despulpado_gr REAL NOT NULL DEFAULT 0,
+  Perdidas_Escaldado_gr REAL NOT NULL DEFAULT 0,
+  Perdidas_Escaldado REAL NOT NULL DEFAULT 0,
+  Perdidas_empacado_gr REAL NOT NULL DEFAULT 0,
+  Perdidas_empacado REAL NOT NULL DEFAULT 0,
+  Perdidas_evaporacion_gr REAL NOT NULL DEFAULT 0,
+  Perdidas_evaporacion REAL NOT NULL DEFAULT 0,
+  Perdidas_homogenizado_gr REAL NOT NULL DEFAULT 0,
+  Perdidas_homogenizado REAL NOT NULL DEFAULT 0,
+  Total_Formulacion REAL NOT NULL DEFAULT 0,
+  gr_pulpa REAL NOT NULL DEFAULT 0,
+  gr_azucar REAL NOT NULL DEFAULT 0,
+  gr_agua REAL NOT NULL DEFAULT 0,
+  gr_CMC REAL NOT NULL DEFAULT 0,
+  gr_acidoAscorbico REAL NOT NULL DEFAULT 0,
+  gr_benzonatoSodio REAL NOT NULL DEFAULT 0,
+  gr_sorbatoPotasio REAL NOT NULL DEFAULT 0,
+  Fruta_fresca_formulacion REAL NOT NULL DEFAULT 0,
+  Fruta_fresca_real REAL NOT NULL DEFAULT 0,
+  Rendimiento_producto REAL NOT NULL DEFAULT 0,
+  Acidez1 REAL NOT NULL DEFAULT 0,
+  Acidez2 REAL NOT NULL DEFAULT 0,
+  perdidas_olla_gr REAL NOT NULL DEFAULT 0,
+  
+  
+  FOREIGN KEY (id_grupos) REFERENCES practica1 (id_grupos)
+)
+''');
+
   }
 
 
@@ -562,7 +611,7 @@ CREATE TABLE _resultados_practica1 (
     });
   }
 
-  Future<List<Estudiante>> getEstudiantesPorGrupo(int idGrupo) async {
+  Future<List<Estudiante>> getEstudiantesPorGrupo(int idGrupo) async {                 // FUNCIÓN MATEO 5
     final db = await database;  // Obtiene la instancia de la base de datos
     final List<Map<String, dynamic>> maps = await db.query(
         'estudiantes',  // Asume que la tabla se llama 'estudiantes'
@@ -572,12 +621,31 @@ CREATE TABLE _resultados_practica1 (
 
     if (maps.isNotEmpty) {
       return List.generate(maps.length, (i) {
-        return Estudiante.fromMap(maps[i]);  // Asegúrate de que la clase Estudiante tiene este constructor
+        return Estudiante.fromMap(maps[i]);
       });
     } else {
       return [];  // Retorna una lista vacía si no hay estudiantes
     }
   }
+
+  // Esta función genera el archivo CSV de los estudiantes
+  Future<String> generateStudentsCSV() async {
+    final db = await instance.database;
+    final data = await db.query('estudiantes');
+    final directory = await getApplicationDocumentsDirectory();
+    File file = File('${directory.path}/students.csv');
+    print('${directory.path}/students.csv');
+
+    // Crea o sobrescribe el archivo CSV
+    String csvData = 'ID, Grupo ID, Correo\n';
+    for (var row in data) {
+      csvData += '${row['id']},${row['id_grupos']},${row['correo']}\n';
+    }
+    await file.writeAsString(csvData);
+
+    return file.path; // Devuelve la ruta del archivo
+  }
+
 
   // Actualizar un estudiante
   Future<int> updateEstudiante(Estudiante estudiante) async {
@@ -680,9 +748,8 @@ CREATE TABLE _resultados_practica1 (
   }
 
 // FUNIONES PRÁCTICA ---------------------------------------------------------
-
 // Leer una práctica por su ID de grupo
-  Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {
+  Future<Practica1?> getPractica1ByIdGrupos(int idGrupos) async {                // OPCIÓN MATEO
     final db = await database;
     final maps = await db.query(
         'practica1', where: 'id_grupos = ?', whereArgs: [idGrupos]);
@@ -691,6 +758,7 @@ CREATE TABLE _resultados_practica1 (
     }
     return null;
   }
+
 
 // Eliminar una práctica
   Future<int> deletePractica(int idGrupos) async {
@@ -765,6 +833,21 @@ CREATE TABLE _resultados_practica1 (
     return null;
   }
 
+  Future<dynamic> readSpecificData(String tableName, String columnName, int idGrupos) async { //OPCIÓN PRINCIPAL DE MATEO
+    final db = await instance.database;
+    final maps = await db.query(
+      tableName,
+      columns: [columnName],
+      where: 'id_grupos = ?',
+      whereArgs: [idGrupos],
+    );
+
+    if (maps.isNotEmpty) {
+      return maps.first[columnName];
+    }
+    throw Exception('ID not found');
+  }
+
   // FUNCIONES GET --------------------------------------------------------------
 
   Future<double> getNumericValue(String tableName, String columnName, int idGrupo) async {
@@ -790,14 +873,14 @@ CREATE TABLE _resultados_practica1 (
         whereArgs: [idGrupo]
     );
     if (result.isNotEmpty && result.first[columnName] != null) {
-      return result.first[columnName] as String;
+      return result.first[columnName] as String ;
     }
     return 'Na';
   }
 
   // PARA LA FORMULACIÓN ------------------------------------------------------
 
-  Future<Map<String, dynamic>> getComponentData(int idGrupo) async {
+  Future<Map<String, dynamic>> getComponentData1(int idGrupo) async {
     final db = await database;
     // Recuperar porcentajes de la tabla practica1
     final Map<String, dynamic> percentages = (await db.query(
@@ -828,6 +911,40 @@ CREATE TABLE _resultados_practica1 (
     };
   }
 
+  Future<Map<String, dynamic>> getComponentData2(int idGrupo) async {
+    final db = await database;
+    // Recuperar porcentajes de la tabla practica2
+    final Map<String, dynamic> percentages = (await db.query(
+        'practica2',
+        columns: ['p_pulpa', 'p_azucar', 'p_agua', 'p_CMC', 'p_acido_ascorbico', 'p_benzonato_sodio', 'p_sorbato_potasio'],
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    )).first;
+
+    // Recuperar gramos de la tabla _resultados_practica2
+    final Map<String, dynamic> grams = (await db.query(
+        '_resultados_practica2',
+        columns: ['Total_Formulacion', 'gr_pulpa', 'gr_azucar', 'gr_agua', 'gr_CMC', 'gr_acidoAscorbico', 'gr_benzonatoSodio', 'gr_sorbatoPotasio'],
+        where: 'id_grupos = ?',
+        whereArgs: [idGrupo]
+    )).first;
+
+    // Calcular porcentajes y retornar datos combinados
+    return {
+      "Total_Formulacion": grams['Total_Formulacion'],
+      "Componentes": [
+        {"name": "Pulpa", "grams": grams['gr_pulpa'], "percentage": percentages['p_pulpa']},
+        {"name": "Azúcar", "grams": grams['gr_azucar'], "percentage": percentages['p_azucar']},
+        {"name": "Agua", "grams": grams['gr_agua'], "percentage": percentages['p_agua']},
+        {"name": "CMC", "grams": grams['gr_CMC'], "percentage": percentages['p_CMC']},
+        {"name": "Ácido Ascórbico", "grams": grams['gr_acidoAscorbico'], "percentage": percentages['p_acido_ascorbico']},
+        {"name": "Benzoato de Sodio", "grams": grams['gr_benzonatoSodio'], "percentage": percentages['p_benzonato_sodio']},
+        {"name": "Sorbato de Potasio", "grams": grams['gr_sorbatoPotasio'], "percentage": percentages['p_sorbato_potasio']}
+      ]
+    };
+  }
+
+
 
   // VERSIONES BASE DE DATOS -------------------------------------------------
   Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
@@ -838,9 +955,9 @@ CREATE TABLE _resultados_practica1 (
     //  await db.execute('DROP TABLE nombre_tabla');
     //}
 
-    if (oldVersion < 12) {
-      await db.execute('ALTER TABLE practica1 ADD COLUMN perdidas_olla_empacado REAL NOT NULL DEFAULT 0.0');
-    }
+   // if (oldVersion < 2) {
+
+   // }
     Future close() async {
       final db = await instance.database;
 

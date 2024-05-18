@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';// Asegúrate de importar el DatabaseManager
 
@@ -51,45 +52,45 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Center(
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints: BoxConstraints(maxWidth: 600.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         '5. ESCALDADO',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
-                      child: const Text(
+                      child:  Text(
                         'Descripción del proceso de escaldado. Aquí va el contenido descriptivo sobre cómo se maneja el escaldado en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Ingrese el peso escaldado',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _pesoEscaldadoController,
                       decoration: const InputDecoration(
@@ -102,7 +103,7 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
                         FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       ],
                     ),
-                    const SizedBox(height: 18.0),
+                     SizedBox(height: 18.0.h),
                     ElevatedButton(
                       onPressed: _guardarPesoEscaldado,
                       style: ElevatedButton.styleFrom(

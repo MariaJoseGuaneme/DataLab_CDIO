@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart'; // Asegúrate de que la importación es correcta
-import 'package:base/funciones_proyecto/select_proceso.dart';
-class RecepcionPage24 extends StatefulWidget {
-  const RecepcionPage24({super.key});
+import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../preferences.dart';
+class RecepcionPage24_pulpa extends StatefulWidget {
+  const RecepcionPage24_pulpa({super.key});
 
   @override
-  _RecepcionPage24State createState() => _RecepcionPage24State();
+  _RecepcionPage24State_pulpa createState() => _RecepcionPage24State_pulpa();
 }
 
-class _RecepcionPage24State extends State<RecepcionPage24> {
+class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
   late Future<Map<String, dynamic>> componentData;
+  int idGrupo = UserPreferences.getIdGrupo();
+  String practica = UserPreferences.getPracticaSeleccionada();
+  final DatabaseHelper _databaseH = DatabaseHelper.instance;
 
   @override
   void initState() {
     super.initState();
     calcularYGuardarResultados();
-    componentData = DatabaseHelper.instance.getComponentData(1);
+    componentData = DatabaseHelper.instance.getComponentData1(idGrupo);
   }
 
   @override
@@ -32,13 +38,13 @@ class _RecepcionPage24State extends State<RecepcionPage24> {
                 width: double.infinity,
                 color: Colors.green,
                 alignment: Alignment.center,
-                child: const Text(
+                child:  Text(
                   '12. FORMULACIÓN',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
+                  style: TextStyle(color: Colors.white, fontSize: 24.sp),
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 24),
+               SizedBox(height: 24.h),
               FutureBuilder<Map<String, dynamic>>(
                 future: componentData,
                 builder: (context, snapshot) {
@@ -54,11 +60,11 @@ class _RecepcionPage24State extends State<RecepcionPage24> {
                         border: Border.all(color: Colors.black, width: 2), // Bordes exteriores negros
                       ),
                       child: DataTable(
-                        columnSpacing: 40,
-                        headingRowHeight: 40,
+                        columnSpacing: 40.w,
+                        headingRowHeight: 40.h,
                         dataRowHeight: 40,
-                        headingTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-                        dataTextStyle: TextStyle(fontSize: 20),
+                        headingTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 26.sp),
+                        dataTextStyle: TextStyle(fontSize: 20.sp),
                         columns: const [
                           DataColumn(label: Text('Componente')),
                           DataColumn(label: Text('Gramos')),

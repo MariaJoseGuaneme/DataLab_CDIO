@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
@@ -63,35 +64,35 @@ class _PagInicio13State extends State<PagInicio13> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Center(
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints:  BoxConstraints(maxWidth: 600.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         'Ingrese los tiempos',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Tiempo de escaldado',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _tiempoEscaldadoController,
                       decoration: const InputDecoration(
@@ -101,13 +102,13 @@ class _PagInicio13State extends State<PagInicio13> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
-                    const Text(
+                     SizedBox(height: 16.0.h),
+                     Text(
                       'Tiempo de enfriamiento ',
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 8.0),
+                     SizedBox(height: 8.0.h),
                     TextField(
                       controller: _tiempoEnfriamientoController,
                       decoration: const InputDecoration(
@@ -117,7 +118,7 @@ class _PagInicio13State extends State<PagInicio13> {
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))],
                     ),
-                    const SizedBox(height: 16.0),
+                     SizedBox(height: 16.0.h),
                     ElevatedButton(
                       onPressed: () {
                         _guardarTiempoEscaldado();

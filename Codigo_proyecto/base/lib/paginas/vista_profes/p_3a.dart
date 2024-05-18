@@ -2,6 +2,7 @@ import 'package:base/paginas/vista_profes/p_3b.dart';
 import 'package:base/paginas/vista_profes/p_4.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../preferences.dart';
 
 class PagInicio3a extends StatefulWidget {
@@ -31,8 +32,8 @@ class _PagInicio3aState extends State<PagInicio3a> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
+          padding: EdgeInsets.symmetric(
+              horizontal: 50.0.w), // Asegúrate de usar 'const' para optimizar
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,25 +41,25 @@ class _PagInicio3aState extends State<PagInicio3a> {
               Flexible(
                 child: Image.asset(
                   'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
-                  height: 120.0,
+                  height: 120.0.h,
                 ),
               ),
-              SizedBox(height: 48.0),
+              SizedBox(height: 48.0.h),
               Text(
                 'INGRESA TUS DATOS',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize: 22.0.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 48.0),
+              SizedBox(height: 48.0.h),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 60.0,
+                padding:  EdgeInsets.symmetric(
+                    vertical: 60.0.h,
                     horizontal:
-                        8.0), // Asegúrate de usar 'const' para optimizar
+                        8.0.w), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10.0),
@@ -74,7 +75,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                         prefixIcon: Icon(Icons.account_circle_sharp),
                         hintText: 'Correo institucional',
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                            vertical: 10.0.h, horizontal: 20.0.w),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -82,7 +83,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 50.0),
+                    SizedBox(height: 50.0.h),
                     TextField(
                       controller: passwordController,
                       obscureText: _obscureText,
@@ -91,7 +92,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                         prefixIcon: Icon(Icons.lock_outline_rounded),
                         hintText: 'Contraseña',
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                            vertical: 10.0.h, horizontal: 20.0.w),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -112,9 +113,9 @@ class _PagInicio3aState extends State<PagInicio3a> {
                   ],
                 ),
               ),
-              SizedBox(height: 50.0),
+              SizedBox(height: 50.0.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                padding:  EdgeInsets.symmetric(horizontal: 200.0.w),
                 child: Container(
                   child: Material(
                     color: Colors.black,
@@ -146,21 +147,21 @@ class _PagInicio3aState extends State<PagInicio3a> {
                         }
 
                       },
-                      minWidth: 100.0,
-                      height: 42.0,
+                      minWidth: 100.0.w,
+                      height: 42.0.h,
                       child: Text(
                         'Ingresar',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 20.0.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200),
+                padding:  EdgeInsets.symmetric(horizontal: 200.w),
                 child: Container(
-                  width: 100.0,
+                  width: 100.0.w,
                   child: Material(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(10.0),
@@ -169,11 +170,11 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio3b()),);// Implementar la lógica de Registrarse
                       },
-                      minWidth: 50.0,
-                      height: 42.0,
+                      minWidth: 50.0.w,
+                      height: 42.0.h,
                       child: Text(
                         'Registrarse',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
                       ),
                     ),
                   ),

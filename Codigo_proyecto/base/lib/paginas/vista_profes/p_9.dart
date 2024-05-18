@@ -1,5 +1,6 @@
-import 'package:base/paginas/vista_profes/p_9aPulpa.dart';
+import 'package:base/paginas/vista_profes/p_9a.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
@@ -36,11 +37,11 @@ class _PagInicio9 extends State<PagInicio9> {
             padding: const EdgeInsets.all(10),
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
-            child: const Text(
+            child:  Text(
               'Selecciona la práctica',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 38,
+                fontSize: 38.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -50,19 +51,19 @@ class _PagInicio9 extends State<PagInicio9> {
           Expanded(
            flex: 2,
             child: GridView.count(
-              padding: const EdgeInsets.all(20),
+              padding:  EdgeInsets.all(20),
               crossAxisCount: 2,
-               crossAxisSpacing: 20, // Espacio entre columnas
-               mainAxisSpacing: 20, // Espacio entre filas
+               crossAxisSpacing: 20.w, // Espacio entre columnas
+               mainAxisSpacing: 20.h, // Espacio entre filas
                childAspectRatio: buttonAspectRatio,
                children: <Widget>[
               _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 57, 174, 247), () async {
                await UserPreferences.setPracticaSeleccionada('practica1'); // Guarda 'practica1' para PULPA
-               Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa()));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9a()));
               }),
               _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () async {
                 await UserPreferences.setPracticaSeleccionada('practica2'); // Guarda 'practica2' para REFRESCO
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9aPulpa())); // Asegúrate de actualizar esto si REFRESCO va a otra página
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const PagInicio9a())); // Asegúrate de actualizar esto si REFRESCO va a otra página
              }),
           ],
        ),
@@ -78,8 +79,8 @@ class _PagInicio9 extends State<PagInicio9> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white, backgroundColor: color, // Color del texto del botón
-          padding: const EdgeInsets.symmetric(vertical: 16.0), // Ajusta el padding dentro del botón
-          textStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          padding:  EdgeInsets.symmetric(vertical: 16.0.h), // Ajusta el padding dentro del botón
+          textStyle: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

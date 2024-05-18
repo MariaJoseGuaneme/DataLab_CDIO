@@ -1,5 +1,6 @@
 import 'package:base/paginas/p_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PagInicio extends StatefulWidget {
   const PagInicio({ super.key });
@@ -24,29 +25,29 @@ return Center(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-              height:400 ,
-              width: 400,
+              height:400.h ,
+              width: 400.w,
               child: Image.asset('assets/logou.jpg'), 
             ),
-            const SizedBox(height: 20.0,),
+            SizedBox(height: 10.0.h,),
           Container(
-            width: 400,
-            height: 200,
+            width: 500.w,
+            height: 150.h,
             decoration: BoxDecoration(
               color: Colors.green,
               border: Border.all(color: Colors.green,width: 4.0),
               borderRadius: BorderRadius.circular(10.0)
             ),
 
-            child: const Center(
+            child:  Center(
             child: Text('¡Bienvenido al sistema de recolección de datos!',
-             style: TextStyle(color: Colors.white,fontSize: 30,
+             style: TextStyle(color: Colors.white,fontSize: 30.sp,
               fontWeight: FontWeight.bold,backgroundColor:Colors.green),
             textAlign: TextAlign.center,)
             ),
             ),
 
-            const SizedBox(height: 20.0,),
+             SizedBox(height: 20.0.h,),
            ElevatedButton(
             onPressed: (){
               Navigator.push(context,
@@ -54,7 +55,7 @@ return Center(
             }, 
             style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.black),
              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius:BorderRadius.circular(10.0)) ),),
-            child: const Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30)),
+            child:  Text('Iniciar', style: TextStyle(color: Colors.white, fontSize: 30.sp)),
             ) ,
             
         ],

@@ -1,5 +1,11 @@
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
 import 'package:flutter/material.dart';
+import 'package:base/base_datos.dart';
+import 'dart:io';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
 
 class Select_e extends StatefulWidget {
   const Select_e({super.key});
@@ -27,30 +33,31 @@ class _Select_e extends State<Select_e> {
 }
 
 Widget inicio(BuildContext context) {
+  final DatabaseHelper _databaseH = DatabaseHelper.instance;
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          height: 400,
-          width: 400,
+          height: 400.h,
+          width: 400.w,
           child: Image.asset('assets/logou.jpg'),
         ),
-        const SizedBox(height: 30.0),
+         SizedBox(height: 8.0.h),
         Container(
-          width: 300,
-          height: 100,
+          width: 300.w,
+          height: 100.h,
           decoration: BoxDecoration(
             color: Colors.green,
             border: Border.all(color: Colors.green, width: 4.0),
             borderRadius: BorderRadius.circular(10.0),
           ),
-          child: const Center(
+          child:  Center(
             child: Text(
               'Selecciona la actividad',
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 30,
+                fontSize: 30.sp,
                 fontWeight: FontWeight.bold,
                 backgroundColor: Colors.green,
               ),
@@ -58,7 +65,7 @@ Widget inicio(BuildContext context) {
             ),
           ),
         ),
-        const SizedBox(height: 50.0),
+         SizedBox(height: 50.0.h),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -66,21 +73,21 @@ Widget inicio(BuildContext context) {
               onTap: () {
               },
               child: Container(
-                width: 200,
-                height: 100,
+                width: 300.w,
+                height: 80.h,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 89, 135, 213),
                   border: Border.all(
                       color: const Color.fromARGB(255, 68, 100, 165),
-                      width: 10),
+                      width: 4),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: const Center(
+                child:  Center(
                   child: Text(
                     'REVISAR PRACTICAS',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
@@ -88,7 +95,7 @@ Widget inicio(BuildContext context) {
                 ),
               ),
             ),
-            const SizedBox(width: 60),
+             SizedBox(width: 60.w),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(
@@ -96,21 +103,21 @@ Widget inicio(BuildContext context) {
                 );
               },
               child: Container(
-                width: 200,
-                height: 100,
+                width: 300.w,
+                height: 80.h,
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 85, 223, 138),
                   border: Border.all(
                       color: const Color.fromARGB(255, 104, 203, 102),
-                      width: 10),
+                      width: 4),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: const Center(
+                child:  Center(
                   child: Text(
                     'INICIAR PRACTICA',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
@@ -124,3 +131,4 @@ Widget inicio(BuildContext context) {
     ),
   );
 }
+

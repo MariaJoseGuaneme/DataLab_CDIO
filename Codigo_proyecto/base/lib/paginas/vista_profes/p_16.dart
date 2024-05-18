@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../preferences.dart';
 
 class PagInicio16 extends StatefulWidget {
@@ -82,11 +83,11 @@ class _PagInicio16State extends State<PagInicio16> {
             padding: const EdgeInsets.all(10),
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
-            child: const Text(
+            child: Text(
               'Agregar nuevo correo institucional',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

@@ -3,6 +3,7 @@ import 'package:base/funciones_proyecto/select_actividad_estudiante.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/paginas/vistas_estudiantes/p_4.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PagInicio3e extends StatefulWidget {
   const PagInicio3e({Key? key}) : super(key: key);
@@ -30,8 +31,8 @@ class _PagInicio3eState extends State<PagInicio3e> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 50.0), // Asegúrate de usar 'const' para optimizar
+          padding:  EdgeInsets.symmetric(
+              horizontal: 50.0.w), // Asegúrate de usar 'const' para optimizar
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,25 +40,25 @@ class _PagInicio3eState extends State<PagInicio3e> {
               Flexible(
                 child: Image.asset(
                   'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
-                  height: 140.0,
+                  height: 140.0.h,
                 ),
               ),
-              SizedBox(height: 48.0),
+              SizedBox(height: 48.0.h),
               Text(
                 'INGRESA TU CORREO',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22.0,
+                  fontSize: 22.0.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 48.0),
+              SizedBox(height: 48.0.h),
               Container(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 60.0,
+                padding:  EdgeInsets.symmetric(
+                    vertical: 60.0.h,
                     horizontal:
-                    8.0), // Asegúrate de usar 'const' para optimizar
+                    8.0.w), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10.0),
@@ -73,7 +74,7 @@ class _PagInicio3eState extends State<PagInicio3e> {
                         prefixIcon: Icon(Icons.account_circle_sharp),
                         hintText: 'Correo institucional',
                         contentPadding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                            vertical: 10.0.h, horizontal: 20.0.w),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
@@ -81,13 +82,13 @@ class _PagInicio3eState extends State<PagInicio3e> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 50.0),
+                    SizedBox(height: 50.0.h),
                   ],
                 ),
               ),
-              SizedBox(height: 50.0),
+              SizedBox(height: 50.0.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                padding:  EdgeInsets.symmetric(horizontal: 200.0.w),
                 child: Container(
                   child: Material(
                     color: Colors.black,
@@ -115,11 +116,11 @@ class _PagInicio3eState extends State<PagInicio3e> {
                           );
                         }
                       },
-                      minWidth: 100.0,
-                      height: 42.0,
+                      minWidth: 100.0.w,
+                      height: 42.0.h,
                       child: Text(
                         'Ingresar',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0),
+                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
                       ),
                     ),
                   ),

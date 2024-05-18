@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:base/funciones_proyecto/select_proceso.dart';
+import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
+import 'package:base/funciones_proyecto/select_proceso_refresco.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../preferences.dart';
 class PagInicio5 extends StatefulWidget {
   const PagInicio5({super.key});
 
@@ -32,11 +35,11 @@ class _PagInicio5 extends State<PagInicio5> {
             padding: const EdgeInsets.all(10),
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
-            child: const Text(
+            child:  Text(
               'Selecciona la práctica',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 38,
+                fontSize: 40.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -45,17 +48,19 @@ class _PagInicio5 extends State<PagInicio5> {
           Expanded(
             child: Center(
               child: GridView.count(
-                padding: const EdgeInsets.all(20),
+                padding:  EdgeInsets.all(20),
                 crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                crossAxisSpacing: 20.w,
+                mainAxisSpacing: 20.h,
                 childAspectRatio: buttonAspectRatio,
                 children: <Widget>[
-                  _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169), () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu()));
+                  _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 16, 8, 169), () async {
+                    await UserPreferences.setPracticaSeleccionada('practica1'); // Guarda 'practica1' para PULPA
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu_pulpa()));
                   }),
-                  _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () {
-                    // Navegación a la página de refresco
+                  _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () async {
+                    await UserPreferences.setPracticaSeleccionada('practica2'); // Guarda 'practica2' para REFRESCO
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Menu_refresco()));// Navegación a la página de refresco
                   }),
                 ],
               ),
@@ -73,8 +78,8 @@ class _PagInicio5 extends State<PagInicio5> {
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
           backgroundColor: color,
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          padding: EdgeInsets.symmetric(vertical: 16.0.h),
+          textStyle: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

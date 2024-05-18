@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 import 'package:base/paginas/vista_profes/p_10.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
 
-class PagInicio9aPulpa extends StatefulWidget {
-  const PagInicio9aPulpa({super.key});
+class PagInicio9a extends StatefulWidget {
+  const PagInicio9a({super.key});
 
   @override
-  _PagInicio9aPulpaState createState() => _PagInicio9aPulpaState();
+  _PagInicio9aState createState() => _PagInicio9aState();
 }
 
-class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
+class _PagInicio9aState extends State<PagInicio9a> {
   final TextEditingController _frutaController = TextEditingController();
   final TextEditingController _brixController = TextEditingController();
   final DatabaseHelper _databaseH = DatabaseHelper.instance; //instancia de la base de datos
@@ -58,32 +59,32 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
             left: 0,
             child: Image.asset(
               'assets/UQ.png',
-              width: 200,
-              height: 200,
+              width: 200.w,
+              height: 200.h,
             ),
           ),
           Center(
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                constraints: const BoxConstraints(maxWidth: 600),
+                constraints:  BoxConstraints(maxWidth: 600.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
-                      child: const Text(
+                      child:  Text(
                         'Ingresar fruta',
-                        style: TextStyle(color: Colors.white, fontSize: 30),
+                        style: TextStyle(color: Colors.white, fontSize: 30.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 50),
-                    const Text(
+                     SizedBox(height: 50.h),
+                     Text(
                       'Ingrese el nombre de la fruta',
-                      style: TextStyle(fontSize: 22),
+                      style: TextStyle(fontSize: 22.sp),
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 20),
@@ -95,12 +96,12 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
                         hintText: 'Introduzca el nombre de la fruta',
                       ),
                     ),
-                    const Text(
+                     Text(
                       'Ingrese los grados Brix de la fruta',
-                      style: TextStyle(fontSize: 22),
+                      style: TextStyle(fontSize: 22.sp),
                       textAlign: TextAlign.left,
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                     TextField(
                       controller: _brixController,
                       decoration: const InputDecoration(
@@ -109,7 +110,7 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
                         hintText: 'Grados Brix de la fruta',
                       ),
                     ),
-                    const SizedBox(height: 18.0),
+                     SizedBox(height: 18.0.h),
                     ElevatedButton(
                       onPressed: (){
                         _guardarFruta();
@@ -117,7 +118,6 @@ class _PagInicio9aPulpaState extends State<PagInicio9aPulpa> {
                         Navigator.push(context,
                             MaterialPageRoute(builder:(context) => const PagInicio10() ));
                       },
-                      //onPressed: _guardarFruta,
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

@@ -8,22 +8,23 @@ import 'package:base/paginas/vistas_estudiantes/p_20.dart';
 import 'package:base/paginas/vistas_estudiantes/p_21.dart';
 import 'package:base/paginas/vistas_estudiantes/p_22.dart';
 import 'package:base/paginas/vistas_estudiantes/p_23.dart';
-import 'package:base/paginas/vistas_estudiantes/p_24.dart';
+import 'package:base/paginas/vistas_estudiantes/p_24_pulpa.dart';
 import 'package:base/paginas/vistas_estudiantes/p_25.dart';
 import 'package:base/paginas/vistas_estudiantes/p_26.dart';
 import 'package:base/paginas/vistas_estudiantes/p_27.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sqflite/sqflite.dart';
-
-class Menu extends StatefulWidget {
-  const Menu({super.key});
+import 'package:base/funciones_proyecto/exportar.dart';
+class Menu_pulpa extends StatefulWidget {
+  const Menu_pulpa({super.key});
 
   @override
-  State<Menu> createState() => _Menu();
+  State<Menu_pulpa> createState() => _Menu();
 }
 
-class _Menu extends State<Menu> {
+class _Menu extends State<Menu_pulpa> {
   // Inicializa una variable para mantener el widget actual mostrado en el body
   Widget _currentBody = const Center(
     child: Text('Contenido principal aquí'),
@@ -123,7 +124,7 @@ class _Menu extends State<Menu> {
           break;
         case 'Formulación':
           _currentBody =
-              const RecepcionPage24(); // Cambia a la página de recepción
+              const RecepcionPage24_pulpa(); // Cambia a la página de recepción
           break;
         case 'Mezclado':
           _currentBody =
@@ -149,11 +150,11 @@ class _Menu extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           'Proceso de producción',
           style: TextStyle(
               color: Colors.white,
-              fontSize: 24), // Ajusta el color a blanco y el tamaño del texto
+              fontSize: 28.sp), // Ajusta el color a blanco y el tamaño del texto
         ),
         backgroundColor: const Color.fromARGB(
             255, 20, 99, 22), // Color verde específico para el AppBar
@@ -162,12 +163,12 @@ class _Menu extends State<Menu> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
+             DrawerHeader(
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 20, 99, 22),
               ),
               child: Text('Selecciona el proceso',
-                  style: TextStyle(color: Colors.white, fontSize: 24)),
+                  style: TextStyle(color: Colors.white, fontSize: 18)),
             ),
             ...sections.map((section) {
               // Aplica un estilo diferente al botón 'Exportar'
@@ -180,10 +181,12 @@ class _Menu extends State<Menu> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: Colors.red,
-                      textStyle: const TextStyle(fontSize: 20),
+                      textStyle: TextStyle(fontSize: 20.sp),
                     ),
-                    onPressed: () =>
-                        calcularYGuardarResultados(), // Acción especial para exportar datos
+                    onPressed: () {
+                      _exportData();
+                      calcularYGuardarResultados();
+                    }// Acción especial para exportar datos
                   ),
                 );
               } else {
@@ -192,7 +195,7 @@ class _Menu extends State<Menu> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: section['color'],
-                      textStyle: const TextStyle(fontSize: 20),
+                      textStyle:  TextStyle(fontSize: 26.sp),
                     ),
                     onPressed: () => _changeContent(section['title']),
                     child: Text(section['title']),
@@ -209,7 +212,7 @@ class _Menu extends State<Menu> {
 
 // Método para manejar la exportación de datos
   void _exportData() {
-    // Implementa la lógica para exportar datos aquí
+    sendEmail(context);// Implementa la lógica para exportar datos aquí
   }
 }
 
@@ -235,14 +238,15 @@ Future<void> calcularYGuardarResultados() async {
     double Peso_semillas = practica['peso_semillas'] as double;
     double Acidez_1_ml = practica['acidez_1'] as double;
     double Acidez_2_ml = practica['acidez_2'] as double;
-    double Perdidas_olla = practica['perdidas_olla'] as double;
+    double Perdidas_olla = practica['perdidas_olla'] as double; //peso de la olla sola
     double Peso_pulpa_empacada = practica['peso_pulpa_empacada'] as double;
-    double perdidas_olla_empacado = practica['perdidas_olla_empacado']as double;
+    double perdidas_olla_empacado = practica['perdidas_olla_empacado']as double; // peso de la olla después de empacar su producto
 
 
     double Producto_obtener = unidadesEmpaque * unidadesProducir;
     double cascara_y_semilla = Peso_semillas + Peso_cascara;
     double Rendimiento_fruta;
+
     if (Peso_inicial > 0) {
       Rendimiento_fruta =
           (Peso_inicial - cascara_y_semilla) * 100 / Peso_inicial;
@@ -292,7 +296,7 @@ Future<void> calcularYGuardarResultados() async {
     double Rendimiento_producto;
 
     if (Total_Formulacion > 0) {
-      Rendimiento_producto = (Producto_obtener / Total_Formulacion) * 100;
+      Rendimiento_producto = ((Producto_obtener / Total_Formulacion) * 100);
     } else {
       Rendimiento_producto = 0;
     }
