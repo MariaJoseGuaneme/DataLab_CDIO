@@ -37,19 +37,18 @@ Widget inicio(BuildContext context) {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          height: 400.h,
-          width: 400.w,
+          height: 300.h,
+          width: 300.w,
           child: Image.asset('assets/logou.jpg'),
         ),
          SizedBox(height: 2.h),
         Container(
           width: 300.w,
-          height: 100.h,
+          height: 80.h,
           decoration: BoxDecoration(
             color: Colors.green,
             border: Border.all(color: Colors.green, width: 4.0),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
+                     ),
           child:  Center(
             child: Text(
               'Selecciona la actividad',
@@ -63,7 +62,7 @@ Widget inicio(BuildContext context) {
             ),
           ),
         ),
-         SizedBox(height: 20.0.h),
+         SizedBox(height: 40.0.h),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

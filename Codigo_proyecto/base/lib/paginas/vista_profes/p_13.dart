@@ -114,6 +114,7 @@ class _PagInicio13State extends State<PagInicio13> {
                       onPressed: () {
                         _guardarTiempoEscaldado();
                         _guardarTiempoEnfriamiento();
+                        Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

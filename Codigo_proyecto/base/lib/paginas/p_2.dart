@@ -1,7 +1,6 @@
 import 'package:base/paginas/vista_profes/p_3a.dart';
 import 'package:base/paginas/vistas_estudiantes/p_3.dart';
 import 'package:flutter/material.dart';
-import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PagInicio2 extends StatefulWidget {
@@ -83,7 +82,6 @@ return Center(
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const PagInicio3e()),
                   );
-                  // Handle INSERTAR DATOS tap
                 },
                 child:
               Container(

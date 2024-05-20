@@ -65,10 +65,12 @@ Future <String> generarArchivo(String practica) async {
 
   sheet.setColumnWidth(1,15);
   sheet.setColumnWidth(5,15);
-
-
+String tipo = 'PULPA';
+if (practica == 'practica1'){
+  tipo = 'PULPA';
+}else {tipo = 'REFRESCO';}
   // Añadir algunos datos y combinar celdas
-  sheet.cell(excel1.CellIndex.indexByString('B3')).value = excel1.TextCellValue('PROCESAMIENTO DE PRACTICA');
+  sheet.cell(excel1.CellIndex.indexByString('B3')).value = excel1.TextCellValue('PROCESAMIENTO DE '+tipo);
   sheet.merge(excel1.CellIndex.indexByString('B3'), excel1.CellIndex.indexByString('D3'));
   cell = sheet.cell(excel1.CellIndex.indexByString('B3'));
   cell.cellStyle = cellStyle;

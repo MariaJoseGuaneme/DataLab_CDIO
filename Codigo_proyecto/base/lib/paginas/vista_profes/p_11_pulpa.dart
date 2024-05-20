@@ -190,6 +190,7 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                         _guardarP_citrico();
                         _guardarP_pulpa();
                         _guardarP_sorbato();
+                        Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
