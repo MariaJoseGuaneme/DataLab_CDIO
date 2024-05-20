@@ -119,6 +119,7 @@ class _PagInicio12State extends State<PagInicio12> {
                       onPressed: () {
                        _guardarUnidadesProducir();
                        _guardarUnidadesEmpaque();
+                       Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

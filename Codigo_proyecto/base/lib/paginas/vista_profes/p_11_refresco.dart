@@ -105,7 +105,10 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
                     _crearTextField('Sorbato de potasio', _psorbatopotasioController, 'Ingrese el porcentaje de sorbato de potasio'),
                      SizedBox(height: 16.0.h),
                     ElevatedButton(
-                      onPressed: _guardarDatos,
+                      onPressed: (){
+                        _guardarDatos;
+                        Navigator.of(context).pop();
+                      },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,
