@@ -76,7 +76,7 @@ Widget inicio(BuildContext context) {
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 89, 135, 213),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 68, 100, 165), width: 4),
+                      color: const Color.fromARGB(255, 68, 100, 165), width: 5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child:  Center(
@@ -105,7 +105,7 @@ Widget inicio(BuildContext context) {
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 85, 223, 138),
                   border: Border.all(
-                      color: const Color.fromARGB(255, 104, 203, 102), width: 4),
+                      color: const Color.fromARGB(255, 104, 203, 102), width: 5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child:  Center(
@@ -120,7 +120,8 @@ Widget inicio(BuildContext context) {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox(width: 40),
           ],
         )
       ],

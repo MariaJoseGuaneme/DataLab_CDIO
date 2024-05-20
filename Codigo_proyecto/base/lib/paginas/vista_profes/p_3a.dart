@@ -44,12 +44,12 @@ class _PagInicio3aState extends State<PagInicio3a> {
                   height: 120.0.h,
                 ),
               ),
-              SizedBox(height: 48.0.h),
+              SizedBox(height: 20.h),
               Text(
                 'INGRESA TUS DATOS',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22.0.sp,
+                  fontSize: 26.0.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -83,7 +83,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 50.0.h),
+                    SizedBox(height: 20.0.h),
                     TextField(
                       controller: passwordController,
                       obscureText: _obscureText,
@@ -113,7 +113,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                   ],
                 ),
               ),
-              SizedBox(height: 50.0.h),
+              SizedBox(height: 30.0.h),
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 200.0.w),
                 child: Container(

@@ -198,7 +198,6 @@ class DatabaseManager {
       }
     } else {
       // Si ya existe, actualiza el registro existente para ese idGrupos.
-      try {
         int count = await db.update(
             practicaTableName, {columnName: value}, where: 'id_grupos = ?',
             whereArgs: [idGrupos]);
@@ -208,13 +207,7 @@ class DatabaseManager {
                 'No se encontró el registro para actualizar en $practicaTableName')),
           );
         }
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(
-              'Error al actualizar el dato en $practicaTableName: ${e
-                  .toString()}')),
-        );
       }
     }
   }
-}
+
