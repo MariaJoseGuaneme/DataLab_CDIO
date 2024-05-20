@@ -22,7 +22,7 @@ Future<List<bool>> sendEmail(BuildContext context,String practica) async {
     recipientEmails.add(e.correo);
   }
 
-  final mailer = Mailer('');
+  final mailer = Mailer('SG.IlM9FcZoSmeG48y8iu50dQ.umVnhh1utuKtigwkx0zz3xgvo8HmbVlPGLOQN1bWK');
   final fromAddress = Address('datalabplus@gmail.com');
   List<bool> results = [];
 
