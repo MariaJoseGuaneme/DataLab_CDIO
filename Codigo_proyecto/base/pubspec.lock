@@ -221,6 +221,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.19.0"
+<<<<<<< HEAD
+=======
+  jiffy:
+    dependency: transitive
+    description:
+      name: jiffy
+      sha256: "3497caaa36d36a29033e66803c9739ce6bccbc7e241ca46070f76ee9e6f6eb0c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.1"
+>>>>>>> Majo
   js:
     dependency: transitive
     description:
@@ -522,6 +533,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "9e8bac2367d03bd902844f59e866c0e7b1e10b0b8fa5a6a926c0d8ae8c344533"
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.2.4"
+  syncfusion_flutter_xlsio:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_xlsio
+      sha256: c14d232b801d1dcf1108d95e5e5c2b5526c7b1b7b8959d4a19afe4896e547359
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.2.4"
+  syncfusion_officecore:
+    dependency: transitive
+    description:
+      name: syncfusion_officecore
+      sha256: "347919e8ca82c54c87956cf0d1d668328cd21331c12de8fec271c8036e3a4e45"
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.2.4"
   synchronized:
     dependency: transitive
     description:

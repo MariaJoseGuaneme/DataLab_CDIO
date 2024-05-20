@@ -22,6 +22,8 @@ import 'package:base/paginas/vistas_estudiantes/p_36.dart';
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../paginas/Revisar_practicas.dart';
+import '../preferences.dart';
 import 'exportar.dart';
 
 class Menu_refresco extends StatefulWidget {
@@ -32,58 +34,152 @@ class Menu_refresco extends StatefulWidget {
 }
 
 class _Menu extends State<Menu_refresco> {
+  String practica = UserPreferences.getPracticaSeleccionada();
   Widget _currentBody = const Center(
     child: Text('Contenido principal aquí'),
   );
 
-  List<Map<String, dynamic>> get sections => [
-    {'title': 'Recepción', 'color': const Color.fromARGB(255, 100, 200, 247)},
-    {'title': 'Lavado', 'color': const Color.fromARGB(255, 41, 161, 231)},
-    {'title': 'Pesado', 'color': const Color.fromARGB(255, 8, 122, 167)},
-    {'title': 'Desinfección', 'color': const Color.fromARGB(255, 28, 106, 196)},
-    {'title': 'Escaldado', 'color': const Color.fromARGB(255, 50, 196, 69)},
-    {'title': 'Enfriamiento', 'color': const Color.fromARGB(255, 34, 133, 42)},
-    {'title': 'Acondicionamiento', 'color': const Color.fromARGB(255, 16, 112, 20)},
-    {'title': 'Despulpar', 'color': const Color.fromARGB(255, 241, 189, 165)},
-    {'title': 'Pesado P/S', 'color': const Color.fromARGB(255, 255, 206, 141)},
-    {'title': 'Control Físico-Químico 1', 'color': const Color.fromARGB(255, 255, 184, 126)},
-    {'title': 'Formulación', 'color': const Color.fromARGB(255, 233, 165, 101)},
-    {'title': 'Ebullición', 'color': const Color.fromARGB(255, 240, 153, 72)},
-    {'title': 'Control Físico-Químico 2', 'color': const Color.fromARGB(255, 136, 134, 26)},
-    {'title': 'Pesado - Ebullición', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Homogeneizar', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Enfriamiento', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Pesado - Homogeneizado', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Envasar y tapar', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Pesado - Total', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Enfriar y almacenar', 'color': const Color.fromARGB(255, 245, 236, 107)},
-    {'title': 'Exportar', 'color': const Color.fromARGB(255, 243, 15, 15)},
-  ];
+  List<Map<String, dynamic>> get sections =>
+      [
+        {
+          'title': 'Recepción',
+          'color': const Color.fromARGB(255, 100, 200, 247)
+        },
+        {'title': 'Lavado', 'color': const Color.fromARGB(255, 41, 161, 231)},
+        {'title': 'Pesado', 'color': const Color.fromARGB(255, 8, 122, 167)},
+        {
+          'title': 'Desinfección',
+          'color': const Color.fromARGB(255, 28, 106, 196)
+        },
+        {'title': 'Escaldado', 'color': const Color.fromARGB(255, 50, 196, 69)},
+        {
+          'title': 'Enfriamiento',
+          'color': const Color.fromARGB(255, 34, 133, 42)
+        },
+        {
+          'title': 'Acondicionamiento',
+          'color': const Color.fromARGB(255, 16, 112, 20)
+        },
+        {
+          'title': 'Despulpar',
+          'color': const Color.fromARGB(255, 241, 189, 165)
+        },
+        {
+          'title': 'Pesado P/S',
+          'color': const Color.fromARGB(255, 255, 206, 141)
+        },
+        {
+          'title': 'Control Físico-Químico 1',
+          'color': const Color.fromARGB(255, 255, 184, 126)
+        },
+        {
+          'title': 'Formulación',
+          'color': const Color.fromARGB(255, 233, 165, 101)
+        },
+        {
+          'title': 'Ebullición',
+          'color': const Color.fromARGB(255, 240, 153, 72)
+        },
+        {
+          'title': 'Control Físico-Químico 2',
+          'color': const Color.fromARGB(255, 136, 134, 26)
+        },
+        {
+          'title': 'Pesado - Ebullición',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {
+          'title': 'Homogeneizar',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {
+          'title': 'Enfriamiento',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {
+          'title': 'Pesado - Homogeneizado',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {
+          'title': 'Envasar y tapar',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {
+          'title': 'Pesado - Total',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {
+          'title': 'Enfriar y almacenar',
+          'color': const Color.fromARGB(255, 245, 236, 107)
+        },
+        {'title': 'Exportar', 'color': const Color.fromARGB(255, 243, 15, 15)},
+      ];
 
   void _changeContent(String sectionTitle) {
     setState(() {
       switch (sectionTitle) {
-        case 'Recepción': _currentBody = const RecepcionPage(); break;
-        case 'Lavado': _currentBody = const  RecepcionPage2(); break;
-        case 'Pesado': _currentBody = RecepcionPage13(); break;
-        case 'Desinfección': _currentBody = RecepcionPage14(); break;
-        case 'Escaldado': _currentBody = const RecepcionPage16(); break;
-        case 'Enfriamiento': _currentBody = const RecepcionPage18(); break;
-        case 'Acondicionamiento': _currentBody = const RecepcionPage20(); break;
-        case 'Despulpar': _currentBody = const RecepcionPage21(); break;
-        case 'Pesado P/S': _currentBody = const RecepcionPage22(); break;
-        case 'Control Físico-Químico 1': _currentBody = const RecepcionPage23(); break;
-        case 'Formulación': _currentBody = const RecepcionPage24_refresco(); break;
-        case 'Ebullición': _currentBody = const RecepcionPage28(); break;
-        case 'Control Físico-Químico 2': _currentBody = const RecepcionPage29(); break;
-        case 'Pesado - Ebullición': _currentBody = const RecepcionPage30(); break;
-        case 'Homogeneizar': _currentBody = const RecepcionPage31(); break;
-        case 'Enfriamiento': _currentBody = const RecepcionPage32(); break;
-        case 'Pesado - Homogeneizado': _currentBody = const RecepcionPage33(); break;
-        case 'Envasar y tapar': _currentBody = const RecepcionPage34(); break;
-        case 'Pesado - Total': _currentBody = const RecepcionPage35(); break;
-        case 'Enfriar y almacenar': _currentBody = const RecepcionPage36(); break;
-        default: _currentBody = const Center(child: Text('Contenido principal aquí'));
+        case 'Recepción':
+          _currentBody = const RecepcionPage();
+          break;
+        case 'Lavado':
+          _currentBody = const RecepcionPage2();
+          break;
+        case 'Pesado':
+          _currentBody = RecepcionPage13();
+          break;
+        case 'Desinfección':
+          _currentBody = RecepcionPage14();
+          break;
+        case 'Escaldado':
+          _currentBody = const RecepcionPage16();
+          break;
+        case 'Enfriamiento':
+          _currentBody = const RecepcionPage18();
+          break;
+        case 'Acondicionamiento':
+          _currentBody = const RecepcionPage20();
+          break;
+        case 'Despulpar':
+          _currentBody = const RecepcionPage21();
+          break;
+        case 'Pesado P/S':
+          _currentBody = const RecepcionPage22();
+          break;
+        case 'Control Físico-Químico 1':
+          _currentBody = const RecepcionPage23();
+          break;
+        case 'Formulación':
+          _currentBody = const RecepcionPage24_refresco();
+          break;
+        case 'Ebullición':
+          _currentBody = const RecepcionPage28();
+          break;
+        case 'Control Físico-Químico 2':
+          _currentBody = const RecepcionPage29();
+          break;
+        case 'Pesado - Ebullición':
+          _currentBody = const RecepcionPage30();
+          break;
+        case 'Homogeneizar':
+          _currentBody = const RecepcionPage31();
+          break;
+        case 'Enfriamiento':
+          _currentBody = const RecepcionPage32();
+          break;
+        case 'Pesado - Homogeneizado':
+          _currentBody = const RecepcionPage33();
+          break;
+        case 'Envasar y tapar':
+          _currentBody = const RecepcionPage34();
+          break;
+        case 'Pesado - Total':
+          _currentBody = const RecepcionPage35();
+          break;
+        case 'Enfriar y almacenar':
+          _currentBody = const RecepcionPage36();
+          break;
+        default:
+          _currentBody = const Center(child: Text('Contenido principal aquí'));
       }
     });
   }
@@ -92,11 +188,12 @@ class _Menu extends State<Menu_refresco> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(
+        title: Text(
           'Proceso de producción',
           style: TextStyle(
               color: Colors.white,
-              fontSize: 28.sp), // Ajusta el color a blanco y el tamaño del texto
+              fontSize: 28
+                  .sp), // Ajusta el color a blanco y el tamaño del texto
         ),
         backgroundColor: const Color.fromARGB(255, 20, 99, 22),
       ),
@@ -108,55 +205,115 @@ class _Menu extends State<Menu_refresco> {
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 20, 99, 22),
               ),
-              child: Text('Selecciona el proceso', style: TextStyle(color: Colors.white, fontSize: 18)),
+              child: Text('Selecciona el proceso',
+                  style: TextStyle(color: Colors.white, fontSize: 18)),
             ),
             ...sections.map((section) {
-    if (section['title'] == 'Exportar') {
-    return ListTile(
-    title: ElevatedButton.icon(
-    icon: const Icon(Icons.download,
-    color: Colors.white), // Ícono de descarga
-    label: Text(section['title']),
-    style: ElevatedButton.styleFrom(
-    foregroundColor: Colors.white,
-    backgroundColor: Colors.red,
-    textStyle:  TextStyle(fontSize: 20.sp),
-    ),
-    onPressed: () {
-      _exportData();
-    calcularYGuardarResultados();} // Acción especial para exportar datos
-    ),
-    );
-    } else {
-    return  ListTile(
-      title: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: section['color'],
-          textStyle:  TextStyle(fontSize: 26.sp),
-        ),
-        onPressed: () => _changeContent(section['title']),
-        child: Text(section['title']),
-      ),
-    );
-    }
-    }),
+              if (section['title'] == 'Exportar') {
+                return ListTile(
+                  title: ElevatedButton.icon(
+                      icon: const Icon(Icons.download,
+                          color: Colors.white), // Ícono de descarga
+                      label: Text(section['title']),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.red,
+                        textStyle: TextStyle(fontSize: 20.sp),
+                      ),
+                      onPressed: () {
+                        print(practica);
+                        print('de refresco');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Scaffold(
+                                  appBar: AppBar(
+                                    title: Text('Pre-Visualización'),
+                                    backgroundColor: Color.fromARGB(
+                                        255, 59, 148, 61), // Verde específico
+                                    actions: <Widget>[
+                                      ElevatedButton.icon(
+                                          icon: const Icon(Icons.send,
+                                              color: Colors.white),
+                                          // Ícono de descarga
+                                          label: Text('Enviar'),
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Colors.white,
+                                            backgroundColor: Colors.red,
+                                            textStyle: TextStyle(
+                                                fontSize: 20.sp),
+                                          ),
+                                          onPressed: () async {
+                                            // Mostrar un SnackBar inicial indicando que el envío está en progreso
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                                SnackBar(
+                                                  content: Text('Enviando...'),
+                                                  duration: Duration(
+                                                      hours: 1), // Un tiempo largo para asegurar que permanezca visible
+                                                )
+                                            );
+
+                                            // Llamar a la función sendEmail y esperar los resultados
+                                            List<
+                                                bool> emailResults = await sendEmail(context, practica);
+
+                                            // Remover el SnackBar "Enviando..."
+                                            ScaffoldMessenger.of(context)
+                                                .removeCurrentSnackBar();
+
+                                            // Mostrar SnackBar basado en resultados
+                                            if (emailResults.every((
+                                                result) => result == true)) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                  SnackBar(content: Text(
+                                                      'Todos los correos fueron enviados con éxito'))
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                  SnackBar(content: Text(
+                                                      'Uno o más correos fallaron'))
+                                              );
+                                            }
+                                            // Cierra la vista después de mostrar los SnackBars
+                                            Navigator.of(context).pop();
+                                          }
+                                      ),
+                                    ],
+                                  ),
+                                  body: ExcelViewerPage(practica: practica), // Sin AppBar o con una AppBar básica
+                                ),
+                          ),
+                        );
+                        calcularYGuardarResultados();
+                      } // Acción especial para exportar datos
+                  ),
+                );
+              } else {
+                return ListTile(
+                  title: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: section['color'],
+                      textStyle: TextStyle(fontSize: 26.sp),
+                    ),
+                    onPressed: () => _changeContent(section['title']),
+                    child: Text(section['title']),
+                  ),
+                );
+              }
+            }
+            ),
           ],
         ),
       ),
       body: _currentBody,
     );
   }
-// Método para manejar la exportación de datos
-  void _exportData() {
-    sendEmail(context);
-    // Implementa la lógica para exportar datos aquí
-  }
 }
-
-
-
-
 
 Future<void> calcularYGuardarResultados() async {
   final db = await DatabaseHelper.instance.database;

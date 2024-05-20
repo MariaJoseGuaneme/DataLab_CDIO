@@ -38,7 +38,7 @@ Widget inicio(BuildContext context) {
           width: 400.w,
           child: Image.asset('assets/logou.jpg'),
         ),
-         SizedBox(height: 10.0.h),
+         SizedBox(height: 5.0.h),
         Container(
           width: 300.w,
           height: 100.h,
@@ -60,7 +60,7 @@ Widget inicio(BuildContext context) {
             ),
           ),
         ),
-         SizedBox(height: 50.0.h),
+         SizedBox(height: 30.0.h),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -123,9 +123,10 @@ Widget inicio(BuildContext context) {
                   ),
                 ),
               ),
-            )
+            ),
           ],
-        )
+        ),
+        SizedBox(height: 100),
       ],
     ),
   );

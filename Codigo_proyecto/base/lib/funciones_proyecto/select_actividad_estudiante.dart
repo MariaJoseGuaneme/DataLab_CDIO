@@ -1,9 +1,8 @@
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
-import 'dart:io';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../paginas/vista_profes/p_6.dart';
 
 
 
@@ -33,7 +32,6 @@ class _Select_e extends State<Select_e> {
 }
 
 Widget inicio(BuildContext context) {
-  final DatabaseHelper _databaseH = DatabaseHelper.instance;
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -71,6 +69,9 @@ Widget inicio(BuildContext context) {
           children: <Widget>[
             GestureDetector(
               onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PagInicio6()),
+                );
               },
               child: Container(
                 width: 300.w,

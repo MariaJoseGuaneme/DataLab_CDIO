@@ -104,6 +104,11 @@ class _PagInicio4State extends State<PagInicio4> {
       ),
       body: Column(
         children: <Widget>[
+          Image.asset(
+            'assets/UQ.png',
+            width: 200.w,
+            height: 200.h,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: grupos.length + 1, // +1 para el botón de agregar grupo

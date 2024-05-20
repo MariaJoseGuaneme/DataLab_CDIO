@@ -49,6 +49,7 @@ dependencies:
   csv: ^6.0.0
   excel: ^4.0.3
   flutter_screenutil: ^5.9.1
+  syncfusion_flutter_xlsio: ^25.2.4
 
 flutter_icons:
   android: "launcher_icon"  # Genera iconos para Android

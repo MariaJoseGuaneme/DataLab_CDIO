@@ -15,8 +15,11 @@ import 'package:base/paginas/vistas_estudiantes/p_27.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:base/paginas/Revisar_practicas.dart';
 import 'package:base/funciones_proyecto/exportar.dart';
+
+import '../preferences.dart';
+
 class Menu_pulpa extends StatefulWidget {
   const Menu_pulpa({super.key});
 
@@ -25,6 +28,7 @@ class Menu_pulpa extends StatefulWidget {
 }
 
 class _Menu extends State<Menu_pulpa> {
+  String practica = UserPreferences.getPracticaSeleccionada(); // Identificador de la práctica
   // Inicializa una variable para mantener el widget actual mostrado en el body
   Widget _currentBody = const Center(
     child: Text('Contenido principal aquí'),
@@ -78,73 +82,81 @@ class _Menu extends State<Menu_pulpa> {
         {'title': 'Exportar', 'color': const Color.fromARGB(255, 243, 15, 15)},
       ];
 
-  void _changeContent(String sectionTitle) {
-    // Actualiza el estado del widget body dependiendo de la sección
-    setState(() {
-      switch (sectionTitle) {
-        case 'Recepción':
-          _currentBody =
-              const RecepcionPage(); // Cambia a la página de recepción
-          break;
-        case 'Lavado':
-          _currentBody =
-              const RecepcionPage2(); // Cambia a la página de recepción
-          break;
-        case 'Pesado':
-          _currentBody =
-              RecepcionPage13(); // Cambia a la página de recepción
-          break;
-        case 'Desinfección':
-          _currentBody =
-              const RecepcionPage14(); // Cambia a la página de recepción
-          break;
-        case 'Escaldado':
-          _currentBody =
-              const RecepcionPage16(); // Cambia a la página de recepción
-          break;
-        case 'Enfriamiento':
-          _currentBody =
-              const RecepcionPage18(); // Cambia a la página de recepción
-          break;
-        case 'Acondicionamiento':
-          _currentBody =
-              const RecepcionPage20(); // Cambia a la página de recepción
-          break;
-        case 'Despulpar':
-          _currentBody =
-              const RecepcionPage21(); // Cambia a la página de recepción
-          break;
-        case 'Pesado P/S':
-          _currentBody =
-              const RecepcionPage22(); // Cambia a la página de recepción
-          break;
-        case 'Control Físico-Químico':
-          _currentBody =
-              const RecepcionPage23(); // Cambia a la página de recepción
-          break;
-        case 'Formulación':
-          _currentBody =
-              const RecepcionPage24_pulpa(); // Cambia a la página de recepción
-          break;
-        case 'Mezclado':
-          _currentBody =
-              const RecepcionPage25(); // Cambia a la página de recepción
-          break;
-        case 'Control Físico-Químico ':
-          _currentBody =
-              const RecepcionPage26(); // Cambia a la página de recepción
-          break;
-        case 'Empacado':
-          _currentBody =
-              const RecepcionPage27(); // Cambia a la página de recepción
-          break;
 
-        // Añade casos para otras secciones
-        default:
-          _currentBody = const Center(child: Text('Contenido principal aquí'));
-      }
-    });
+  void _changeContent(String sectionTitle) async {
+    if (sectionTitle == 'Formulación') {
+      // Ejecutar cálculos y recarga antes de cambiar al cuerpo de la página.
+      await calcularYGuardarResultados();
+      setState(() {
+        _currentBody = RecepcionPage24_pulpa();
+      });
+    } else {
+      // Para otras secciones, cambia inmediatamente.
+      setState(() {
+        switch (sectionTitle) {
+          case 'Recepción':
+            _currentBody =
+            const RecepcionPage(); // Cambia a la página de recepción
+            break;
+          case 'Lavado':
+            _currentBody =
+            const RecepcionPage2(); // Cambia a la página de recepción
+            break;
+          case 'Pesado':
+            _currentBody =
+                RecepcionPage13(); // Cambia a la página de recepción
+            break;
+          case 'Desinfección':
+            _currentBody =
+            const RecepcionPage14(); // Cambia a la página de recepción
+            break;
+          case 'Escaldado':
+            _currentBody =
+            const RecepcionPage16(); // Cambia a la página de recepción
+            break;
+          case 'Enfriamiento':
+            _currentBody =
+            const RecepcionPage18(); // Cambia a la página de recepción
+            break;
+          case 'Acondicionamiento':
+            _currentBody =
+            const RecepcionPage20(); // Cambia a la página de recepción
+            break;
+          case 'Despulpar':
+            _currentBody =
+            const RecepcionPage21(); // Cambia a la página de recepción
+            break;
+          case 'Pesado P/S':
+            _currentBody =
+            const RecepcionPage22(); // Cambia a la página de recepción
+            break;
+          case 'Control Físico-Químico':
+            _currentBody =
+            const RecepcionPage23(); // Cambia a la página de recepción
+            break;
+          case 'Formulación':
+            _currentBody =
+            const RecepcionPage24_pulpa(); // Cambia a la página de recepción
+            break;
+          case 'Mezclado':
+            _currentBody =
+            const RecepcionPage25(); // Cambia a la página de recepción
+            break;
+          case 'Control Físico-Químico ':
+            _currentBody =
+            const RecepcionPage26(); // Cambia a la página de recepción
+            break;
+          case 'Empacado':
+            _currentBody =
+            const RecepcionPage27(); // Cambia a la página de recepción
+            break;
+          default:
+            _currentBody = const Center(child: Text('Contenido principal aquí'));
+        }
+      });
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +196,61 @@ class _Menu extends State<Menu_pulpa> {
                       textStyle: TextStyle(fontSize: 20.sp),
                     ),
                     onPressed: () {
-                      _exportData();
+                      print(practica);
+                      print('de pulpa');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                              appBar: AppBar(
+                                title: Text('Pre-Visualización'),
+                                backgroundColor: Color.fromARGB(
+                                    255, 59, 148, 61), // Verde específico
+                                actions: <Widget>[
+                                  ElevatedButton.icon(
+                                  icon: const Icon(Icons.send,
+                                  color: Colors.white), // Ícono de descarga
+                                label: Text('Enviar'),
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.red,
+                                  textStyle:  TextStyle(fontSize: 20.sp),
+                                ),
+                                      onPressed: () async {
+                                        // Mostrar un SnackBar inicial indicando que el envío está en progreso
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text('Enviando...'),
+                                              duration: Duration(hours: 1), // Un tiempo largo para asegurar que permanezca visible
+                                            )
+                                        );
+
+                                        // Llamar a la función sendEmail y esperar los resultados
+                                        List<bool> emailResults = await sendEmail(context, practica);
+
+                                        // Remover el SnackBar "Enviando..."
+                                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+                                        // Mostrar SnackBar basado en resultados
+                                        if (emailResults.every((result) => result == true)) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text('Todos los correos fueron enviados con éxito'))
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text('Uno o más correos fallaron'))
+                                          );
+                                        }
+                                        // Cierra la vista después de mostrar los SnackBars
+                                        Navigator.of(context).pop();
+                                      }
+                                  ),
+                                ],
+                              ),
+                              body: ExcelViewerPage(practica: practica), // Sin AppBar o con una AppBar básica
+                            ),
+                          ),
+                        );
                       calcularYGuardarResultados();
                     }// Acción especial para exportar datos
                   ),
@@ -209,16 +275,10 @@ class _Menu extends State<Menu_pulpa> {
       body: _currentBody,
     );
   }
-
-// Método para manejar la exportación de datos
-  void _exportData() {
-    sendEmail(context);// Implementa la lógica para exportar datos aquí
-  }
 }
 
 Future<void> calcularYGuardarResultados() async {
   final db = await DatabaseHelper.instance.database;
-  final _databaseH = DatabaseHelper.instance;
   //_databaseH.borrarRegistroPractica(); NO DESCOMENTAR, gracias
   final practica1 = await db.query(
       'practica1'); // Obtén todos los datos de la tabla practica1.

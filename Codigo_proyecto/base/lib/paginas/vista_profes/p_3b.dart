@@ -142,7 +142,7 @@ class _PagInicio3bState extends State<PagInicio3b> {
                               : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
-                              _obscureText = !_obscureText;
+                              _obscureText2 = !_obscureText2;
                             });
                           },
                         ),
