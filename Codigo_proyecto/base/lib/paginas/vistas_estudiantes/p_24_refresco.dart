@@ -39,7 +39,7 @@ class _RecepcionPage24State_refresco extends State<RecepcionPage24_refresco> {
                 alignment: Alignment.center,
                 child:  Text(
                   '12. FORMULACIÓN',
-                  style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                  style: TextStyle(color: Colors.white, fontSize: 35.sp),
                   textAlign: TextAlign.center,
                 ),
               ),

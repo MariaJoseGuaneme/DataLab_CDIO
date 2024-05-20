@@ -64,15 +64,6 @@ class _RecepcionPage29State extends State<RecepcionPage29> {
           Center(child:
           Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -86,8 +77,8 @@ class _RecepcionPage29State extends State<RecepcionPage29> {
                       padding: EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child:  Text(
-                        '13. CONTROL FISICO-QUIMICO',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        '14. CONTROL FISICO-QUIMICO 2',
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

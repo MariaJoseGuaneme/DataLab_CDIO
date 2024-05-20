@@ -37,8 +37,8 @@ class RecepcionPage36 extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child: Text(
-                        '20. ENFRIAR Y ALMACENAR',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        '21. ENFRIAR Y ALMACENAR',
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -49,8 +49,8 @@ class RecepcionPage36 extends StatelessWidget {
                       color: Colors.green
                           .shade300, // Un tono de verde más claro para la descripción
                       child:  Text(
-                        'Descripción del proceso de recepción. Aquí va el contenido descriptivo sobre cómo se maneja la recepción en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Disminuir la temperatura del producto para su posterior almacenado.',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

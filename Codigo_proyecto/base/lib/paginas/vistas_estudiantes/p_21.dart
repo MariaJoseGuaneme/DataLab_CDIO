@@ -36,7 +36,7 @@ class RecepcionPage21 extends StatelessWidget {
                     color: Colors.green,
                     child:  Text(
                       '9. DESPULPADO',
-                      style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                      style: TextStyle(color: Colors.white, fontSize: 35.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -47,8 +47,8 @@ class RecepcionPage21 extends StatelessWidget {
                     color: Colors.green
                         .shade300, // Un tono de verde más claro para la descripción
                     child:  Text(
-                      'Descripción del proceso de despulpado. Aquí va el contenido descriptivo sobre cómo se maneja el despulpado en tu proceso.',
-                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                      'Proceso de retiro de las semillas con el fin de extraer la pulpa',
+                      style: TextStyle(color: Colors.white, fontSize: 25.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),

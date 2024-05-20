@@ -36,9 +36,9 @@ class RecepcionPage18 extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
-                      child: const Text(
+                      child: Text(
                         '6. ENFRIAMIENTO',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -48,9 +48,9 @@ class RecepcionPage18 extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green
                           .shade300, // Un tono de verde más claro para la descripción
-                      child: const Text(
-                        'Descripción del proceso de recepción. Aquí va el contenido descriptivo sobre cómo se maneja la recepción en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      child:  Text(
+                        'Es la estapa de choque térmico del escaldado. Llevando a la materia prima a temperaturas más bajas',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

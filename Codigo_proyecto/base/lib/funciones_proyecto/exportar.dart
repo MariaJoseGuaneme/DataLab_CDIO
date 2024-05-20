@@ -504,8 +504,10 @@ Future <String> generarArchivo(String practica) async {
 
 
   sheet.cell(excel1.CellIndex.indexByString('B31')).value = excel1.TextCellValue('Rendimiento del producto final');
-  sheet.merge(excel1.CellIndex.indexByString('B31'), excel1.CellIndex.indexByString('C28'));
+  sheet.merge(excel1.CellIndex.indexByString('B31'), excel1.CellIndex.indexByString('C31'));
   cell = sheet.cell(excel1.CellIndex.indexByString('B31'));
+  cell.cellStyle = cellStyle;
+  cell = sheet.cell(excel1.CellIndex.indexByString('F4'));
   cell.cellStyle = cellStyle;
   sheet.cell(excel1.CellIndex.indexByString('D31')).value = excel1.TextCellValue((await _dbHelper.readSpecificData('_resultados_' + practica, 'Rendimiento_producto', idGrupo)).toString());
   cell = sheet.cell(excel1.CellIndex.indexByString('D31'));

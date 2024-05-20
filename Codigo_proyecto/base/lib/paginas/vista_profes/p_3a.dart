@@ -151,7 +151,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       height: 42.0.h,
                       child: Text(
                         'Ingresar',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 24.0.sp),
                       ),
                     ),
                   ),
@@ -174,7 +174,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                       height: 42.0.h,
                       child: Text(
                         'Registrarse',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 24.0.sp),
                       ),
                     ),
                   ),

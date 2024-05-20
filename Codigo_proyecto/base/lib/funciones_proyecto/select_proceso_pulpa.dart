@@ -30,8 +30,11 @@ class Menu_pulpa extends StatefulWidget {
 class _Menu extends State<Menu_pulpa> {
   String practica = UserPreferences.getPracticaSeleccionada(); // Identificador de la práctica
   // Inicializa una variable para mantener el widget actual mostrado en el body
-  Widget _currentBody = const Center(
-    child: Text('Contenido principal aquí'),
+  Widget _currentBody =  Center(child: SizedBox(
+    width: 200,
+    height: 200,
+    child: Image.asset('assets/logou.jpg'),
+  ),
   );
   List<Map<String, dynamic>> get sections => [
         {
@@ -151,7 +154,12 @@ class _Menu extends State<Menu_pulpa> {
             const RecepcionPage27(); // Cambia a la página de recepción
             break;
           default:
-            _currentBody = const Center(child: Text('Contenido principal aquí'));
+            _currentBody =  Center(child: SizedBox(
+              width: 400,
+              height: 400,
+              child: Image.asset('assets/logou.jpg'),
+            ),
+            );
         }
       });
     }
@@ -166,7 +174,7 @@ class _Menu extends State<Menu_pulpa> {
           'Proceso de producción',
           style: TextStyle(
               color: Colors.white,
-              fontSize: 28.sp), // Ajusta el color a blanco y el tamaño del texto
+              fontSize: 32.sp), // Ajusta el color a blanco y el tamaño del texto
         ),
         backgroundColor: const Color.fromARGB(
             255, 20, 99, 22), // Color verde específico para el AppBar
@@ -180,7 +188,7 @@ class _Menu extends State<Menu_pulpa> {
                 color: Color.fromARGB(255, 20, 99, 22),
               ),
               child: Text('Selecciona el proceso',
-                  style: TextStyle(color: Colors.white, fontSize: 18)),
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
             ),
             ...sections.map((section) {
               // Aplica un estilo diferente al botón 'Exportar'

@@ -15,7 +15,6 @@ class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
   late Future<Map<String, dynamic>> componentData;
   int idGrupo = UserPreferences.getIdGrupo();
   String practica = UserPreferences.getPracticaSeleccionada();
-  final DatabaseHelper _databaseH = DatabaseHelper.instance;
 
   @override
   void initState() {
@@ -40,7 +39,7 @@ class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
                 alignment: Alignment.center,
                 child:  Text(
                   '12. FORMULACIÓN',
-                  style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                  style: TextStyle(color: Colors.white, fontSize: 35.sp),
                   textAlign: TextAlign.center,
                 ),
               ),

@@ -38,7 +38,7 @@ class RecepcionPage14 extends StatelessWidget {
                       color: Colors.green,
                       child: Text(
                         '4. DESINFECCION',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -49,8 +49,8 @@ class RecepcionPage14 extends StatelessWidget {
                       color: Colors.green
                           .shade300, // Un tono de verde más claro para la descripción
                       child: Text(
-                        'Descripción del proceso de recepción. Aquí va el contenido descriptivo sobre cómo se maneja la recepción en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Eliminación de los microorganismos o bacterias encontradas en la superficie de la materia prima',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

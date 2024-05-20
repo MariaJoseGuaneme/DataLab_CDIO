@@ -37,8 +37,8 @@ class RecepcionPage28 extends StatelessWidget {
                       padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child:  Text(
-                        '12. EBULLICIÓN',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        '13. EBULLICIÓN',
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -49,8 +49,8 @@ class RecepcionPage28 extends StatelessWidget {
                       color: Colors.green
                           .shade300, // Un tono de verde más claro para la descripción
                       child:  Text(
-                        'Descripción del proceso de recepción. Aquí va el contenido descriptivo sobre cómo se maneja la recepción en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Proceso por el cual el producto de lleva a temperaturas altas',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

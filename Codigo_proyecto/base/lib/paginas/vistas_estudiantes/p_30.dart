@@ -46,15 +46,7 @@ class _RecepcionPage30State extends State<RecepcionPage30> {
       appBar: AppBar(),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
+
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -68,8 +60,8 @@ class _RecepcionPage30State extends State<RecepcionPage30> {
                       padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child:  Text(
-                        '14. PESADO - EBULLICIÓN',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        '15. PESADO - EBULLICIÓN',
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -78,8 +70,8 @@ class _RecepcionPage30State extends State<RecepcionPage30> {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child: Text(
-                        'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Medida del producto del producto después de ebullición.',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

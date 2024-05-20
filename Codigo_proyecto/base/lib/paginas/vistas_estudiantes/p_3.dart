@@ -40,23 +40,23 @@ class _PagInicio3eState extends State<PagInicio3e> {
               Flexible(
                 child: Image.asset(
                   'assets/UQ.png', // Asegúrate de que el logo está en tu carpeta de assets.
-                  height: 140.0.h,
+                  height: 200.0.h,
                 ),
               ),
-              SizedBox(height: 48.0.h),
+              SizedBox(height: 20.0.h),
               Text(
                 'INGRESA TU CORREO',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22.0.sp,
+                  fontSize: 30.0.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 48.0.h),
+              SizedBox(height: 20.0.h),
               Container(
                 padding:  EdgeInsets.symmetric(
-                    vertical: 60.0.h,
+                    vertical: 40.0.h,
                     horizontal:
                     8.0.w), // Asegúrate de usar 'const' para optimizar
                 decoration: BoxDecoration(
@@ -82,11 +82,11 @@ class _PagInicio3eState extends State<PagInicio3e> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 50.0.h),
+                    SizedBox(height: 20.0.h),
                   ],
                 ),
               ),
-              SizedBox(height: 50.0.h),
+              SizedBox(height: 20.0.h),
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 200.0.w),
                 child: Container(
@@ -120,7 +120,7 @@ class _PagInicio3eState extends State<PagInicio3e> {
                       height: 42.0.h,
                       child: Text(
                         'Ingresar',
-                        style: TextStyle(color: Colors.white, fontSize: 17.0.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 26.0.sp),
                       ),
                     ),
                   ),

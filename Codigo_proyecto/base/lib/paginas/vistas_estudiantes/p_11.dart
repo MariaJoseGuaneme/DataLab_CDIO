@@ -36,7 +36,7 @@ class RecepcionPage extends StatelessWidget {
                     color: Colors.green,
                     child:  Text(
                       '1. RECEPCIÓN',
-                      style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                      style: TextStyle(color: Colors.white, fontSize: 35.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -47,8 +47,8 @@ class RecepcionPage extends StatelessWidget {
                     color: Colors.green
                         .shade300, // Un tono de verde más claro para la descripción
                     child:  Text(
-                      'Descripción del proceso de recepción. Aquí va el contenido descriptivo sobre cómo se maneja la recepción en tu proceso.',
-                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                      'Recepción de la materia prima que se utilizará en la práctica',
+                      style: TextStyle(color: Colors.white, fontSize: 25.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),

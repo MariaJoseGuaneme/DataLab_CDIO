@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(768, 1024),  // Tamaño de diseño original para tablet
       minTextAdapt: true,  // Ajusta el tamaño del texto para que se adapte también
       builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: const PagInicio(),
       ),
     );

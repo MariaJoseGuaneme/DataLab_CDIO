@@ -36,7 +36,7 @@ class RecepcionPage25 extends StatelessWidget {
                     color: Colors.green,
                     child:  Text(
                       '13. MEZCLADO',
-                      style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                      style: TextStyle(color: Colors.white, fontSize: 35.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -47,8 +47,8 @@ class RecepcionPage25 extends StatelessWidget {
                     color: Colors.green
                         .shade300, // Un tono de verde más claro para la descripción
                     child:  Text(
-                      'Descripción del proceso de mezclado. Aquí va el contenido descriptivo sobre cómo se maneja el mezclado en tu proceso.',
-                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                      'Proceso en donde se unen todos los componentes de producto',
+                      style: TextStyle(color: Colors.white, fontSize: 25.sp),
                       textAlign: TextAlign.center,
                     ),
                   ),

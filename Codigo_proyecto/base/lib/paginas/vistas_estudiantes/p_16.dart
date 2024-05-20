@@ -47,15 +47,6 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
       appBar: AppBar(),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -70,7 +61,7 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
                       color: Colors.green,
                       child:  Text(
                         '5. ESCALDADO',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -79,8 +70,8 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child:  Text(
-                        'Descripción del proceso de escaldado. Aquí va el contenido descriptivo sobre cómo se maneja el escaldado en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Cocción en agua a temperatura de ebullición de la materia prima durante un breve periodo de tiempo, con un posterior choque térmico, para mejorar las características del producto final',
+                        style: TextStyle(color: Colors.white, fontSize: 22.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

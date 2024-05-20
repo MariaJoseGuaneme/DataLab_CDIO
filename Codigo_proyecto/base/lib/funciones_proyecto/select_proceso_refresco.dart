@@ -35,8 +35,11 @@ class Menu_refresco extends StatefulWidget {
 
 class _Menu extends State<Menu_refresco> {
   String practica = UserPreferences.getPracticaSeleccionada();
-  Widget _currentBody = const Center(
-    child: Text('Contenido principal aquí'),
+  Widget _currentBody =  Center(child: SizedBox(
+    width: 200,
+    height: 200,
+    child: Image.asset('assets/logou.jpg'),
+  ),
   );
 
   List<Map<String, dynamic>> get sections =>
@@ -90,27 +93,27 @@ class _Menu extends State<Menu_refresco> {
         },
         {
           'title': 'Homogeneizar',
-          'color': const Color.fromARGB(255, 245, 236, 107)
+          'color': const Color.fromARGB(255, 201, 101, 81)
         },
         {
           'title': 'Enfriamiento',
-          'color': const Color.fromARGB(255, 245, 236, 107)
+          'color': const Color.fromARGB(255, 204, 139, 122)
         },
         {
           'title': 'Pesado - Homogeneizado',
-          'color': const Color.fromARGB(255, 245, 236, 107)
+          'color': const Color.fromARGB(255, 210, 165, 157)
         },
         {
           'title': 'Envasar y tapar',
-          'color': const Color.fromARGB(255, 245, 236, 107)
+          'color': const Color.fromARGB(255, 204, 155, 185)
         },
         {
           'title': 'Pesado - Total',
-          'color': const Color.fromARGB(255, 245, 236, 107)
+          'color': const Color.fromARGB(255, 213, 156, 210)
         },
         {
           'title': 'Enfriar y almacenar',
-          'color': const Color.fromARGB(255, 245, 236, 107)
+          'color': const Color.fromARGB(255, 201, 101, 81)
         },
         {'title': 'Exportar', 'color': const Color.fromARGB(255, 243, 15, 15)},
       ];
@@ -192,8 +195,7 @@ class _Menu extends State<Menu_refresco> {
           'Proceso de producción',
           style: TextStyle(
               color: Colors.white,
-              fontSize: 28
-                  .sp), // Ajusta el color a blanco y el tamaño del texto
+              fontSize: 32.sp), // Ajusta el color a blanco y el tamaño del texto
         ),
         backgroundColor: const Color.fromARGB(255, 20, 99, 22),
       ),
@@ -206,7 +208,7 @@ class _Menu extends State<Menu_refresco> {
                 color: Color.fromARGB(255, 20, 99, 22),
               ),
               child: Text('Selecciona el proceso',
-                  style: TextStyle(color: Colors.white, fontSize: 18)),
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
             ),
             ...sections.map((section) {
               if (section['title'] == 'Exportar') {

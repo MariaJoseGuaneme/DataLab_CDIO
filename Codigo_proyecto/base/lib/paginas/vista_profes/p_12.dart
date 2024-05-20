@@ -54,15 +54,6 @@ class _PagInicio12State extends State<PagInicio12> {
       appBar: AppBar(),
       body: Stack(
         children: [
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(

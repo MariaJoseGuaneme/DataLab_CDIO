@@ -68,15 +68,6 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
       appBar: AppBar(),
       body: Stack(
         children: [
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w.h,
-              height: 200,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(

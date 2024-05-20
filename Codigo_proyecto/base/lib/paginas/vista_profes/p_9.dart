@@ -34,14 +34,14 @@ class _PagInicio9 extends State<PagInicio9> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
             child:  Text(
               'Selecciona la práctica',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 38.sp,
+                fontSize: 46.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -67,7 +67,12 @@ class _PagInicio9 extends State<PagInicio9> {
              }),
           ],
        ),
-     )
+     ),
+          Image.asset(
+            'assets/UQ.png',
+            width: 200.w,
+            height: 200.h,
+          ),
     ],
       ),
     );
@@ -75,14 +80,14 @@ class _PagInicio9 extends State<PagInicio9> {
 
   Widget _buildPracticaButton(BuildContext context, String etiqueta, Color color, VoidCallback onPressed) {
     return Padding(
-      padding: const EdgeInsets.all(20), // Añade padding alrededor del botón para más espacio
+      padding: const EdgeInsets.all(10), // Añade padding alrededor del botón para más espacio
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white, backgroundColor: color, // Color del texto del botón
           padding:  EdgeInsets.symmetric(vertical: 16.0.h), // Ajusta el padding dentro del botón
-          textStyle: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(fontSize: 40.sp, fontWeight: FontWeight.bold),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
         onPressed: onPressed,

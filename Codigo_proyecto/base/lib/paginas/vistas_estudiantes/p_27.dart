@@ -66,15 +66,7 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
       appBar: AppBar(),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
+
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -89,7 +81,7 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
                             color: Colors.green,
                             child: Text(
                               '15. EMPACADO/ENVASADO',
-                              style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                              style: TextStyle(color: Colors.white, fontSize: 35.sp),
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -98,8 +90,8 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
                             padding: const EdgeInsets.all(8.0),
                             color: Colors.green.shade300,
                             child:  Text(
-                              'Descripción del proceso de pesado. Aquí va el contenido descriptivo sobre cómo se maneja el pesado en tu proceso.',
-                              style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                              'Disposición del producto en un envase con el mismo gramaje',
+                              style: TextStyle(color: Colors.white, fontSize: 25.sp),
                               textAlign: TextAlign.center,
                             ),
                           ),

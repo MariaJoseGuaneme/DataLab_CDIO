@@ -46,15 +46,6 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
       appBar: AppBar(),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -69,7 +60,7 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
                       color: Colors.green,
                       child:  Text(
                         '8. ACONDICIONAMIENTO',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -78,8 +69,8 @@ class _RecepcionPage20State extends State<RecepcionPage20> {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child:  Text(
-                        'Descripción del proceso de acondicionamiento. Aquí va el contenido descriptivo sobre cómo se maneja el acondicionamiento en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Proceso en el cual se le retira la cáscara a la materia prima',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),

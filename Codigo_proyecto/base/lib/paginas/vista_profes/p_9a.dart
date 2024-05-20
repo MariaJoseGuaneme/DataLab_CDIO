@@ -54,15 +54,6 @@ class _PagInicio9aState extends State<PagInicio9a> {
       appBar: AppBar(),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -124,6 +115,7 @@ class _PagInicio9aState extends State<PagInicio9a> {
                       ),
                       child: const Text('Aceptar'),
                     ),
+                    SizedBox(height: 18.0.h),
                   ],
                 ),
               ),

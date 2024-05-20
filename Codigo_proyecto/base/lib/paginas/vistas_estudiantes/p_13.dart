@@ -50,15 +50,6 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
       appBar: AppBar(),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Image.asset(
-              'assets/UQ.png',
-              width: 200.w,
-              height: 200.h,
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               child: Container(
@@ -73,7 +64,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       color: Colors.green,
                       child:  Text(
                         '3. PESADO',
-                        style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -82,8 +73,8 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       padding: const EdgeInsets.all(8.0),
                       color: Colors.green.shade300,
                       child:  Text(
-                        'Descripción del proceso de pesado. Aquí va el contenido descriptivo sobre cómo se maneja el pesado en tu proceso.',
-                        style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                        'Se pesa la materia prima inicial para conocer cuánta de esta, hay disponible para el producto',
+                        style: TextStyle(color: Colors.white, fontSize: 25.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
