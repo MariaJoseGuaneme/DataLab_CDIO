@@ -3,6 +3,8 @@ import 'package:base/paginas/vista_profes/p_9.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../paginas/vista_profes/p_4.dart';
+
 class Select_p extends StatefulWidget {
   const Select_p({super.key});
 
@@ -15,15 +17,46 @@ class _Select_p extends State<Select_p> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop(); // Goes back to the previous page.
-          },
-        ),
+        title: Text('DataLab+', style: TextStyle(fontSize: 32.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: showHelpDialog,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Ayuda', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.help_outline, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],
       ),
       backgroundColor: Colors.white,
       body: inicio(context),
+    );
+  }
+  void showHelpDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Ayuda:'),
+          content: Text('1. INSERTAR DATOS: Para ingresar los datos base necesarios en cada práctica\n 2. REVISAR DATOS: Para observar los datos de las prácticas hechas por el grupo'),
+          actions: <Widget>[
+            OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.green,
+                side: BorderSide(color: Colors.green, width: 2),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -123,9 +156,23 @@ Widget inicio(BuildContext context) {
                 ),
               ),
             ),
-          ],
+      ],
+    ),
+        SizedBox(height: 30),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PagInicio4()));
+          },
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+            fixedSize: Size(320.w, 50.h),
+          ),
+          child: const Text('Grupos'),
         ),
-        SizedBox(height: 100),
       ],
     ),
   );

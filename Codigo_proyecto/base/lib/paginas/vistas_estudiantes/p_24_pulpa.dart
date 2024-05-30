@@ -1,3 +1,4 @@
+import 'package:base/paginas/vistas_estudiantes/p_25.dart';
 import 'package:flutter/material.dart';
 import 'package:base/base_datos.dart'; // Asegúrate de que la importación es correcta
 import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
@@ -38,7 +39,7 @@ class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
                 color: Colors.green,
                 alignment: Alignment.center,
                 child:  Text(
-                  '12. FORMULACIÓN',
+                  'FORMULACIÓN',
                   style: TextStyle(color: Colors.white, fontSize: 35.sp),
                   textAlign: TextAlign.center,
                 ),
@@ -91,6 +92,25 @@ class _RecepcionPage24State_pulpa extends State<RecepcionPage24_pulpa> {
                     return Text("No data available");
                   }
                 },
+              ),
+              SizedBox(height: 40.h),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: 200.w, // Esto forzará al botón a expandirse al máximo ancho permitido por el contenedor
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => RecepcionPage25()));
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.black),
+                      // Añadir padding vertical si es necesario para aumentar la altura del botón
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 10)),
+                    ),
+                    child: Text('Continuar', style: TextStyle(color: Colors.white, fontSize: 30.sp)),
+                  ),
+                ),
               ),
             ],
           ),

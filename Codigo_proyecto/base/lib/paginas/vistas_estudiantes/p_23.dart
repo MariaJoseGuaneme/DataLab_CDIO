@@ -1,9 +1,12 @@
+import 'package:base/paginas/vistas_estudiantes/p_24_pulpa.dart';
+import 'package:base/paginas/vistas_estudiantes/p_24_refresco.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart'; // Asegúrate de importar tu DatabaseManager
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
 import '../../preferences.dart';
 
 class RecepcionPage23 extends StatefulWidget {
@@ -57,8 +60,23 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Control Fisicoquímico'),
+      appBar: AppBar(title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],
       ),
       body:
            Center(child:
@@ -77,8 +95,8 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
                       padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child:  Text(
-                        '11. CONTROL FISICO-QUIMICO',
-                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
+                        'CONTROL FISICO-QUIMICO 1',
+                        style: TextStyle(color: Colors.white, fontSize: 30.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -130,7 +148,17 @@ class _RecepcionPage23State extends State<RecepcionPage23> {
                     ),
                      SizedBox(height: 18.0.h),
                     ElevatedButton(
-                      onPressed: _guardarDatos,
+                      onPressed: () {
+                        _guardarDatos();
+                        if (practica == 'practica1'){
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (_) => RecepcionPage24_pulpa()));
+                        }else {
+                          Navigator.push(
+                              context, MaterialPageRoute(
+                              builder: (_) => RecepcionPage24_refresco()));
+                        };
+                      },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

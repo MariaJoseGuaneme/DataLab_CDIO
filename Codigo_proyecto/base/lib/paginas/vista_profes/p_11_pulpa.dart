@@ -4,7 +4,9 @@ import 'package:base/base_datos.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
 import '../../preferences.dart';
+import 'p_10.dart';
 
 class PagInicio11_pulpa extends StatefulWidget {
   const PagInicio11_pulpa({super.key});
@@ -48,31 +50,31 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
 
 
 
-  void _guardarP_pulpa() async {
+  Future<void> _guardarP_pulpa() async {
     final String ppulpaStr = _ppulpaController.text;
     final double? ppulpa = double.tryParse(ppulpaStr);
     await _dbManager.insertSingleDataPractica(practica, 'p_pulpa', ppulpa, idGrupo, context);
   }
 
-  void _guardarP_ascorbico() async {
+  Future<void> _guardarP_ascorbico() async {
     final String pascorbicoStr = _pacidoascorbicoController.text;
     final double? pascorbico = double.tryParse(pascorbicoStr);
     await _dbManager.insertSingleDataPractica(practica, 'p_acido_ascorbico', pascorbico, idGrupo, context);
   }
 
-  void _guardarP_citrico() async {
+  Future<void> _guardarP_citrico() async {
     final String pcitricoStr = _pacidocitricoController.text;
     final double? pcitrico = double.tryParse(pcitricoStr);
     await _dbManager.insertSingleDataPractica(practica, 'p_acido_citrico', pcitrico, idGrupo, context);
   }
 
-  void _guardarP_benzonato() async {
+  Future<void> _guardarP_benzonato() async {
     final String pbenzonatoStr = _pbenzoatosodioController.text;
     final double? pbenzonato = double.tryParse(pbenzonatoStr);
     await _dbManager.insertSingleDataPractica(practica, 'p_benzonato_sodio', pbenzonato,idGrupo, context);
   }
 
-  void _guardarP_sorbato() async {
+  Future<void> _guardarP_sorbato() async {
     final String psorbatoStr = _psorbatopotasioController.text;
     final double? psorbato = double.tryParse(psorbatoStr);
     await _dbManager.insertSingleDataPractica(practica,'p_sorbato_potasio', psorbato, idGrupo, context);
@@ -81,7 +83,23 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],),
       body: Stack(
         children: [
           Center(
@@ -184,13 +202,13 @@ class _PagInicio11_pulpaState extends State<PagInicio11_pulpa> {
                     ),
                      SizedBox(height: 16.0.h),
                     ElevatedButton(
-                      onPressed: () {
-                        _guardarP_ascorbico();
-                        _guardarP_benzonato();
-                        _guardarP_citrico();
-                        _guardarP_pulpa();
-                        _guardarP_sorbato();
-                        Navigator.of(context).pop();
+                      onPressed: () async {
+                        await _guardarP_ascorbico();
+                        await _guardarP_benzonato();
+                        await _guardarP_citrico();
+                        await _guardarP_pulpa();
+                        await _guardarP_sorbato();
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio10()));
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

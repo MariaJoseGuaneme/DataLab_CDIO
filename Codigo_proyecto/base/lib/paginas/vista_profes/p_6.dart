@@ -38,7 +38,7 @@ class _PagInicio9 extends State<PagInicio6> {
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
             child:  Text(
-              'Selecciona la práctica',
+              'Selecciona la práctica que quieres revisar',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 46.sp,

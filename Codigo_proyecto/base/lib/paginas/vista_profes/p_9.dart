@@ -1,3 +1,4 @@
+import 'package:base/funciones_proyecto/select_actividad_profe.dart';
 import 'package:base/paginas/vista_profes/p_9a.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +74,22 @@ class _PagInicio9 extends State<PagInicio9> {
             width: 200.w,
             height: 200.h,
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Select_p()));
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+              fixedSize: Size(320.w, 50.h),
+            ),
+            child: const Text('Grupos'),
+          ),
     ],
+
       ),
     );
   }

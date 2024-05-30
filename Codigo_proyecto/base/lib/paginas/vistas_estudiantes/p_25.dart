@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
+
 class RecepcionPage25 extends StatelessWidget {
   const RecepcionPage25({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],),
       body: Stack(
         children: <Widget>[
           // Imagen en la esquina superior izquierda
@@ -35,7 +53,7 @@ class RecepcionPage25 extends StatelessWidget {
                     padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                     color: Colors.green,
                     child:  Text(
-                      '13. MEZCLADO',
+                      'MEZCLADO',
                       style: TextStyle(color: Colors.white, fontSize: 35.sp),
                       textAlign: TextAlign.center,
                     ),

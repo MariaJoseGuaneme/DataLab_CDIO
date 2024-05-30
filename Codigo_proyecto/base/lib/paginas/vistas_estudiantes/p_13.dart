@@ -1,10 +1,12 @@
 
+import 'package:base/paginas/vistas_estudiantes/p_14.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
 import '../../preferences.dart';
 
 
@@ -47,7 +49,23 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],),
       body: Stack(
         children: <Widget>[
           Center(
@@ -63,7 +81,7 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                       padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child:  Text(
-                        '3. PESADO',
+                        'PESADO INICIAL',
                         style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
@@ -99,7 +117,11 @@ class _RecepcionPage13State extends State<RecepcionPage13> {
                     ),
                      SizedBox(height: 18.0.h),
                     ElevatedButton(
-                      onPressed: _guardarPesoInicial,
+                      onPressed: () {
+                        _guardarPesoInicial();
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => RecepcionPage14()));
+                      },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

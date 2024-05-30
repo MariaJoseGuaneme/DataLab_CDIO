@@ -4,6 +4,7 @@ import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
 import '../../preferences.dart';
 
 
@@ -63,7 +64,23 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],),
       body: Stack(
         children: <Widget>[
 
@@ -80,7 +97,7 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
                             padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                             color: Colors.green,
                             child: Text(
-                              '15. EMPACADO/ENVASADO',
+                              'EMPACADO/ENVASADO',
                               style: TextStyle(color: Colors.white, fontSize: 35.sp),
                               textAlign: TextAlign.center,
                             ),
@@ -158,6 +175,8 @@ class _RecepcionPage27State extends State<RecepcionPage27> {
                             _guardarPesoolla();
                             _guardarPesoollaenvasado();
                             _guardarPulpaTotal();
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,

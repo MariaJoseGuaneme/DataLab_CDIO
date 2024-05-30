@@ -1,9 +1,11 @@
+import 'package:base/paginas/vistas_estudiantes/p_18.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
 import '../../preferences.dart';// Asegúrate de importar el DatabaseManager
 
 class RecepcionPage16 extends StatefulWidget {
@@ -44,7 +46,23 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],),
       body: Stack(
         children: <Widget>[
           Center(
@@ -60,7 +78,7 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
                       padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                       color: Colors.green,
                       child:  Text(
-                        '5. ESCALDADO',
+                        'ESCALDADO',
                         style: TextStyle(color: Colors.white, fontSize: 35.sp),
                         textAlign: TextAlign.center,
                       ),
@@ -96,7 +114,11 @@ class _RecepcionPage16State extends State<RecepcionPage16> {
                     ),
                      SizedBox(height: 18.0.h),
                     ElevatedButton(
-                      onPressed: _guardarPesoEscaldado,
+                      onPressed: () {
+                        _guardarPesoEscaldado();
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => RecepcionPage18()));
+                      },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

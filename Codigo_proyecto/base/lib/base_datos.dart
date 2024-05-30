@@ -833,6 +833,7 @@ CREATE TABLE _resultados_practica2 (
     return null;
   }
 
+
   Future<dynamic> readSpecificData(String tableName, String columnName, int idGrupos) async { //OPCIÓN PRINCIPAL DE MATEO
     final db = await instance.database;
     final maps = await db.query(
@@ -846,6 +847,21 @@ CREATE TABLE _resultados_practica2 (
       return maps.first[columnName];
     }
     throw Exception('ID not found');
+  }
+
+  Future<bool> areFieldsFilled(String tableName, int idGrupos, List<String> fields) async {
+    try {
+      for (String field in fields) {
+        var value = await readSpecificData(tableName, field, idGrupos);
+        if (value == 0 || value == null) { // Comprueba si el campo es cero o nulo
+          return false;
+        }
+      }
+      return true; // Todos los campos están llenos y no son cero
+    } catch (e) {
+      print("Error checking fields: $e");
+      return false;
+    }
   }
 
   // FUNCIONES GET --------------------------------------------------------------

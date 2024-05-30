@@ -4,6 +4,7 @@ import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
+import 'p_25.dart';
 class RecepcionPage24_refresco extends StatefulWidget {
   const RecepcionPage24_refresco({super.key});
 
@@ -91,6 +92,25 @@ class _RecepcionPage24State_refresco extends State<RecepcionPage24_refresco> {
                     return Text("No data available");
                   }
                 },
+              ),
+              SizedBox(height: 40.h),
+              Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: 200.w, // Esto forzará al botón a expandirse al máximo ancho permitido por el contenedor
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => RecepcionPage25()));
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.black),
+                      // Añadir padding vertical si es necesario para aumentar la altura del botón
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 10)),
+                    ),
+                    child: Text('Continuar', style: TextStyle(color: Colors.white, fontSize: 30.sp)),
+                  ),
+                ),
               ),
             ],
           ),

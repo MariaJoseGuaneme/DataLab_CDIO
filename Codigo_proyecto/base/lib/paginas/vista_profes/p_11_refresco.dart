@@ -5,6 +5,7 @@ import 'package:base/base_datos_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
+import 'p_10.dart';
 
 class PagInicio11_refresco extends StatefulWidget {
   const PagInicio11_refresco({super.key});
@@ -51,7 +52,7 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
     });
   }
 
-  void _guardarDatos() async {
+  Future<void> _guardarDatos() async {
     // Guardar todos los valores de una sola vez
     await _dbManager.insertSingleDataPractica(practica, 'p_pulpa', double.tryParse(_ppulpaController.text), idGrupo, context);
     await _dbManager.insertSingleDataPractica(practica, 'p_azucar', double.tryParse(_pazucarController.text), idGrupo, context);
@@ -96,9 +97,9 @@ class _PagInicio11_refrescoState extends State<PagInicio11_refresco> {
                     _crearTextField('Sorbato de potasio', _psorbatopotasioController, 'Ingrese el porcentaje de sorbato de potasio'),
                      SizedBox(height: 16.0.h),
                     ElevatedButton(
-                      onPressed:(){
-                        _guardarDatos;
-                        Navigator.of(context).pop();
+                      onPressed:() async {
+                        await _guardarDatos;
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio10()));
                         },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

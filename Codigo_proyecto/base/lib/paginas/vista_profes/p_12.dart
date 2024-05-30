@@ -5,6 +5,7 @@ import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
+import 'p_10.dart';
 
 class PagInicio12 extends StatefulWidget {
   const PagInicio12({super.key});
@@ -36,13 +37,13 @@ class _PagInicio12State extends State<PagInicio12> {
       });
     }
 
-  void _guardarUnidadesProducir() async {
+  Future<void> _guardarUnidadesProducir() async {
     final String uproducirStr = _unidadesProducirController.text;
     final double? uproducir = double.tryParse(uproducirStr);
     await _dbManager.insertSingleDataPractica(practica, 'unidades_producir', uproducir, idGrupo, context);
   }
 
-  void _guardarUnidadesEmpaque() async {
+  Future<void> _guardarUnidadesEmpaque() async {
     final String uempaqueStr = _unidadesEmpaqueController.text;
     final double? uempaque = double.tryParse(uempaqueStr);
     await _dbManager.insertSingleDataPractica(practica, 'unidades_empaque', uempaque, idGrupo, context);
@@ -107,10 +108,10 @@ class _PagInicio12State extends State<PagInicio12> {
                     ),
                      SizedBox(height: 16.0.h),
                     ElevatedButton(
-                      onPressed: () {
-                       _guardarUnidadesProducir();
-                       _guardarUnidadesEmpaque();
-                       Navigator.of(context).pop();
+                      onPressed: () async {
+                       await _guardarUnidadesProducir();
+                       await _guardarUnidadesEmpaque();
+                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio10()));
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

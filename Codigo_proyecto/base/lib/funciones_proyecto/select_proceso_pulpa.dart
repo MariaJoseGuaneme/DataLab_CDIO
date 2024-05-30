@@ -17,7 +17,6 @@ import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:base/paginas/Revisar_practicas.dart';
 import 'package:base/funciones_proyecto/exportar.dart';
-
 import '../preferences.dart';
 
 class Menu_pulpa extends StatefulWidget {
@@ -170,11 +169,12 @@ class _Menu extends State<Menu_pulpa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: null,
         title:  Text(
           'Proceso de producción',
           style: TextStyle(
               color: Colors.white,
-              fontSize: 32.sp), // Ajusta el color a blanco y el tamaño del texto
+              fontSize: 26.sp), // Ajusta el color a blanco y el tamaño del texto
         ),
         backgroundColor: const Color.fromARGB(
             255, 20, 99, 22), // Color verde específico para el AppBar
@@ -204,8 +204,6 @@ class _Menu extends State<Menu_pulpa> {
                       textStyle: TextStyle(fontSize: 20.sp),
                     ),
                     onPressed: () {
-                      print(practica);
-                      print('de pulpa');
                         Navigator.push(
                           context,
                           MaterialPageRoute(

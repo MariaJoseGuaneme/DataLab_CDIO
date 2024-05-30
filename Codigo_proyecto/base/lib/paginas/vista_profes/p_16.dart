@@ -75,7 +75,7 @@ class _PagInicio16State extends State<PagInicio16> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Correos en este grupo'),
+        title: Text('Correos en este grupo', style: TextStyle(fontSize: 32.sp)),
       ),
       body: Column(
         children: <Widget>[
@@ -84,15 +84,16 @@ class _PagInicio16State extends State<PagInicio16> {
             color: const Color.fromARGB(255, 21, 110, 34),
             width: double.infinity,
             child: Text(
-              'Agregar nuevo correo institucional',
+              'Agregar correo institucional en este grupo',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20.sp,
+                fontSize: 40.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
           ),
+          SizedBox(height: 20.h,),
           Padding(
             padding: const EdgeInsets.all(10),
             child: TextField(

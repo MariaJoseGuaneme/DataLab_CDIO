@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
+import 'p_12.dart';
+
 class RecepcionPage extends StatelessWidget {
   const RecepcionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],
+      ),
       body: Stack(
         children: <Widget>[
           // Imagen en la esquina superior izquierda
@@ -35,7 +56,7 @@ class RecepcionPage extends StatelessWidget {
                     padding:  EdgeInsets.symmetric(vertical: 16.0.h),
                     color: Colors.green,
                     child:  Text(
-                      '1. RECEPCIÓN',
+                      'RECEPCIÓN',
                       style: TextStyle(color: Colors.white, fontSize: 35.sp),
                       textAlign: TextAlign.center,
                     ),
@@ -52,6 +73,26 @@ class RecepcionPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  SizedBox(height: 40.h),
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      width: 200.w, // Esto forzará al botón a expandirse al máximo ancho permitido por el contenedor
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (_) => RecepcionPage2()));
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.black),
+                          // Añadir padding vertical si es necesario para aumentar la altura del botón
+                          padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 10)),
+                        ),
+                        child: Text('Continuar', style: TextStyle(color: Colors.white, fontSize: 30.sp)),
+                      ),
+                    ),
+                  ),
+
                 ],
               ),
             ),

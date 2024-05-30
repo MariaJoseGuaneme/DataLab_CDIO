@@ -5,6 +5,7 @@ import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../preferences.dart';
+import 'p_10.dart';
 
 class PagInicio13 extends StatefulWidget {
   const PagInicio13({super.key});
@@ -40,14 +41,14 @@ class _PagInicio13State extends State<PagInicio13> {
   }
 
 
-  void _guardarTiempoEscaldado() async {
+  Future<void> _guardarTiempoEscaldado() async {
     final String tiempoEscaldadoStr = _tiempoEscaldadoController.text;
     final double? tiempoEscaldado = double.tryParse(tiempoEscaldadoStr);
     await _dbManager.insertSingleDataPractica(practica, 'tiempo_escaldado', tiempoEscaldado, idGrupo, context);
   }
 
 
-  void _guardarTiempoEnfriamiento() async {
+  Future<void> _guardarTiempoEnfriamiento() async {
     final String tenfriamientoStr = _tiempoEnfriamientoController.text;
     final double? tEnfriamiento = double.tryParse(tenfriamientoStr);
     await _dbManager.insertSingleDataPractica(practica, 'tiempo_enfriamiento', tEnfriamiento, idGrupo, context);
@@ -111,10 +112,10 @@ class _PagInicio13State extends State<PagInicio13> {
                     ),
                      SizedBox(height: 16.0.h),
                     ElevatedButton(
-                      onPressed: () {
-                        _guardarTiempoEscaldado();
-                        _guardarTiempoEnfriamiento();
-                        Navigator.of(context).pop();
+                      onPressed: () async {
+                        await _guardarTiempoEscaldado();
+                        await _guardarTiempoEnfriamiento();
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PagInicio10()));
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,

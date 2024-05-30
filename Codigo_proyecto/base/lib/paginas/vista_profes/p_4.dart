@@ -1,3 +1,4 @@
+import 'package:base/paginas/p_2.dart';
 import 'package:base/paginas/vista_profes/p_16.dart';
 import 'package:base/funciones_proyecto/select_actividad_profe.dart';
 import 'package:flutter/material.dart';
@@ -96,11 +97,24 @@ class _PagInicio4State extends State<PagInicio4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GRUPOS ACTUALES'),
+        title: Text('Grupos actuales', style: TextStyle(fontSize: 32.sp)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).pop(),),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: showHelpDialog,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Ayuda', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.help_outline, size: 46.sp),
+        ],
+      ),
         ),
+      ]
       ),
       body: Column(
         children: <Widget>[
@@ -109,6 +123,13 @@ class _PagInicio4State extends State<PagInicio4> {
             width: 200.w,
             height: 200.h,
           ),
+          SizedBox(height: 10.h),
+      Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: 100.0.w),
+          child:
+          Text('Selecciona el grupo al que quieres \n         configurar una práctica', style: TextStyle(fontSize: 30.sp)),
+      ),
           Expanded(
             child: ListView.builder(
               itemCount: grupos.length + 1, // +1 para el botón de agregar grupo
@@ -120,9 +141,25 @@ class _PagInicio4State extends State<PagInicio4> {
               },
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PagInicio2()));
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+              fixedSize: Size(320.w, 50.h),
+            ),
+            child: const Text('Inicio'),
+          ),
+          SizedBox(height: 50.h),
         ],
       ),
     );
+
   }
 
   Widget _grupo(Grupo grupo, int index) {
@@ -180,6 +217,27 @@ class _PagInicio4State extends State<PagInicio4> {
           _agregarGrupo(idProfesor);
         },
       ),
+    );
+  }
+  void showHelpDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Ayuda:'),
+          content: Text('En esta sección podrás añadir, editar y borrar grupos, además de acceder a la configuración de las prácticas de un grupo en particular\n\n 1. Añadir correos de estudiantes: Click en el ícono de editar \n 2. Eliminar un grupo: Click en los tres puntos al lado del grupo y borrarlo \n 3. Abrir la página de configuración de prácticas: Click en el grupo al que quieres configurar las prácticas '),
+          actions: <Widget>[
+            OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.green,
+                side: BorderSide(color: Colors.green, width: 2),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,8 +1,9 @@
+import 'package:base/funciones_proyecto/menu_pulpa.dart';
 import 'package:flutter/material.dart';
-import 'package:base/funciones_proyecto/select_proceso_pulpa.dart';
 import 'package:base/funciones_proyecto/select_proceso_refresco.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/select_actividad_estudiante.dart';
 import '../../preferences.dart';
 
 
@@ -10,10 +11,10 @@ class PagInicio5 extends StatefulWidget {
   const PagInicio5({super.key});
 
   @override
-  State<PagInicio5> createState() => _PagInicio9();
+  State<PagInicio5> createState() => _PagInicio5();
 }
 
-class _PagInicio9 extends State<PagInicio5> {
+class _PagInicio5 extends State<PagInicio5> {
   @override
   Widget build(BuildContext context) {
     // Obtiene el tamaño de la pantalla
@@ -61,7 +62,7 @@ class _PagInicio9 extends State<PagInicio5> {
               children: <Widget>[
                 _buildPracticaButton(context, 'PULPA', const Color.fromARGB(255, 57, 174, 247), () async {
                   await UserPreferences.setPracticaSeleccionada('practica1'); // Guarda 'practica1' para PULPA
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Menu_pulpa()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MenuPulpaReal()));
                 }),
                 _buildPracticaButton(context, 'REFRESCO', const Color.fromARGB(255, 13, 71, 161), () async {
                   await UserPreferences.setPracticaSeleccionada('practica2'); // Guarda 'practica2' para REFRESCO
@@ -69,6 +70,20 @@ class _PagInicio9 extends State<PagInicio5> {
                 }),
               ],
             ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Select_e()));
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+              fixedSize: Size(320.w, 50.h),
+            ),
+            child: const Text('Menú principal'),
           ),
           Image.asset(
             'assets/UQ.png',

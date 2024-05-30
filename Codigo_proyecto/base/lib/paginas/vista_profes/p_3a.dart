@@ -22,6 +22,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Inicio de sesión - Profesor', style: TextStyle(fontSize: 30.sp)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -46,7 +47,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
               ),
               SizedBox(height: 20.h),
               Text(
-                'INGRESA TUS DATOS',
+                'INGRESA TUS DATOS \n PARA INICIAR SESIÓN',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 26.0.sp,
@@ -54,7 +55,7 @@ class _PagInicio3aState extends State<PagInicio3a> {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 48.0.h),
+              SizedBox(height: 30.0.h),
               Container(
                 padding:  EdgeInsets.symmetric(
                     vertical: 60.0.h,
@@ -157,7 +158,9 @@ class _PagInicio3aState extends State<PagInicio3a> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0.h),
+              SizedBox(height: 10.0.h),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 150.w),child:Text('Si no tienes una cuenta, regístrate', style: TextStyle(fontSize: 20.sp))),
+              SizedBox(height: 10.0.h),
               Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 200.w),
                 child: Container(

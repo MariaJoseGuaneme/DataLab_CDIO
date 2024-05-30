@@ -3,6 +3,8 @@ import 'package:base/paginas/vista_profes/p_9.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../vistas_estudiantes/p_4.dart';
+
 class PagInicio5 extends StatefulWidget {
   const PagInicio5({super.key});
 
@@ -121,9 +123,9 @@ Widget inicio(BuildContext context) {
                 ),
               ),
             ),
-            SizedBox(width: 40),
           ],
-        )
+        ),
+        SizedBox(height: 30)
       ],
     ),
   );

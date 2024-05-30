@@ -1,9 +1,11 @@
+import 'package:base/paginas/vistas_estudiantes/p_27.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:base/base_datos_manager.dart';
 import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../funciones_proyecto/menu_pulpa.dart';
 import '../../preferences.dart';// Asegúrate de importar tu DatabaseManager
 
 class RecepcionPage26 extends StatefulWidget {
@@ -58,7 +60,23 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Control Fisicoquímico'),
+        title: Text('Proceso anterior', style: TextStyle(fontSize: 28.sp)),
+        backgroundColor: Colors.green,
+        actions: [
+          InkWell(
+            onTap: (){Navigator.push(
+                context, MaterialPageRoute(builder: (_) => MenuPulpaReal()));},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Volver al Menú', style: TextStyle(fontSize: 26.sp)),
+                SizedBox(width: 4.w),
+                Icon(Icons.menu_open, size: 46.sp),
+              ],
+            ),
+          ),
+          SizedBox(width: 20.w),
+        ],
       ),
       body:
           Center(child:
@@ -77,8 +95,8 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       color: Colors.green,
                       child:  Text(
-                        '11. CONTROL FISICO-QUIMICO',
-                        style: TextStyle(color: Colors.white, fontSize: 35.sp),
+                        'CONTROL FISICO-QUIMICO 2',
+                        style: TextStyle(color: Colors.white, fontSize: 30.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -130,7 +148,11 @@ class _RecepcionPage26State extends State<RecepcionPage26> {
                     ),
                      SizedBox(height: 18.0.h),
                     ElevatedButton(
-                      onPressed: _guardarDatos,
+                      onPressed: () {
+                        _guardarDatos();
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (_) => RecepcionPage27()));
+                      },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black,

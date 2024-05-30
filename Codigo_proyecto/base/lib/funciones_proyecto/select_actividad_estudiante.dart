@@ -1,6 +1,7 @@
+import 'package:base/funciones_proyecto/inicio.dart';
+import 'package:base/paginas/p_2.dart';
 import 'package:base/paginas/vistas_estudiantes/p_5.dart';
 import 'package:flutter/material.dart';
-import 'package:base/base_datos.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../paginas/vista_profes/p_6.dart';
 
@@ -18,6 +19,7 @@ class _Select_e extends State<Select_e> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          title: Text('Menú principal', style: TextStyle(fontSize: 26.sp)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -126,6 +128,22 @@ Widget inicio(BuildContext context) {
               ),
             )
           ],
+        ),
+        SizedBox(height: 40),
+
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PagInicio2()));
+          },
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+            fixedSize: Size(320.w, 50.h),
+          ),
+          child: const Text('Inicio'),
         ),
         SizedBox(height: 80),
       ],
